@@ -189,29 +189,5 @@
 
      <menuitem id="menu_operation_order" sequence="2" name="Operation Order" parent ="menu_logistics_info" action="operation_order_action" groups="logistics.group_operation_order_user"/>
 
-    <record id="account_invoice_form_view_contract_inherit" model="ir.ui.view">
-          <field name="name">Edit account invoice view</field>
-          <field name="model">account.invoice</field>
-          <field name="inherit_id" ref="account.invoice_form"/>
-          <field name="arch" type="xml">
 
-              <xpath expr="//page[@name='other_info']" position="before">
-             <page name="order_info" string="Order Info">
-                 <group>
-                     <group>
-                         <field name="bl_no"/>
-                         <field name="ship_date"/>
-                         <field name="ship_via"/>
-                     </group>
-                     <group>
-                         <field name="pol"/>
-                         <field name="pod"/>
-                         <field name="vessel_voyage_no"/>
-                     </group>
-
-                 </group>
-             </page>
-               </xpath>
-          </field>
-      </record>
 </odoo>
