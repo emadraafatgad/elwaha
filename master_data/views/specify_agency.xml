@@ -1,0 +1,152 @@
+<odoo>
+    <record id="specify_agent_code" model="ir.sequence">
+        <field name="name">Specify Agent</field>
+        <field name="code">specify.agent</field>
+        <field name="prefix"/>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record id="specify_agency_search_view" model="ir.ui.view">
+        <field name="name">Specify Agent Search</field>
+        <field name="model">specify.agent</field>
+        <field name="arch" type="xml">
+            <search>
+                    <group expand="0" string="Group By...">
+                        <filter name="state" string="State" icon="terp-partner" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="specify_agent_action" model="ir.actions.act_window">
+        <field name="name">Specify Agent</field>
+        <field name="res_model">specify.agent</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','in',('draft','available','selected'))]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="specify_agent_action_done" model="ir.actions.act_window">
+        <field name="name">Done</field>
+        <field name="res_model">specify.agent</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state','=','done')]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="view_specify_agent_form" model="ir.ui.view">
+        <field name="name">Specify Agent</field>
+        <field name="model">specify.agent</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                     <button name="move_to_available"
+                                  string="Specify" type="object"
+                                  class="oe_highlight" states="draft"/>
+                     <button name="select"
+                                  string="Select" type="object"
+                                  class="oe_highlight" states="available"/>
+                    <field name="state" widget="statusbar"
+                               statusbar_visible="draft,available,selected"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+
+                    <group>
+
+                        <group>
+                            <field name="labor_id"/>
+                            <field name="passport_no" readonly="1"/>
+                            <field name="religion" readonly="1"/>
+                            <field name="age" readonly="1"/>
+                            <field name="agency" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <field name="employer" attrs="{'required':[('state','=','available')],'readonly':[('state','in',('selected','done'))]}"/>
+                            <field name="employer_mobile" attrs="{'required':[('state','=','available')],'readonly':[('state','in',('selected','done'))]}"/>
+                            <field name="destination_city"/>
+                            <field name="visa_no"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="date_info" string="Date Information">
+                            <group>
+                                <group>
+                                     <field name="request_date" readonly="1"/>
+                                </group>
+                            </group>
+
+                             <group>
+                                <group>
+                                     <field name="available_date" readonly="1"/>
+                                </group>
+                                 <group>
+                                     <field name="select_date" readonly="1"/>
+                                 </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_specify_agent_tree">
+        <field name="name">Specify Agent</field>
+        <field name="model">specify.agent</field>
+        <field name="arch" type="xml">
+            <tree default_order="create_date desc">
+                 <field name="name"/>
+                <field name="labor_id" string="Laborer"/>
+                 <field name="state"/>
+                 <field name="create_date" />
+             </tree>
+        </field>
+    </record>
+      <record id="mass_enter_agency_form_view" model="ir.ui.view">
+            <field name="name">Enter Agency Form</field>
+            <field name="model">mass.agency</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="agency"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Enter" name="enter_agency" type="object" default_focus="1" class="btn-primary" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+     <act_window id="action_mass_agency"
+            multi="True"
+            key2="client_action_multi" name="Mass Agency"
+            res_model="mass.agency" src_model="specify.agent"
+            view_mode="form" target="new" view_type="form" />
+
+
+
+    <menuitem id="menu_specify_agent_root" sequence="61" name="Specify Agency" groups="master_data.group_registeration_user" parent="menu_recruitment_root"/>
+    <menuitem id="menu_specify_agent" sequence="1" name="Specify Agency" parent="menu_specify_agent_root"
+              action="specify_agent_action"/>
+
+    <menuitem id="menu_specify_agent_done" sequence="2" name="Done" parent="menu_specify_agent_root"
+              action="specify_agent_action_done"/>
+
+
+
+
+
+</odoo>

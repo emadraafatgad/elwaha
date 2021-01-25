@@ -1,0 +1,83 @@
+<odoo>
+     <record id="clearance_list_code" model="ir.sequence">
+        <field name="name">Clearance List Code</field>
+        <field name="code">clearance.list</field>
+        <field name="prefix">C-list</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="clearance_list_action" model="ir.actions.act_window">
+        <field name="name">Clearance List</field>
+        <field name="res_model">clearance.list</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="view_clearance_list_form" model="ir.ui.view">
+        <field name="name">Clearance List</field>
+        <field name="model">clearance.list</field>
+        <field name="arch" type="xml">
+            <form >
+                <header>
+                   <button name="action_confirm" states="new"
+                                string="Confirm" type="object"
+                                class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                               statusbar_visible="new,confirmed"/>
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                  <group>
+                      <group>
+                          <field name="assign_date"/>
+                      </group>
+                      <group>
+                          <field name="receive_date"/>
+                      </group>
+                  </group>
+                   <notebook>
+                     <page string="List">
+                       <field name="clearance_list" domain="[('state','=','new')]">
+                           <tree editable="top">
+                  <field name="name"/>
+                 <field name="labor_id"  string="Laborer" readonly="1"/>
+                 <field name="passport_no" readonly="1"/>
+                 <field name="gender" readonly="1"/>
+                 <field name="job_title" readonly="1"/>
+                 <field name="agency" readonly="1"/>
+                 <field name="state" readonly="1"/>
+                           </tree>
+                               </field>
+                     </page>
+                   </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_clearance_list_tree">
+        <field name="name">Clearance List Tree</field>
+        <field name="model">clearance.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="assign_date"/>
+                <field name="receive_date"/>
+                <field name="state"/>
+             </tree>
+        </field>
+    </record>
+     <menuitem id="menu_clearance_List" sequence="2" name="Clearance List" parent="menu_clearance_main"
+              action="clearance_list_action"/>
+
+
+</odoo>

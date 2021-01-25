@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+
+        <record id="res_company_info_tax_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.tax.reg</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="commercial_reg"/>
+                    <field name="tax_reg"/>
+                    <field name="tax_file"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_switch_account_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.bank.switch_account</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='acc_number']" position="after">
+                        <field name="swift_code"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 LasLabs Inc.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="oeh_medical_physician_view">
+            <field name="name">Physicians</field>
+            <field name="model">oeh.medical.physician</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Physician">
+                    <sheet>
+                        <div>
+                            <field name="image" widget='image' options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                        </div>
+
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" required="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="clinic" string="Working Clinic " widget="many2many_tags" options="{'no_create': True}"/>
+                                <field name="code"/>
+                                <field name="read_only" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="minimum_charge"/>
+                                <field name="consultancy_price"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="oeh_user_id" options="{'no_create': True}"/>
+                        </group>
+                        <notebook>
+                            <page string="General">
+                                <group string="Contact Information">
+                                    <group>
+                                        <field name="mobile_phone"/>
+                                        <field name="work_email" widget="email"/>
+                                    </group>
+                                    <group>
+                                        <field name="work_phone"/>
+                                        <field name="work_location"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Extra Info">
+                                <field name="notes"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_physician_tree">
+            <field name="name">Physician List</field>
+            <field name="model">oeh.medical.physician</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string='Physician Information'>
+                    <field name="name"/>
+                    <field name="code"/>
+<!--                        <field name="address_id"/>-->
+<!--                        <field name="speciality"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_medical_physician_filter" model="ir.ui.view">
+        <field name="name">Doctor Search</field>
+        <field name="model">oeh.medical.physician</field>
+        <field name="arch" type="xml">
+            <search string="Doctor">
+                <field name="name" />
+                <field name="code" />
+                <field name="work_phone"/>
+            </search>
+        </field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_physician_kanban_view">
+        <field name="name">Doctor Kanban</field>
+        <field name="model">oeh.medical.physician</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="address_id"/>
+                <field name="code"/>
+                <field name="work_email"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oeh_medical_vignette oe_semantic_html_override">
+                            <div class="oeh_medical_image">
+                                <a type="open"><img t-att-src="kanban_image('oeh.medical.physician', 'image_medium', record.id.raw_value)" alt="Doctor face" class="oeh_medical_picture"/></a>
+                            </div>
+                            <div class="oeh_medical_details">
+                                <h4>
+                                    <a type="open"><field name="name"/></a>
+                                </h4>
+                                <ul>
+                                    <li t-if="record.code.raw_value"><field name="code"/></li>
+                                    <li t-if="record.work_phone.raw_value"><field name="work_phone"/></li>
+                                    <li t-if="record.work_email.raw_value"><a t-attf-href="mailto:#{record.work_email.value}"><field name="work_email"/></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+
+        </field>
+        </record>
+
+        <record id="oeh_medical_physician_action_tree" model="ir.actions.act_window">
+            <field name="name">Doctor</field>
+            <field name="res_model">oeh.medical.physician</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new physician.
+              </p><p>
+                With oeHealth physician screen, you can add all the doctors and manage their weekly schedules
+              </p>
+            </field>
+        </record>
+        <menuitem name="Doctor data" id="oeh_medical_physician_data_tree" parent="medical_root" sequence="80"/>
+        <menuitem action="oeh_medical_physician_action_tree" id="oeh_medical_physician_list" parent="oeh_medical_physician_data_tree" sequence="1"/>
+
+        <record id="oeh_medical_physician_action_tree1" model="ir.actions.act_window">
+            <field name="name">My Profile</field>
+            <field name="res_model">oeh.medical.physician</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

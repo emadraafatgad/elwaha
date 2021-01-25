@@ -1,0 +1,61 @@
+<odoo>
+    <menuitem id="visits_root" name="Visits Management" sequence="50"/>
+
+        <record model="ir.ui.view" id="visit_class_form_view">
+            <field name="name">visit.class.form</field>
+            <field name="model">visit.class</field>
+            <field name="arch" type="xml">
+                <form string="Visit Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="count"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="visit_class_tree_view">
+            <field name="name">visit.class.tree</field>
+            <field name="model">visit.class</field>
+            <field name="arch" type="xml">
+                <tree string="Visit Tree" editable="bottom">
+                    <field name="name"/>
+                    <field name="count"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="visit_class_list_action">
+            <field name="name">Classes</field>
+            <field name="res_model">visit.class</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new Visits Class
+                </p>
+            </field>
+        </record>
+
+
+    <menuitem id="visit_class_list_menu" name="Class Name" parent="visits_root" action="visit_class_list_action" sequence="90"/>
+
+    <record id="view_partner_class_form" model="ir.ui.view">
+        <field name="name">class.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="vat" position="after">
+                <field name="class_id" attrs="{'required': [('customer', '=', True)]}"/>
+<!--                <field name="employee_id"/>-->
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,75 @@
+<odoo>
+    <data>
+
+    <record id="clinic_service_package_line_action_tree" model="ir.actions.act_window">
+        <field name="name">Sessions Package</field>
+        <field name="res_model">service.package.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.view" id="clinic_service_package_line_tree">
+        <field name="name">Sessions Package List</field>
+        <field name="model">service.package.line</field>
+        <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sessions List">
+                    <field name="name"/>
+                    <field name="package_price"/>
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="clinic_service_package_line_form">
+        <field name="name">Session Package</field>
+        <field name="model">service.package.line</field>
+        <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Session Package">
+                    <sheet>
+                        <group colspan="12">
+                            <group colspan="6" col="2">
+                                <field name="name"/>
+                            </group>
+<!--                            <group></group>-->
+                        </group>
+                        <notebook>
+                            <page string="Sessions">
+                                <field name="service_package_line_ids">
+                                    <tree string="Sessions List" editable="bottom">
+                                        <field name="service_line_ids" string="Session Name"/>
+                                        <field name="count"/>
+                                        <field name="unit_price"/>
+                                        <field name="total_price" sum="Total" widget="monetary"/>
+                                    </tree>
+                                </field>
+<!--                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">-->
+<!--                                    <label for="package_price" />-->
+<!--                                </div>-->
+                            <field name="package_price" invisible="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+
+                            </page>
+                            <page string="Notes">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+<!--                            <group colspan="12">-->
+<!--                                -->
+<!--                            </group>-->
+
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+<!--        <menuitem id="clinic_service_package_menu"  name = "Packages" parent="medical_root" sequence="80"/>-->
+<!--        <menuitem action="clinic_service_package_line_action_tree"-->
+<!--              parent="clinic_service_package_menu"-->
+<!--              name="Packages List"-->
+<!--              id="clinic_service_package_line_list"-->
+<!--              sequence="4"/>-->
+
+    </data>
+</odoo>

@@ -1,0 +1,141 @@
+<odoo>
+     <record id="purchase_plan_code" model="ir.sequence">
+        <field name="name">Plan Code</field>
+        <field name="code">purchase.plan</field>
+        <field name="prefix">plan/</field>
+        <field name="padding">5</field>
+        <field name="company_id" eval="False"/>
+    </record>
+    <record id="purchase_plan_action" model="ir.actions.act_window">
+        <field name="name">Purchase Plan</field>
+        <field name="res_model">purchase.plan</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="view_purchase_plan_form" model="ir.ui.view">
+        <field name="name">Purchase Plan Form</field>
+        <field name="model">purchase.plan</field>
+        <field name="arch" type="xml">
+            <form string="Port">
+                <header>
+                     <field name="state" widget="statusbar" statusbar_visible="new,done"/>
+                     <button name="make_purchase_order" string="Make Purchase Order" type="object" class="oe_highlight"/>
+                </header>
+
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                        <group>
+                            <group>
+                              <field name="purchase_order" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <group>
+<!--                            <group>-->
+<!--                              <field name="product" widget="many2many_tags"/>-->
+<!--                              <field name="total_qty"/>-->
+
+<!--                            </group>-->
+                            <group>
+                                <field name="sent_date"/>
+                                <field name="attachment" filename="filename" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+                                <field name="filename" invisible="1"/>
+
+                            </group>
+                        </group>
+                    <notebook>
+                        <page string="PLans">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="product"/>
+                                    <field name="description"/>
+                                    <field name="qty"/>
+                                    <field name="delivery_date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other Information">
+                            <group>
+                               <group>
+                               <field name="origin"/>
+                            </group>
+                             <group>
+                               <field name="company_id"/>
+                            </group>
+                            </group>
+
+                        </page>
+                    </notebook>
+
+
+
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_purchase_plan_tree">
+        <field name="name">Purchase Plan Tree</field>
+        <field name="model">purchase.plan</field>
+        <field name="arch" type="xml">
+            <tree >
+                 <field name="name"/>
+<!--                 <field name="product" widget="many2many_tags"/>-->
+<!--                 <field name="total_qty"/>-->
+                 <field name="sent_date"/>
+                 <field name="origin"/>
+                 <field name="state"/>
+             </tree>
+        </field>
+    </record>
+
+     <record id="view_purchase_order_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.edit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//header" position="replace">
+                    <header>
+                    <button name="action_rfq_send" states="draft" string="Send by Email" type="object" context="{'send_rfq':True}" class="oe_highlight"/>
+                    <button name="print_quotation" string="Print RFQ" type="object" states="draft" class="oe_highlight" groups="base.group_user"/>
+                    <button name="initial_approve" string="Approve" type="object" class="oe_highlight" states="draft,sent" groups="contract.group_gm_user,purchase.group_purchase_manager"/>
+                    <button name="button_confirm" type="object" states="approved" string="Confirm Order" class="oe_highlight" id="bid_confirm" groups="contract.group_gm_user"/>
+                    <button name="button_approve" type="object" states='to approve' string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager"/>
+                    <button name="action_view_invoice" string="Create Bill" type="object" class="oe_highlight" context="{'create_bill':True}" attrs="{'invisible': ['|', ('state', 'not in', ('purchase', 'done')), ('invoice_status', 'in', ('no', 'invoiced'))]}"/>
+                    <button name="action_rfq_send" states="sent" string="Re-Send by Email" type="object" context="{'send_rfq':True}"/>
+                    <button name="print_quotation" string="Print RFQ" type="object" states="sent" groups="base.group_user"/>
+                    <button name="button_confirm" type="object" states="draft" string="Confirm Order" id="draft_confirm" invisible="1"/>
+                    <button name="action_rfq_send" states="purchase" string="Send PO by Email" type="object" context="{'send_rfq':False}"/>
+                    <button name="action_view_invoice" string="Create Bill" type="object" context="{'create_bill':True}" attrs="{'invisible': ['|', '|', ('state', 'not in', ('purchase', 'done')), ('invoice_status', 'not in', ('no', 'invoiced')), ('order_line', '=', [])]}"/>
+                    <button name="button_draft" states="cancel" string="Set to Draft" type="object" />
+                    <button name="button_cancel" states="draft,to approve,sent,purchase" string="Cancel" type="object" />
+                    <button name="button_done" type="object" string="Lock" states="purchase"/>
+                    <button name="button_unlock" type="object" string="Unlock" states="done" groups="purchase.group_purchase_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sent,approved,purchase" readonly="1"/>
+                </header>
+                </xpath>
+
+
+            </field>
+    </record>
+
+
+    <menuitem id="menu_purchase_plan" name="Purchase Plan" parent="purchase.menu_purchase_root"
+              action="purchase_plan_action" groups="purchase.group_purchase_user"/>
+
+
+
+
+</odoo>

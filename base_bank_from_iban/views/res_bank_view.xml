@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_res_bank_form" model="ir.ui.view">
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_bank_tree" model="ir.ui.view">
+        <field name="model">res.bank</field>
+        <field name="inherit_id" ref="base.view_res_bank_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="code" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_bank_form" model="ir.ui.view">
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <field name="acc_number" position="after">
+                <field name="account_no" />
+            </field>
+        </field>
+    </record>
+
+     <record id="view_res_partner_bank_tree" model="ir.ui.view">
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_tree"/>
+        <field name="arch" type="xml">
+            <field name="acc_number" position="after">
+                <field name="account_no" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="add_to_res_partner_bank">
+        <field name="name">add.to.res.partner.bank</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_id']" position="after">
+                <field name="branch"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+<!--<p >-->
+<!--                                <h6><strong> Our Bank Account  - In UAE Dhs </strong></h6>-->
+<!--                                <strong>Beneficiary :</strong>-->
+<!--                                <span> Cureleads FZ-LLC </span><br/>-->
+<!--                                <strong>Beneficiary bank :</strong>-->
+<!--                                <span > Mashreq Bank </span><br/>-->
+<!--                                <strong>Account No :</strong>-->
+<!--                                <span> 019100432258 </span><br/>-->
+<!--                                <strong>Iban No : </strong>-->
+<!--                                <span>AE530330000019100432258</span><br/>-->
+<!--                                <strong >Bank Address :  Dubai, UAE</strong>-->
+<!--                              </p>-->
+<!--                              <br/><br/>-->
+<!--                            <p t-if="o.partner_bank_id">-->
+<!--                              <h6><strong> Our Bank Account  - In UAE Dhs </strong></h6>-->
+<!--                              <strong>Beneficiary :</strong>-->
+<!--                              <span> Cureleads FZ-LLC </span><br/>-->
+<!--                              <strong>Beneficiary bank :</strong>-->
+<!--                              <span t-field="o.partner_bank_id.bank_id.name"/><br/>-->
+<!--                              <strong>Account No :</strong>-->
+<!--                              <span t-field="o.partner_bank_id.account_no"/><br/>-->
+<!--                              <strong>Iban No : </strong>-->
+<!--                              <span t-field="o.partner_bank_id"/><br/>-->
+<!--                              <strong >Bank Address :  Dubai, UAE</strong>-->
+<!--                            </p>-->
+<!--                            <br/><br/>-->

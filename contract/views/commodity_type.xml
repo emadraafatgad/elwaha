@@ -1,0 +1,43 @@
+<odoo>
+
+     <record id="commodity_type_action" model="ir.actions.act_window">
+        <field name="name">Commodity Type</field>
+        <field name="res_model">commodity.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban,search</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.view" id="container_type_tree">
+        <field name="name">Commodity Type Tree</field>
+        <field name="model">commodity.type</field>
+        <field name="arch" type="xml">
+            <tree string="Commodity Type">
+                <field name="name"/>
+             </tree>
+        </field>
+    </record>
+
+    <record id="view_commodity_type_form" model="ir.ui.view">
+        <field name="name">commodity Type Form</field>
+        <field name="model">commodity.type</field>
+        <field name="arch" type="xml">
+            <form string="Commodity Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <menuitem id="menu_commodity_type" name="Commodity Type"  parent ="menu_contract_info" action="commodity_type_action"/>
+
+</odoo>

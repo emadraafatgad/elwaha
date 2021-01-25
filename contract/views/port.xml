@@ -1,0 +1,56 @@
+<odoo>
+
+    <record id="container_port_action" model="ir.actions.act_window">
+        <field name="name">Port</field>
+        <field name="res_model">container.port</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="view_container_port_form" model="ir.ui.view">
+        <field name="name">Container Port Form</field>
+        <field name="model">container.port</field>
+        <field name="arch" type="xml">
+            <form string="Port">
+
+                <sheet>
+
+                        <group>
+                            <group>
+                              <field name="name" />
+                              <field name="country_id" />
+                            </group>
+                        </group>
+
+
+
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_container_port_tree">
+        <field name="name">Container Port Tree</field>
+        <field name="model">container.port</field>
+        <field name="arch" type="xml">
+            <tree string="Port">
+                 <field name="name" />
+                 <field name="country_id"/>
+
+             </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_container_port" sequence="2" name="Port" parent="menu_contract_info"
+              action="container_port_action" />
+
+
+
+</odoo>

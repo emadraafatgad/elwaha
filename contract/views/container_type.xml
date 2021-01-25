@@ -1,0 +1,44 @@
+<odoo>
+
+     <record id="container_type_action" model="ir.actions.act_window">
+        <field name="name">Container Type</field>
+        <field name="res_model">container.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban,search</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.view" id="container_type_tree">
+        <field name="name">Container Type Tree</field>
+        <field name="model">container.type</field>
+        <field name="arch" type="xml">
+            <tree string="Container Type">
+                <field name="name"/>
+             </tree>
+        </field>
+    </record>
+
+    <record id="view_container_type_form" model="ir.ui.view">
+        <field name="name">Container Type Form</field>
+        <field name="model">container.type</field>
+        <field name="arch" type="xml">
+            <form string="Container Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                 </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+     <menuitem id="menu_container_type" name="Container Type"  parent ="menu_contract_info" action="container_type_action"/>
+
+</odoo>

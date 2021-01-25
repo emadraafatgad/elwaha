@@ -1,0 +1,45 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="visit_report_report_form">
+            <field name="name">Visit Report Form</field>
+            <field name="model">employee.visits.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Visit Report">
+                    <sheet>
+                        <group colspan="4">
+                            <group>
+                                <field name="month"/>
+                            </group>
+                            <group>
+                                <field name="start_date" />
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_visits_report" string="Report" type="object" class="btn-primary"/>
+<!--                         <button name="print_leaves_report" string="Get Leaves" type="object" class="btn-primary"/>-->
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="visit_report_report_action" model="ir.actions.act_window">
+             <field name="name">Visits Report</field>
+             <field name="res_model">employee.visits.report</field>
+             <field name="type">ir.actions.act_window</field>
+             <field name="view_type">form</field>
+             <field name="view_mode">tree,form</field>
+             <field name="view_id" ref="visit_report_report_form"/>
+             <field name="target">new</field>
+        </record>
+
+        <menuitem id="visits_report_management_menu" name="Visits Report"
+                  parent="visits_root" action="visit_report_report_action" sequence="100"/>
+
+
+    </data>
+</odoo>

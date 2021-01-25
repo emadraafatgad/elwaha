@@ -1,0 +1,61 @@
+<odoo>
+
+<!-- Inherit quotation report (from module sale) -->
+    <template id="unicom_invoice_report" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@t-if='o.reference']"
+                position="replace">
+           <p t-if="o.partner_bank_id" name="bank name">
+                <strong class="text-center">Bank Name  :  </strong><span t-field="o.partner_bank_id.bank_id.name"/>
+            </p>
+            <p t-if="o.partner_bank_id" name="account holder">
+                <strong class="text-center">Account Holder  :  </strong><span t-field="o.partner_bank_id.partner_id.name"/>
+            </p>
+            <p t-if="o.partner_bank_id" name="bank account">
+                <strong class="text-center">Bank Account  :  </strong><span t-field="o.partner_bank_id.acc_number"/>
+            </p>
+        </xpath>
+    </template>
+
+<!--    <template id="unicom_external_layout_report" inherit_id="web.external_layout_standard">-->
+<!--&lt;!&ndash;        <xpath expr="//div[hasclass('row')]/div[hasclass('col-6')]" position="after">&ndash;&gt;-->
+<!--           <xpath expr="//div[hasclass('header')]" position="replace">-->
+<!--               <div class="header">-->
+<!--                   <div class="row">-->
+<!--                        <div class="col-3 mb4">-->
+<!--                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>-->
+<!--                        </div>-->
+<!--                        <div class="col-9 text-right" style="margin-top:22px;" t-field="company.report_header" name="moto"/>-->
+<!--                   </div>-->
+<!--                   <div t-if="company.logo or company.report_header" class="row zero_min_height">-->
+<!--                        <div class="col-12">-->
+<!--                            <div style="border-bottom: 1px solid black;"/>-->
+<!--                        </div>-->
+<!--                   </div>-->
+<!--                   <div class="row">-->
+<!--                        <div class="col-6" name="company_address">-->
+<!--                            <div t-field="company.partner_id"-->
+<!--                                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'-->
+<!--                            />-->
+<!--                            <div class="row mt8 mb8" t-if="company.commercial_reg"  name="company_commercial_reg">-->
+<!--                                 Commercial Reg : <span t-field="company.commercial_reg" />-->
+<!--                            </div>-->
+<!--                           <div style="margin : 0px"  t-if="company.tax_reg"  name="company_tax_reg">-->
+<!--                                Tax Reg : <span t-field="company.tax_reg" />-->
+<!--                            </div>-->
+<!--                           <div  t-if="company.tax_file"  name="company_tax_file">-->
+<!--                                Tax File : <span  t-field="company.tax_file" />-->
+<!--                           </div>-->
+<!--                        </div>-->
+<!--                   </div>-->
+<!--               </div>-->
+<!--            <div class="row">-->
+<!--             <div class="col-6">-->
+
+<!--            </div>-->
+<!--            </div>-->
+
+        </xpath>
+    </template>
+
+
+</odoo>

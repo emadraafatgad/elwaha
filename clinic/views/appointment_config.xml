@@ -1,0 +1,116 @@
+<odoo>
+    <data>
+        <record id="oeh_medical_config_action_tree" model="ir.actions.act_window">
+            <field name="name">Config Action</field>
+            <field name="res_model">oeh.medical.config</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_config_tree">
+            <field name="name">Config tree</field>
+            <field name="model">oeh.medical.config</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Config">
+                        <field name="name"/>
+                        <field name="visita"/>
+                        <field name="clinic" />
+                        <field name="consultancy_price"/>
+                        <field name="doctor_percentage"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_config_form">
+            <field name="name">Config Form</field>
+            <field name="model">oeh.medical.config</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group col="4">
+                                <field name="name"/>
+                                <field name="visita" placeholder="%"/>
+                                <field name="clinic"/>
+                                <field name="consultancy_price" placeholder="$"/>
+                                <field name="doctor_percentage" placeholder="%"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+    <menuitem id="oeh_medical_config_menu"  name = "Configuration" parent="medical_root" sequence="100"/>
+    <menuitem id="oeh_medical_appointment_config_menu"  action="oeh_medical_config_action_tree" name = "Configuration" parent="oeh_medical_config_menu" sequence="1"/>
+
+        <record id="oeh_medical_machine_action_tree" model="ir.actions.act_window">
+            <field name="name">Equipments</field>
+            <field name="res_model">oeh.medical.machine</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_machine_tree">
+            <field name="name">Equipments tree</field>
+            <field name="model">oeh.medical.machine</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Equipments">
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="clinic" />
+                        <field name="model"/>
+                        <field name="serial_no"/>
+                        <field name="cost"/>
+                        <field name="effective_date"/>
+                        <field name="warranty_date"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_machine_form">
+            <field name="name">Equipments Form</field>
+            <field name="model">oeh.medical.machine</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="Equipments">
+                        <sheet>
+                            <div class="oe_title">
+                                <label for="name" class="oe_edit_only"/>
+                                <h1><field name="name" string="Name" placeholder="Equipment Name"/></h1>
+                            </div>
+                            <group colspan="12">
+                                <group col="2">
+                                    <field name="partner_id" context="{'default_supplier': True, 'default_customer': False}"/>
+                                    <field name="clinic" />
+                                </group>
+                                <group col="2">
+                                    <field name="model"/>
+                                    <field name="serial_no"/>
+                                    <field name="cost"/>
+                                </group>
+                                <group col="2">
+                                    <field name="effective_date"/>
+                                    <field name="warranty_date"/>
+                                </group>
+                            </group>
+                        </sheet>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+<!--                            <field name="activity_ids" widget="mail_activity"/>-->
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </form>
+                </field>
+        </record>
+
+        <menuitem id="oeh_medical_machine_menu"  action="oeh_medical_machine_action_tree" name = "Equipments" parent="oeh_medical_config_menu" sequence="5"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+<odoo>
+
+        <record id="oeh_medical_medicine_action_tree" model="ir.actions.act_window">
+            <field name="name">medicine Action</field>
+            <field name="res_model">oeh.medical.medicine</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_medicine_tree">
+            <field name="name">medicine tree</field>
+            <field name="model">oeh.medical.medicine</field>
+            <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Medicine">
+                        <field name="name"/>
+                        <field name="qty_available"/>
+                        <field name="type" context="{'default_type': 'product'}"/>
+                        <field name="lst_price"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_medicine_form">
+            <field name="name">Medicine Form</field>
+            <field name="model">oeh.medical.medicine</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form string="medicine">
+                        <header>
+                            <button name="action_update_quantity_on_hand" string="Update Qty On Hand" type="object" attrs="{'invisible': [('type', '!=', 'product')]}"/>
+
+                        </header>
+                        <sheet>
+                            <div class="oe_left" style="width: 500px;">
+                                <div class="oe_title" style="width: 390px;">
+                                    <label class="oe_edit_only" for="name" string="Medicine Name"/>
+                                    <h1><field name="name" class="oe_inline"/></h1>
+                                </div>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="qty_available" />
+                                </group>
+                                <group>
+                                    <field name="lst_price"/>
+                                </group>
+                                <group>
+                                    <field name="type"/>
+                                    <field name="company_id" string="Clinic"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page string="Info">
+                                    <field name="info"/>
+                                </page>
+                            </notebook>
+                        </sheet>
+<!--                        <div class="oe_chatter">-->
+<!--                            <field name="message_follower_ids" widget="mail_followers"/>-->
+<!--                            <field name="activity_ids" widget="mail_activity"/>-->
+<!--                            <field name="message_ids" widget="mail_thread"/>-->
+<!--                        </div>-->
+                    </form>
+                </field>
+        </record>
+
+        <menuitem id="oeh_medical_medicine_menu"  action="oeh_medical_medicine_action_tree" name = "Medicine" parent="oeh_medical_config_menu" sequence="5"/>
+
+
+
+</odoo>

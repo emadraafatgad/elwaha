@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+hr_religion_id,hr_religion_id,model_religion_name,hr.group_hr_user,1,1,1,1
+hr_military_id,hr_military_id,model_military_name,hr.group_hr_user,1,1,1,1
+hr_certificate_id,hr_certificate_id,model_certificate_name,hr.group_hr_user,1,1,1,1
+hr_file_attached_id,hr_file_attached_id,model_file_attachment,hr.group_hr_user,1,1,1,1
+hr_education_name_id,hr_education_name_id,model_education_name,hr.group_hr_user,1,1,1,1
+hr_education_school_id,hr_education_school_id,model_education_school,hr.group_hr_user,1,1,1,1
+
