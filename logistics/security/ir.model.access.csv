@@ -23,3 +23,4 @@ access_op_manager_production,mrp_production_op,mrp.model_mrp_production,logistic
 access_op_manager_workorder,mrp_workorder_op,mrp.model_mrp_workorder,logistics.group_operation_order_manager,1,1,1,0
 access_loading_place,loading_place,model_loading_place,,1,1,1,1
 access_stock_picking_all,stock_picking_all,stock.model_stock_picking,,1,1,1,1
+access_account_invoice_discount,Account Discount,model_special_discount,,1,1,1,1
