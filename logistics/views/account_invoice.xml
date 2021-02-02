@@ -38,9 +38,9 @@
 <!--                        </div>-->
 <!--                    </group>-->
 <!--                </xpath>-->
-                <xpath expr="//field[@name='amount_tax']" position="after">
-                    <field name="discount_amount"/>
-                </xpath>
+<!--                <xpath expr="//field[@name='amount_tax']" position="after">-->
+<!--                    <field name="discount_amount"/>-->
+<!--                </xpath>-->
         </field>
     </record>
 
