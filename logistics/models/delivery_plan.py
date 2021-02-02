@@ -10,12 +10,13 @@ class DeliveryPLan(models.Model):
     name =fields.Char('Plan ref',default='New',readonly=True)
     origin =fields.Char("Contract Ref")
     state = fields.Selection([('new', 'New'),('shipment', 'Confirmed')],string="status", default='new', track_visibility="onchange")
-    partner_id = fields.Many2one('res.partner',string='Client', required=True,domain=[('partner_type','=','client')])
+    partner_id = fields.Many2one('res.partner',string='Client',readonly=True, required=True,domain=[('partner_type','=','client')])
     # product_id = fields.Many2many('product.product', string='Commodity', required=True)
-    shipment_company = fields.Many2one('res.partner',string="Forwarder",domain=[('partner_type','=','forwarder')])
+    shipment_company = fields.Many2one('res.partner',readonly=True,string="Forwarder",domain=[('partner_type','=','forwarder')])
     line_ids = fields.One2many('operation.order','shipment_plan')
     shipment_lines = fields.One2many('delivery.plan.line','shipment_plan')
     locked = fields.Boolean(compute='compute_lock')
+    contract_id = fields.Many2one('sale.order')
     partial_shipment = fields.Selection([
         ('allowed', 'Allowed'),
         ('not_allowed', 'Not Allowed')], required=True)
@@ -94,4 +95,4 @@ class DeliveryPlanLine(models.Model):
     from_port = fields.Many2one('container.port', string='POL', required=True)
     to_port = fields.Many2one('container.port', string='POD', required=True)
     packing = fields.Many2one('product.packing', string='Packing', required=True)
-
+    contract_id = fields.Many2one('sale.order')

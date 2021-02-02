@@ -43,6 +43,7 @@
                               <group>
 <!--                                  <field name="product_id" attrs="{'readonly':[('state','=','shipment')]}" widget="many2many_tags"/>-->
                                   <field name="partner_id" attrs="{'readonly':[('state','=','shipment')]}"/>
+                                   <field name="contract_id" invisible="1"/>
                                </group>
                                 <group>
                                     <field name="partial_shipment" attrs="{'readonly':[('state','=','shipment')]}"/>
@@ -57,6 +58,7 @@
                                 <field name="shipment_lines">
                                     <tree editable="bottom">
                                        <field name="product_id"/>
+                                         <field name="contract_id" invisible="1"/>
                                         <field name="description"/>
                                        <field name="quantity"/>
                                        <field name="price_unit"/>
@@ -71,12 +73,13 @@
                         </notebook>
                         <notebook>
                             <page string="Orders">
-                                <field name="line_ids" context="{'shipment_plan_id': id}" >
+                                <field name="line_ids" context="{'default_contract_id': contract_id}" >
                                     <tree editable="bottom">
                                         <field name="state"/>
-                                        <field name="shipment_plan_id"/>
+<!--                                        <field name="shipment_plan_id"/>-->
+                                         <field name="contract_id" invisible="1"/>
                                         <field name="shipment_plan_line_id" />
-                                        <field name="product" attrs="{'readonly':[('state','=','confirmed')]}"/>
+                                        <field name="product" invisible="1" attrs="{'readonly':[('state','=','confirmed')]}"/>
                                         <field name="travel_date"/>
                                         <field name="estimated_arrival"/>
                                         <field name="vessel_name"/>

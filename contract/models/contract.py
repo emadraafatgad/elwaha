@@ -77,6 +77,7 @@ class contract(models.Model):
                  'from_port': rec.from_port.id,
                  'to_port': rec.to_port.id,
                  'packing': rec.packing.id,
+                 'contract_id':rec.order_id.id,
 
 
              }))
@@ -94,6 +95,7 @@ class contract(models.Model):
              'product_id': [(6, 0, l)],
              'origin': self.name,
              'company_id': self.company_id.id,
+             'contract_id':self.id,
              'partial_shipment': self.partial_shipment,
              'shipment_lines': shipment_line,
 

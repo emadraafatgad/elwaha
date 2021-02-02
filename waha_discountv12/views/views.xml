@@ -1,0 +1,36 @@
+<odoo>
+  <data>
+
+    <record id="invoice_inherited_from1" model="ir.ui.view">
+        <field name="name">account.invoice</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+<xpath expr="//field[@name='invoice_line_ids']" position="after">
+
+       <label string="Discount Lines" for="discount_lines"/>
+
+   <field name="discount_lines" string ="Discount Lines" >
+                 <tree string="Discount Lines" editable="bottom">
+                  <field name="name"/>
+                    <field name="account_id"/>
+                    <field name="amount"/>
+                </tree>
+</field>
+
+</xpath>
+
+            <xpath expr="//field[@name='amount_tax']" position="after">
+                <field name="ks_amount_discount"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+
+
+  </data>
+</odoo>

@@ -124,29 +124,29 @@ class OperationOrder(models.Model):
         if not self.price_unit:
             raise ValidationError(_('You must enter unit rate.'))
 
-        self.env['operation.order.mrp'].create({
-            'order_no': self.id,
-            'shipment_plan': self.shipment_plan.id,
-            'product': self.product.id,
-            'packing': self.packing.id,
-            'contract_no': self.contract_no,
-            'reserve_no': self.reserve_no,
-            'shipping_line': self.shipping_line.id,
-            'forwarder': self.forwarder.id,
-            'container_type': self.container_type.id,
-            'container_no': self.container_no,
-            'container_weight': self.container_weight,
-            'container_bag_no': self.container_bag_no,
-            'bag_type': self.bag_type,
-            'loading_place': self.loading_place.id,
-            'start_date': self.start_date,
-            'end_date': self.end_date,
-            'travel_date': self.travel_date,
-            'inspection_company1': self.inspection_company1.id,
-            'inspection_company2': self.inspection_company2.id,
-            'company_id': self.company_id.id,
-
-        })
+        # self.env['operation.order.mrp'].create({
+        #     'order_no': self.id,
+        #     'shipment_plan': self.shipment_plan.id,
+        #     'product': self.product.id,
+        #     'packing': self.packing.id,
+        #     'contract_no': self.contract_no,
+        #     'reserve_no': self.reserve_no,
+        #     'shipping_line': self.shipping_line.id,
+        #     'forwarder': self.forwarder.id,
+        #     'container_type': self.container_type.id,
+        #     'container_no': self.container_no,
+        #     'container_weight': self.container_weight,
+        #     'container_bag_no': self.container_bag_no,
+        #     'bag_type': self.bag_type,
+        #     'loading_place': self.loading_place.id,
+        #     'start_date': self.start_date,
+        #     'end_date': self.end_date,
+        #     'travel_date': self.travel_date,
+        #     'inspection_company1': self.inspection_company1.id,
+        #     'inspection_company2': self.inspection_company2.id,
+        #     'company_id': self.company_id.id,
+        #
+        # })
         self.status = 'done'
         self.state = 'confirmed'
 

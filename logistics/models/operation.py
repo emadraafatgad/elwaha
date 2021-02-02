@@ -11,7 +11,8 @@ class OperationOrder(models.Model):
 
      name = fields.Char('Order No', readonly=True, default='New')
      contract_no = fields.Char(readonly=True)
-     # domain="[('shipment_plan','=','shipment_plan.id')]")
+
+     contract_id = fields.Many2one('sale.order')
      status = fields.Selection([('new', 'New'), ('done', 'Done')], default='new')
      state = fields.Selection(
           [('new', 'New'), ('confirmed', 'Under Stuffing'), ('waiting_port', 'Waiting At Port'), ('sailed', 'Sailed')],
@@ -26,7 +27,7 @@ class OperationOrder(models.Model):
      uom = fields.Many2one('uom.uom')
      commodity_type = fields.Many2one('commodity.type')
      container_weight = fields.Float('Container Weight')
-     total_weight = fields.Float(compute='compute_total', string='Total Quantity')
+     total_weight = fields.Float(compute='compute_total', string='Stander Quantity')
      amount = fields.Float(compute='compute_amount')
      container_bag_no = fields.Float(string="Container Bags NO.")
      total_bags = fields.Float(string="Total Bags")
@@ -58,7 +59,7 @@ class OperationOrder(models.Model):
      agree = fields.Char(readonly=True)
      bank_certificate = fields.Char(readonly=True)
      customer_code = fields.Char(readonly=True, string='Client Code', related='customer.client_code')
-     delivered_qty = fields.Float(compute='compute_delivered_qty')
+     delivered_qty = fields.Float(string="Total QTY")
      notes = fields.Text()
      total_after_increase = fields.Float(compute='compute_total_after_increase')
      clearance_finished = fields.Boolean()
@@ -66,13 +67,28 @@ class OperationOrder(models.Model):
      company_id = fields.Many2one('res.company')
 
      shipment_plan = fields.Many2one('delivery.plan',string="PLAAAAN", required=True)
-     shipment_plan_id = fields.Many2one('delivery.plan', string="PLAAAAN", required=True)
-     shipment_plan_line_id = fields.Many2one('delivery.plan.line',string="Commodity",required=True,)
+
+     @api.model
+     def _get_product_id_domain(self):
+          res = [('id', 'in', [0])]  # Nothing accepted by domain, by default
+          delivery_lines = self.env['delivery.plan.line']
+          if self.contract_id:
+               print("i am in")
+               delivery_lines = delivery_lines.search([('contract_id','=',self.contract_id)]).ids
+               print(delivery_lines)
+               res = [('id', 'in',delivery_lines)]
+               print(res,"res")
+          return res
+
+     shipment_plan_line_id = fields.Many2one('delivery.plan.line',string="Commodity",required=True,
+                                             domain="[('contract_id','=',contract_id)]")
+                                             # domain="[('id','in',shipment_plan.shipment_lines.ids)]")
+     # domain = lambda self: self._get_employee_id_domain())
 
      @api.depends('shipment_plan_line_id')
      def get_all_fields(self):
           for rec in self:
-               print(rec.shipment_plan,rec.shipment_plan.name,rec._context.get('active_id'))
+               # print(rec.shipment_plan,rec.shipment_plan.name,rec._context.get('active_id'))
                contract_line = rec.shipment_plan_line_id
                rec.product = contract_line.product_id
                rec.packing = contract_line.packing
@@ -139,30 +155,28 @@ class OperationOrder(models.Model):
                raise ValidationError(_('You must enter start sailing date.'))
           if not self.price_unit:
                raise ValidationError(_('You must enter unit rate.'))
-
-          self.env['operation.order.mrp'].create({
-               'order_no': self.id,
-               'shipment_plan': self.shipment_plan.id,
-               'product': self.product.id,
-               'packing': self.packing.id,
-               'contract_no': self.contract_no,
-               'reserve_no': self.reserve_no,
-               'shipping_line': self.shipping_line.id,
-               'forwarder': self.forwarder.id,
-               'container_type': self.container_type.id,
-               'container_no': self.container_no,
-               'container_weight': self.container_weight,
-               'container_bag_no': self.container_bag_no,
-               'bag_type': self.bag_type,
-               'loading_place': self.loading_place.id,
-               'start_date': self.start_date,
-               'end_date': self.end_date,
-               'travel_date': self.travel_date,
-               'inspection_company1': self.inspection_company1.id,
-               'inspection_company2': self.inspection_company2.id,
-               'company_id': self.company_id.id,
-
-          })
+          # self.env['operation.order.mrp'].create({
+          #      'order_no': self.id,
+          #      'shipment_plan': self.shipment_plan.id,
+          #      'product': self.product.id,
+          #      'packing': self.packing.id,
+          #      'contract_no': self.contract_no,
+          #      'reserve_no': self.reserve_no,
+          #      'shipping_line': self.shipping_line.id,
+          #      'forwarder': self.forwarder.id,
+          #      'container_type': self.container_type.id,
+          #      'container_no': self.container_no,
+          #      'container_weight': self.container_weight,
+          #      'container_bag_no': self.container_bag_no,
+          #      'bag_type': self.bag_type,
+          #      'loading_place': self.loading_place.id,
+          #      'start_date': self.start_date,
+          #      'end_date': self.end_date,
+          #      'travel_date': self.travel_date,
+          #      'inspection_company1': self.inspection_company1.id,
+          #      'inspection_company2': self.inspection_company2.id,
+          #      'company_id': self.company_id.id,
+          # })
           self.status = 'done'
           self.state = 'confirmed'
 
