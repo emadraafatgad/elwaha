@@ -34,7 +34,7 @@
         'views/operation_order_mrp.xml',
         'views/customs_clearance.xml',
         'views/order_report.xml',
-        'views/invoice_report.xml',
+        # 'views/invoice_report.xml',
         'views/account_invoice.xml',
     ],
     # only loaded in demonstration mode

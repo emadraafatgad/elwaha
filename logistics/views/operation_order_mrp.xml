@@ -1,12 +1,12 @@
 <odoo>
-<record id="operation_order_mrp_code" model="ir.sequence">
+    <record id="operation_order_mrp_code" model="ir.sequence">
         <field name="name">Order MRP Plan Code</field>
         <field name="code">operation.order.mrp</field>
         <field name="prefix">Manu/%(year)s/</field>
         <field name="padding">4</field>
         <field name="company_id" eval="False"/>
     </record>
-     <record id="operation_order_mrp_action" model="ir.actions.act_window">
+    <record id="operation_order_mrp_action" model="ir.actions.act_window">
         <field name="name">Order MRP Plan</field>
         <field name="res_model">operation.order.mrp</field>
         <field name="view_type">form</field>
@@ -19,9 +19,13 @@
         <field name="model">operation.order.mrp</field>
         <field name="arch" type="xml">
             <tree>
-                 <field name="code"/>
-                 <field name="state"/>
-             </tree>
+                <field name="code"/>
+                <field name="order_no"/>
+                <field name="shipment_plan"/>
+                <field name="product"/>
+                <field name="packing"/>
+                <field name="state"/>
+            </tree>
         </field>
     </record>
 
@@ -30,28 +34,45 @@
         <field name="model">operation.order.mrp</field>
         <field name="arch" type="xml">
             <form>
-                 <header>
-                     <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="new"/>
-                     <field name="state" widget="statusbar" statusbar_visible="new,confirmed"/>
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="new"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,confirmed"/>
                 </header>
                 <sheet>
-
-
-                             <h1>
-                            <field name="code" readonly="1"/>
-                             </h1>
+                    <h1>
+                        <field name="code" readonly="1"/>
+                    </h1>
                     <group>
                         <group>
-                            <field name="order_no"/>
-                            <field name="shipment_plan"/>
+                            <field name="order_no" readonly="1"/>
+                            <field name="contract_no" readonly="1"/>
                             <field name="product"/>
                             <field name="packing"/>
                         </group>
-                         <group>
+                        <group>
                             <field name="container_no"/>
                             <field name="container_weight"/>
                             <field name="total_weight"/>
+                            <field name="actual_qty"/>
                             <field name="company_id"/>
+                        </group>
+                        <group>
+                            <field name="bag_type"/>
+                        <field name="packing" />
+                            <field name="exit_port"/>
+
+                        </group>
+                        <group>
+                            <field name="shipment_port" />
+                            <field name="loading_place" />
+                            <field name="end_date" />
+                            <field name="inspection_company1"/>
+                        </group>
+                        <group>
+                           <field name="arrival_port" />
+                           <field name="start_date" />
+                           <field name="travel_date" />
+                           <field name="inspection_company2"/>
                         </group>
                     </group>
                     <notebook>
@@ -67,7 +88,7 @@
                         </page>
                     </notebook>
 
-                 </sheet>
+                </sheet>
 
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
@@ -77,23 +98,23 @@
         </field>
     </record>
     <record id="view_bom_inherit" model="ir.ui.view">
-            <field name="name">BOM Inherit</field>
-            <field name="model">mrp.bom</field>
-            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='product_qty']/.." position="after">
-                    <field name="plan_id"/>
+        <field name="name">BOM Inherit</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_qty']/.." position="after">
+                <field name="plan_id"/>
 
             </xpath>
-            </field>
+        </field>
     </record>
     <record id="tree_bom_inherit" model="ir.ui.view">
-            <field name="name">BOM Tree Inherit</field>
-            <field name="model">mrp.bom</field>
-            <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="//tree" position="replace">
-                   <tree string="Bill of Materials">
+        <field name="name">BOM Tree Inherit</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree string="Bill of Materials">
                     <field name="active" invisible="1"/>
                     <field name="sequence" invisible="1"/>
                     <field name="plan_id"/>
@@ -105,7 +126,8 @@
                 </tree>
 
             </xpath>
-            </field>
+        </field>
     </record>
-    <menuitem id="menu_operation_order_mrp" sequence="3" name="Operation Order" parent ="menu_logistics_info" action="operation_order_mrp_action" groups="logistics.group_operation_order_user"/>
-    </odoo>
+    <menuitem id="menu_operation_order_mrp" sequence="3" name="Manufacturing Order" parent="menu_logistics_info"
+              action="operation_order_mrp_action" groups="logistics.group_operation_order_user"/>
+</odoo>

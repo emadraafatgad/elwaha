@@ -112,7 +112,7 @@
                     <button name="print_quotation" string="Print RFQ" type="object" states="draft" class="oe_highlight" groups="base.group_user"/>
                     <button name="initial_approve" string="Approve" type="object" class="oe_highlight" states="draft,sent" groups="contract.group_gm_user,purchase.group_purchase_manager"/>
                     <button name="button_confirm" type="object" states="approved" string="Confirm Order" class="oe_highlight" id="bid_confirm" groups="contract.group_gm_user"/>
-                    <button name="button_approve" type="object" states='to approve' string="Approve Order" class="oe_highlight" groups="purchase.group_purchase_manager"/>
+                    <button name="button_approve" type="object"  string="Approve Order" class="oe_highlight"/>
                     <button name="action_view_invoice" string="Create Bill" type="object" class="oe_highlight" context="{'create_bill':True}" attrs="{'invisible': ['|', ('state', 'not in', ('purchase', 'done')), ('invoice_status', 'in', ('no', 'invoiced'))]}"/>
                     <button name="action_rfq_send" states="sent" string="Re-Send by Email" type="object" context="{'send_rfq':True}"/>
                     <button name="print_quotation" string="Print RFQ" type="object" states="sent" groups="base.group_user"/>
@@ -131,11 +131,20 @@
             </field>
     </record>
 
+    <record id="view_purchase_order_quantity_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.qty</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="after">
+                <field name="product_available"/>
+                <field name="product_reserved"/>
+                <field name="net_available"/>
+            </xpath>
+        </field>
+    </record>
 
-    <menuitem id="menu_purchase_plan" name="Purchase Plan" parent="purchase.menu_purchase_root"
+    <menuitem id="menu_purchase_plan" name="Contract Orders" parent="purchase.menu_purchase_root"
               action="purchase_plan_action" groups="purchase.group_purchase_user"/>
-
-
-
 
 </odoo>

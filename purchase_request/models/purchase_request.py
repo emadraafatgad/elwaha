@@ -69,7 +69,7 @@ class PurchaseRequest(models.Model):
                                    copy=False,
                                    track_visibility='onchange',
                                    default=_get_default_requested_by)
-    request_type = fields.Selection([('row','Row Material'),('maintenance','Maintenance Materials'),
+    request_type = fields.Selection([('row','Raw Material'),('maintenance','Maintenance Materials'),
                                      ('office','Office Supplies'),('general','General')],default='row')
     assigned_to = fields.Many2one(
         'res.users', 'Approver', track_visibility='onchange',

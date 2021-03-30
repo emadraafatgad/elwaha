@@ -1,20 +1,25 @@
-from odoo import models, fields, api,_
+from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+
 
 class DeliveryPLan(models.Model):
     _name = 'delivery.plan'
     _description = 'Delivery Plan'
     _rec_name = 'origin'
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
+    _order = 'id desc'
 
-    name =fields.Char('Plan ref',default='New',readonly=True)
-    origin =fields.Char("Contract Ref")
-    state = fields.Selection([('new', 'New'),('shipment', 'Confirmed')],string="status", default='new', track_visibility="onchange")
-    partner_id = fields.Many2one('res.partner',string='Client',readonly=True, required=True,domain=[('partner_type','=','client')])
+    name = fields.Char('Plan ref', default='New', readonly=True)
+    origin = fields.Char("Contract Ref")
+    state = fields.Selection([('new', 'New'), ('shipment', 'In Progress')], string="status", default='new',
+                             track_visibility="onchange")
+    partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,
+                                 domain=[('partner_type', '=', 'client')])
     # product_id = fields.Many2many('product.product', string='Commodity', required=True)
-    shipment_company = fields.Many2one('res.partner',readonly=True,string="Forwarder",domain=[('partner_type','=','forwarder')])
-    line_ids = fields.One2many('operation.order','shipment_plan')
-    shipment_lines = fields.One2many('delivery.plan.line','shipment_plan')
+    shipment_company = fields.Many2one('res.partner', readonly=True, string="Forwarder",
+                                       domain=[('partner_type', '=', 'forwarder')])
+    line_ids = fields.One2many('operation.order', 'shipment_plan')
+    shipment_lines = fields.One2many('delivery.plan.line', 'shipment_plan')
     locked = fields.Boolean(compute='compute_lock')
     contract_id = fields.Many2one('sale.order')
     partial_shipment = fields.Selection([
@@ -28,10 +33,9 @@ class DeliveryPLan(models.Model):
         for line in self.line_ids:
             qty += line.total_weight
         if qty == self.quantity:
-           self.locked = True
+            self.locked = True
         else:
             self.locked = False
-
 
     @api.multi
     def action_confirm(self):
@@ -56,9 +60,7 @@ class DeliveryPLan(models.Model):
                 'default_forwarder': self.shipment_company.id,
                 'default_contract_no': self.origin,
                 'default_company_id': self.company_id.id,
-
             }
-
         }
 
     @api.multi
@@ -74,6 +76,7 @@ class DeliveryPLan(models.Model):
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('delivery.plan')
         return super(DeliveryPLan, self).create(vals)
+
 
 class LoadingPlace(models.Model):
     _name = 'loading.place'
@@ -96,3 +99,9 @@ class DeliveryPlanLine(models.Model):
     to_port = fields.Many2one('container.port', string='POD', required=True)
     packing = fields.Many2one('product.packing', string='Packing', required=True)
     contract_id = fields.Many2one('sale.order')
+
+
+class contract(models.Model):
+    _inherit = 'sale.order'
+
+    shipment_lines = fields.One2many('delivery.plan.line', 'contract_id',readonly=True)

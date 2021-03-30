@@ -104,4 +104,18 @@ class PurchaseOrderEdit(models.Model):
                 record.purchase_order = l
 
 
+class PurchaseOrderLine(models.Model):
+    _inherit = "purchase.order.line"
 
+    product_available = fields.Float(string="On Hand",related='product_id.qty_available')
+    product_reserved = fields.Float(string="Reserved",related='product_id.outgoing_qty')
+    net_available = fields.Float(string="Available",compute='get_product_quantity')
+
+    @api.depends('product_id')
+    def get_product_quantity(self):
+        for rec in self:
+            print("vskvmdlskmd")
+            qty_available = rec.product_id.qty_available
+            outgoing = rec.product_id.outgoing_qty
+            print(qty_available - outgoing)
+            rec.net_available = qty_available - outgoing

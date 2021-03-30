@@ -14,18 +14,12 @@
         <field name="model">product.packing</field>
         <field name="arch" type="xml">
             <form string="Packing">
-
                 <sheet>
-
+                    <group>
                         <group>
-                            <group>
-                              <field name="name" />
-                            </group>
+                            <field name="name"/>
                         </group>
-
-
-
-
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
@@ -39,16 +33,14 @@
         <field name="name">Packing Tree</field>
         <field name="model">product.packing</field>
         <field name="arch" type="xml">
-            <tree string="Packing">
-                 <field name="name" />
-
-             </tree>
+            <tree string="Packing" >
+                <field name="name"/>
+            </tree>
         </field>
     </record>
 
     <menuitem id="menu_product_packing" sequence="1" name="Packing" parent="menu_contract_info"
-              action="product_packing_action" />
-
+              action="product_packing_action"/>
 
 
 </odoo>

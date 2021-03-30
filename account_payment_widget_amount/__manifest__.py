@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["account_move_line_auto_reconcile_hook"],
+    "depends": ["account_move_line_auto_reconcile_hook",'sale'],
     "data": [
         'views/account.xml',
     ],

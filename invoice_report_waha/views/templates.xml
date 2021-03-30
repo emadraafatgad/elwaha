@@ -1,0 +1,475 @@
+<odoo>
+    <data>
+
+
+        <report id="action_invoice_quotation_report1"
+                string="Elwaha Invoice "
+                model="account.invoice"
+                report_type="qweb-pdf"
+                name="invoice_report_waha.invoice_report_template"
+                file="invoice_report_waha.invoice_report_template"
+          />
+        <template id="invoice_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <style type="text/css">
+                        body {margin-top: 0px;margin-left: 0px;}
+
+#page_1 {position:relative; overflow: hidden;margin: 168px 0px 118px 49px;padding: 0px;border: none;width: 724px;}
+
+
+
+
+
+.ft0{font: 1px 'Calibri';line-height: 1px;}
+.ft1{font: 25px 'Calibri Light';line-height: 31px;}
+.ft2{font: 1px 'Calibri';line-height: 12px;}
+.ft3{font: bold 12px 'Verdana';line-height: 14px;}
+.ft4{font: 1px 'Calibri';line-height: 16px;}
+.ft5{font: 1px 'Calibri';line-height: 3px;}
+.ft6{font: bold 11px 'Verdana';line-height: 13px;}
+.ft7{font: 11px 'Verdana';line-height: 13px;}
+.ft8{font: 1px 'Calibri';line-height: 5px;}
+.ft9{font: 12px 'Calibri Light';line-height: 14px;}
+.ft10{font: 12px 'Verdana';line-height: 14px;}
+.ft11{font: 1px 'Calibri';line-height: 4px;}
+.ft12{font: bold 14px 'Calibri';color: #44546a;line-height: 17px;}
+.ft13{font: bold 13px 'Calibri';color: #44546a;line-height: 15px;}
+.ft14{font: 14px 'Calibri';line-height: 17px;}
+.ft15{font: 14px 'Calibri';line-height: 16px;}
+.ft16{font: bold 14px 'Calibri';color: #44546a;line-height: 16px;}
+.ft17{font: bold 13px 'Verdana';line-height: 16px;}
+.ft18{font: 12px 'Trebuchet MS';text-decoration: underline;line-height: 17px;}
+.ft19{font: bold 14px 'Calibri';line-height: 17px;}
+.ft20{font: bold 12px 'Trebuchet MS';line-height: 17px;}
+.ft21{font: 1px 'Calibri';line-height: 7px;}
+
+.p0{text-align: left;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p1{text-align: right;padding-right: 5px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p2{text-align: left;padding-left: 3px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p3{text-align: right;padding-right: 3px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p4{text-align: left;padding-left: 7px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p5{text-align: left;padding-left: 12px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p6{text-align: left;padding-left: 14px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p7{text-align: right;padding-right: 14px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p8{text-align: right;padding-right: 13px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p9{text-align: left;padding-left: 13px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p10{text-align: left;padding-left: 15px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p11{text-align: center;padding-left: 20px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p12{text-align: right;padding-right: 2px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p13{text-align: center;padding-left: 22px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p14{text-align: right;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p15{text-align: left;padding-left: 4px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+.p16{text-align: left;padding-left: 108px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+
+.td0{padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;}
+.td1{padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;}
+.td2{padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;}
+.td3{padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;}
+.td4{padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;}
+.td5{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;}
+.td6{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;}
+.td7{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;}
+.td8{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;}
+.td9{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;}
+.td10{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 481px;vertical-align: bottom;}
+.td11{padding: 0px;margin: 0px;width: 481px;vertical-align: bottom;}
+.td12{border-bottom: #333f4f 1px solid;padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;}
+.td13{border-bottom: #333f4f 1px solid;padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;}
+.td14{border-bottom: #333f4f 1px solid;padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;}
+.td15{border-bottom: #333f4f 1px solid;padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;}
+.td16{border-bottom: #333f4f 1px solid;padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;}
+.td17{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;background: #fafafa;}
+.td18{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;background: #fafafa;}
+.td19{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;background: #fafafa;}
+.td20{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;background: #fafafa;}
+.td21{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;background: #fafafa;}
+.td22{padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;background: #fafafa;}
+.td23{padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;background: #fafafa;}
+.td24{padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;background: #fafafa;}
+.td25{padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;background: #fafafa;}
+.td26{padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;background: #fafafa;}
+.td27{border-bottom: #757171 1px solid;padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;}
+.td28{border-bottom: #757171 1px solid;padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;}
+.td29{border-bottom: #757171 1px solid;padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;}
+.td30{border-bottom: #757171 1px solid;padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;}
+.td31{border-bottom: #757171 1px solid;padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;}
+.td32{padding: 0px;margin: 0px;width: 479px;vertical-align: bottom;}
+.td33{border-bottom: #595959 1px solid;padding: 0px;margin: 0px;width: 140px;vertical-align: bottom;}
+.td34{border-bottom: #595959 1px solid;padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;}
+.td35{border-bottom: #595959 1px solid;padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;}
+.td36{border-bottom: #595959 1px solid;padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;}
+.td37{border-bottom: #595959 1px solid;padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;}
+.td38{padding: 0px;margin: 0px;width: 522px;vertical-align: bottom;}
+.td39{padding: 0px;margin: 0px;width: 186px;vertical-align: bottom;}
+
+.tr0{height: 31px;}
+.tr1{height: 12px;}
+.tr2{height: 16px;}
+.tr3{height: 3px;}
+.tr4{height: 20px;}
+.tr5{height: 21px;}
+.tr6{height: 5px;}
+.tr7{height: 17px;}
+.tr8{height: 23px;}
+.tr9{height: 19px;}
+.tr10{height: 18px;}
+.tr11{height: 4px;}
+.tr12{height: 22px;}
+.tr13{height: 24px;}
+.tr14{height: 25px;}
+.tr15{height: 7px;}
+
+.t0{width: 724px;font: bold 14px 'Calibri';color: #44546a;}
+.t1{width: 708px;margin-left: 3px;margin-top: 16px;font: bold 14px 'Calibri';}
+
+ </style>
+
+
+<DIV id="page_1">
+
+
+ <TABLE cellpadding="0" cellspacing="0" class="t0">
+<TR>
+	<TD class="tr0 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr0 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr0 td2"><P class="p1 ft1"><span t-esc="doc.number"/> </P></TD>
+	<TD class="tr0 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+<!--	<TD class="tr0 td4"><P class="p1 ft1"><NOBR>32-2020</NOBR></P></TD>-->
+</TR>
+<TR>
+	<TD class="tr1 td5"><P class="p0 ft2"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr1 td6"><P class="p0 ft2"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr1 td7"><P class="p0 ft2"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr1 td8"><P class="p0 ft2"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr1 td9"><P class="p0 ft2"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr2 td0"><P class="p2 ft3">BILL TO :-</P></TD>
+	<TD class="tr2 td1"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td2"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td3"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td4"><P class="p3 ft3"><NOBR><span t-esc="doc.date_due"/> </NOBR></P></TD>
+</TR>
+<TR>
+	<TD colspan="2" class="tr3 td10"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td7"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td8"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td9"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD colspan="2" class="tr2 td11"><P class="p2 ft6"><span t-esc="doc.partner_id.name"/>  </P></TD>
+	<TD class="tr2 td2"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td3"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td4"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr4 td0"><P class="p2 ft7"><span t-esc="doc.partner_id.street"/> </P></TD>
+	<TD class="tr4 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr4 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr4 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr4 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD colspan="2" class="tr5 td11"><P class="p4 ft7"><span t-esc="doc.partner_id.city"/> </P></TD>
+	<TD class="tr5 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr5 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr5 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr5 td0"><P class="p4 ft7"><span t-esc="doc.partner_id.country_id.name"/> </P></TD>
+	<TD class="tr5 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr5 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr5 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr5 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr6 td12"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td13"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td14"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td15"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td16"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr7 td5"><P class="p5 ft9">QUANTITY</P></TD>
+	<TD class="tr7 td6"><P class="p6 ft9">DESCRIPTION OF GOODS</P></TD>
+	<TD class="tr7 td7"><P class="p7 ft9">UNIT PRICE</P></TD>
+	<TD class="tr7 td8"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr7 td9"><P class="p8 ft9">TOTAL</P></TD>
+</TR>
+	<t-set count="1"/>
+
+<TR t-foreach="doc.invoice_line_ids" t-as="line">
+
+	<TD class="tr4 td17"><P class="p9 ft10"><span t-esc="line.quantity"/></P></TD>
+	<TD class="tr4 td18"><P class="p10 ft10"><span t-esc="line.name"/></P></TD>
+	<TD class="tr4 td19"><P class="p7 ft10"><span t-esc="line.price_unit"/></P></TD>
+	<TD class="tr4 td20"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr4 td21"><P class="p11 ft10"><span t-esc="line.price_subtotal"/></P></TD>
+
+
+	<TR >
+	<TD class="tr8 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+</TR>
+
+
+
+
+
+
+
+
+
+
+<TR>
+	<TD class="tr12 td27"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td28"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td29"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td30"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td31"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr12 td17"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td18"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td19"><P class="p7 ft12">SUBTOTALS</P></TD>
+	<TD class="tr12 td20"><P class="p12 ft12">$</P></TD>
+	<TD class="tr12 td21"><P class="p13 ft13"><span t-esc="doc.amount_untaxed"/></P></TD>
+</TR>
+
+     <TR>
+	<TD class="tr12 td27"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td28"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td29"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td30"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td31"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr12 td17"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td18"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td19"><P class="p7 ft12">Discount</P></TD>
+	<TD class="tr12 td20"><P class="p12 ft12">$</P></TD>
+	<TD class="tr12 td21"><P class="p13 ft13"><span t-esc="doc.ks_amount_discount"/></P></TD>
+</TR>
+      <T t-foreach="doc.amount_by_group" t-as="amount_by_group">
+<TR>
+	<TD class="tr12 td27"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td28"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td29"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td30"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td31"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr12 td17"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td18"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr12 td19"><P class="p7 ft12">SUBTOTALS</P></TD>
+	<TD class="tr12 td20"><P class="p12 ft12">$</P></TD>
+	<TD class="tr12 td21"><P class="p13 ft13"><span t-esc="doc.amount_untaxed"/></P></TD>
+</TR>
+      </T>
+     <T t-foreach="doc.amount_by_group" t-as="amount_by_group">
+         <TR>
+            <TD class="tr11 td33"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td34"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td35"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td36"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td37"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+        </TR>
+         <TR>
+            <TD>
+                <TD class="tr12 td17"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+                <TD class="tr12 td18"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+                <span t-esc="amount_by_group[0]"/>
+                <TD class="tr12 td21"><P class="p13 ft13">
+                <span>&amp;nbsp;<span>ON</span>
+                    <t t-esc="amount_by_group[4]"/>
+                </span>
+                </P></TD>
+            </TD>
+                <TD class="tr10 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+                <TD class="tr10 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+                <TD class="tr10 td4"><P class="p13 ft13">
+                    <span t-esc="amount_by_group[3]"/>
+                </P>
+            </TD>
+           </TR>
+        </T>
+
+<!--<TR>-->
+<!--	<TD class="tr4 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr4 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr4 td2"><P class="p7 ft13">ADVANCED PAYMENT</P></TD>-->
+<!--	<TD class="tr4 td3"><P class="p14 ft12">$</P></TD>-->
+<!--	<TD class="tr4 td4"><P class="p13 ft13">48,084.93</P></TD>-->
+<!--</TR>-->
+<!--<TR>-->
+<!--	<TD class="tr8 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD colspan="2" class="tr8 td32"><P class="p7 ft12">Balance Amount contract 18</P></TD>-->
+<!--	<TD class="tr8 td3"><P class="p14 ft12">$</P></TD>-->
+<!--	<TD class="tr8 td4"><P class="p13 ft13">23,905.83</P></TD>-->
+<!--</TR>-->
+<!--<TR>-->
+<!--	<TD class="tr11 td33"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr11 td34"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr11 td35"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr11 td36"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr11 td37"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
+<!--</TR>-->
+<!--<TR>-->
+<!--	<TD class="tr10 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr10 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
+<!--	<TD class="tr10 td2"><P class="p7 ft12">USD TOTAL</P></TD>-->
+<!--	<TD class="tr10 td3"><P class="p12 ft12">$</P></TD>-->
+<!--	<TD class="tr10 td4"><P class="p13 ft13"><span t-esc="doc.amount_total"/></P></TD>-->
+<!--</TR>-->
+          <TR>
+            <TD class="tr11 td33"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td34"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td35"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td36"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr11 td37"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+        </TR>
+        <TR>
+            <TD class="tr10 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr10 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+            <TD class="tr10 td2"><P class="p7 ft12">Advance Payment</P></TD>
+            <TD class="tr10 td3"><P class="p12 ft12">$</P></TD>
+            <t t-set="total_before" t-value="doc.amount_total"/>
+            <t t-set="total_after" t-value="doc.residual"/>
+            <t t-set="paid_amount" t-value="total_before - total_after"/>
+            <TD class="tr10 td4"><P class="p13 ft13"><span t-esc="paid_amount"/></P></TD>
+        </TR>
+     <TR>
+	<TD class="tr11 td33"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr11 td34"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr11 td35"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr11 td36"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr11 td37"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr10 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr10 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr10 td2"><P class="p7 ft12">Total Amount</P></TD>
+	<TD class="tr10 td3"><P class="p12 ft12">$</P></TD>
+	<TD class="tr10 td4"><P class="p13 ft13"><span t-esc="doc.residual"/></P></TD>
+</TR>
+<TR>
+	<TD class="tr6 td5"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td6"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td7"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td8"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr6 td9"><P class="p0 ft8"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr10 td0"><P class="p2 ft14">BL No.</P></TD>
+	<TD class="tr10 td1"><P class="p15 ft12"><span t-esc="doc.bl_no"/></P></TD>
+	<TD class="tr10 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr10 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr10 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr8 td0"><P class="p2 ft15">SHIP DATE</P></TD>
+	<TD class="tr8 td1"><P class="p15 ft16"><NOBR><span t-esc="doc.ship_date"/></NOBR></P></TD>
+	<TD class="tr8 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr8 td0"><P class="p2 ft14">SHIP VIA</P></TD>
+	<TD class="tr8 td1"><P class="p15 ft12"><span t-esc="doc.ship_via"/></P></TD>
+	<TD class="tr8 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr13 td0"><P class="p2 ft14">PORT OF LOADING</P></TD>
+	<TD class="tr13 td1"><P class="p15 ft12"><span t-esc="doc.pol.name"/></P></TD>
+	<TD class="tr13 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr13 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr13 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr8 td0"><P class="p2 ft14">PORT OF DISCHARGE</P></TD>
+	<TD class="tr8 td1"><P class="p15 ft12"><span t-esc="doc.pod.name"/></P></TD>
+	<TD class="tr8 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr8 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr13 td0"><P class="p2 ft14">Vessel  Voyage No.</P></TD>
+	<TD class="tr13 td1"><P class="p15 ft12"><span t-esc="doc.vessel_voyage_no"/></P></TD>
+	<TD class="tr13 td2"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr13 td3"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr13 td4"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr3 td5"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td6"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td7"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td8"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr3 td9"><P class="p0 ft5"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr2 td0"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td1"><P class="p16 ft17">Thank You For Your Business!</P></TD>
+	<TD class="tr2 td2"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td3"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+	<TD class="tr2 td4"><P class="p0 ft4"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+</TABLE>
+<TABLE cellpadding="0" cellspacing="0" class="t1">
+<TR>
+	<TD class="tr10 td38"><P class="p0 ft18">Make all payable to</P></TD>
+	<TD class="tr10 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD rowspan="2" class="tr14 td38"><P class="p0 ft19">Bank account details</P></TD>
+	<TD class="tr10 td39"><P class="p0 ft20">EL WAHA MINING   FERTILIZERS</P></TD>
+</TR>
+<TR>
+	<TD class="tr15 td39"><P class="p0 ft21"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr10 td38"><P class="p0 ft19">Bank Name: <span t-esc="doc.partner_bank_id.bank_id.name"/></P></TD>
+	<TD class="tr10 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr10 td38"><P class="p0 ft19">Branch: <span t-esc="doc.partner_bank_id.branch"/></P></TD>
+	<TD class="tr10 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr10 td38"><P class="p0 ft19">Account Name: <span t-esc="doc.partner_bank_id.acc_holder_name"/></P></TD>
+	<TD class="tr10 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr10 td38"><P class="p0 ft19">IBAN. : <NOBR><span t-esc="doc.partner_bank_id.acc_number"/></NOBR></P></TD>
+	<TD class="tr10 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+    <TR>
+	<TD class="tr10 td38"><P class="p0 ft19">Account No. : <NOBR><span t-esc="doc.partner_bank_id.account_no"/></NOBR></P></TD>
+	<TD class="tr10 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+<TR>
+	<TD class="tr5 td38"><P class="p0 ft19">Swift Code  : <span t-esc="doc.partner_bank_id.bank_id.bic"/></P></TD>
+	<TD class="tr5 td39"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>
+</TR>
+</TABLE>
+
+
+
+
+
+
+
+</DIV>
+                </t>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>

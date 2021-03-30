@@ -8,11 +8,12 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
+
     <record model="ir.ui.view" id="container_type_tree">
         <field name="name">Container Type Tree</field>
         <field name="model">container.type</field>
         <field name="arch" type="xml">
-            <tree string="Container Type">
+            <tree string="Container Type" editable="bottom">
                 <field name="name"/>
              </tree>
         </field>

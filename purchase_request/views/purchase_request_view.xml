@@ -294,6 +294,7 @@
 
     <menuitem
         id="menu_purchase_request_pro_mgt"
+        sequence="1"
         parent="purchase.menu_procurement_management"
         action="purchase_request_form_action"/>
 

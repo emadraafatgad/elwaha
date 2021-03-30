@@ -35,6 +35,7 @@
         'views/container_type.xml',
         'views/commodity_type.xml',
         'views/purchase_plan.xml',
+        'views/purchase_project_plan.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

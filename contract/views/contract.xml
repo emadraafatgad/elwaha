@@ -94,7 +94,7 @@
                 <field name="filename" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="incoterm" groups="sale_stock.group_display_incoterm" />
+                    <field name="incoterm_id" widget="Many2one"/>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="string">Client</attribute>

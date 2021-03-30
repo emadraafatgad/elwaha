@@ -12,7 +12,7 @@
         <field name="name">Commodity Type Tree</field>
         <field name="model">commodity.type</field>
         <field name="arch" type="xml">
-            <tree string="Commodity Type">
+            <tree string="Commodity Type" editable="bottom">
                 <field name="name"/>
              </tree>
         </field>
