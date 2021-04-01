@@ -27,6 +27,7 @@ class OperationOrder(models.Model):
     commodity_type = fields.Many2one('commodity.type')
     container_weight = fields.Float('Container Weight')
     total_weight = fields.Float(compute='compute_total', string='Stander Quantity')
+    qty_done = fields.Float(readonly=True)
     amount = fields.Float(compute='compute_amount')
     container_bag_no = fields.Float(string="Container Bags NO.")
     total_bags = fields.Float(string="Total Bags")
@@ -285,7 +286,7 @@ class OperationOrder(models.Model):
         })
         self.show = True
 
-    @api.multi
+    """@api.multi
     def action_deliver(self):
         copy_record = self.env['stock.picking']
         sp_types = self.env['stock.picking.type'].search([('code', '=', 'outgoing')])
@@ -315,7 +316,7 @@ class OperationOrder(models.Model):
             'picking_type_id': sp_types[0].id,
             'partner_id': self.customer.id,
         }).action_assign()
-        self.show_delivery = True
+        self.show_delivery = True"""
 
     @api.multi
     def unlink(self):

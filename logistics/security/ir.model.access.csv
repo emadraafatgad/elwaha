@@ -24,3 +24,7 @@ access_op_manager_workorder,mrp_workorder_op,mrp.model_mrp_workorder,logistics.g
 access_loading_place,loading_place,model_loading_place,,1,1,1,1
 access_stock_picking_all,stock_picking_all,stock.model_stock_picking,,1,1,1,1
 access_account_invoice_discount,Account Discount,model_special_discount,,1,1,1,1
+access_actual_manufacturing,actual_manufacturing,model_actual_manufacturing,,1,1,1,1
+access_actual_product_produce,actual_product_produce,model_actual_product_produce,,1,1,1,1
+access_consumed_materials,consumed_materials,model_consumed_materials,,1,1,1,1
+access_mo_stock_quant,mo_stock_quant,stock.model_stock_quant,,1,1,0,0
