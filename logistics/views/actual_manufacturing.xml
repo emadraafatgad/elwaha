@@ -25,9 +25,14 @@
                     <button name="action_check_availability"
                             string="Check Availability" type="object" class="oe_highlight" attrs="{'invisible': [('availability', '=', True)]}"/>
                     <button name="action_produce"
-                            string="Produce" type="object"  attrs="{'invisible': [('compute_produce', '=', True)]}"/>
+                            string="Produce" class="oe_highlight" type="object"  attrs="{'invisible': [('compute_produce', '=', True)]}"/>
+                    <button name="action_post_inventory"
+                            string="Post Inventory" type="object"  attrs="{'invisible': ['|',('compute_produce', '!=', True),('picking_state', 'in', ('done','cancel'))]}"/>
+                    <button name="action_done"
+                            string="Done" type="object"  attrs="{'invisible': [('check_done', '=', False)]}"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="confirmed,in_progress,done"/>
+
                 </header>
                 <sheet>
                     <h1>
@@ -39,6 +44,8 @@
                             <field name="product_id" readonly="0"/>
                             <field name="availability" invisible="1"/>
                             <field name="compute_produce" invisible="1"/>
+                            <field name="check_done" invisible="1"/>
+                            <field name="picking_state" invisible="1"/>
                             <label for="product_qty"/>
                             <div class="o_row">
                                 <field name="product_qty"/>
@@ -69,7 +76,7 @@
                                     <field name="location_dest_id" />
                                     <field name="state" invisible="1"/>
                                     <field name="product_uom_qty" string="To consume" />
-                                    <field name="reserved_availability" string="Reserved" />
+                                    <field name="reserved_availability" string="Reserved"/>
                                     <field name="quantity_done" string="Consumed"/>
                                     </tree>
                                 <form>

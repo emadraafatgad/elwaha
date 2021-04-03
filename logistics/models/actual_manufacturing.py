@@ -22,6 +22,14 @@ class ActualManufacturing(models.Model):
     manu_picking_id = fields.Many2one('stock.move')
     qty_produced = fields.Float()
     picking_id = fields.Many2one('stock.picking')
+    picking_state = fields.Selection([
+        ('draft', 'Draft'),
+        ('waiting', 'Waiting Another Operation'),
+        ('confirmed', 'Waiting'),
+        ('assigned', 'Ready'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),
+    ], related='picking_id.state',store=True)
     move_lines = fields.One2many('stock.move','manufacturing_id',compute='compute_move_lines')
     @api.depends('picking_id')
     def compute_move_lines(self):
@@ -39,15 +47,32 @@ class ActualManufacturing(models.Model):
         self.picking_id.action_assign()
 
     availability = fields.Boolean(compute='compute_availability')
+
     @api.depends('move_lines')
     def compute_availability(self):
-        self.availability = all(line.product_uom_qty == line.reserved_availability for line in self.move_lines) or self.state in ('in_progress','done','cancel')
+        self.availability = all(line.product_uom_qty == line.reserved_availability for line in self.move_lines) or self.picking_state in ('done','cancel')
 
     @api.multi
     def action_produce(self):
         self.ensure_one()
         action = self.env.ref('logistics.act_actual_product_produce').read()[0]
         return action
+
+    @api.multi
+    def action_post_inventory(self):
+        self.picking_id.button_validate()
+
+    @api.multi
+    def action_done(self):
+        self.state = 'done'
+    check_done = fields.Boolean(compute='_check_done')
+    @api.depends('picking_id','state')
+    def _check_done(self):
+        if self.picking_id.state == 'done' and self.state == 'in_progress':
+            self.check_done = True
+        else:
+            self.check_done = False
+
 
     @api.model
     def create(self, values):

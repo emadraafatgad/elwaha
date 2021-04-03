@@ -32,7 +32,7 @@ class ActualProductProduce(models.TransientModel):
                 res['product_uom_id'] = todo_uom
             if 'product_qty' in fields:
                 res['product_qty'] = todo_quantity
-        lines=[]
+        lines = []
         for record in production.move_lines:
             qty_to_consume = record.product_uom_qty - record.quantity_done
             lines.append(
@@ -78,10 +78,4 @@ class MrpProductProduceLine(models.TransientModel):
     qty_done = fields.Float('Consumed', digits=dp.get_precision('Product Unit of Measure'))
     qty_reserved = fields.Float('Reserved', digits=dp.get_precision('Product Unit of Measure'))
 
-    @api.onchange('product_id')
-    def _onchange_product_id(self):
-        self.product_uom_id = self.product_id.uom_id.id
 
-    @api.onchange('qty_to_consume')
-    def _onchange_qty_to_consume(self):
-        self.qty_reserved = self.qty_to_consume
