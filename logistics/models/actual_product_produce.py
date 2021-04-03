@@ -33,8 +33,8 @@ class ActualProductProduce(models.TransientModel):
             if 'product_qty' in fields:
                 res['product_qty'] = todo_quantity
         lines=[]
-        for record in production.raw_ids:
-            qty_to_consume = record.product_qty - record.qty_done
+        for record in production.move_lines:
+            qty_to_consume = record.product_uom_qty - record.quantity_done
             lines.append(
                 (0, 0,
                  {
@@ -59,9 +59,9 @@ class ActualProductProduce(models.TransientModel):
         production.origin.actual_qty += quantity
         production.origin.order_no.qty_done += quantity
         for rec in self.produce_line_ids:
-            rec.consumed_raw_id.qty_done += rec.qty_done
+            rec.consumed_raw_id.quantity_done += rec.qty_done
             rec.plan_raw_id.consumed += rec.qty_done
-
+        production.state = 'in_progress'
         return {'type': 'ir.actions.act_window_close'}
 
 
@@ -70,7 +70,7 @@ class MrpProductProduceLine(models.TransientModel):
     _description = "Record Production Line"
 
     product_produce_id = fields.Many2one('actual.product.produce')
-    consumed_raw_id = fields.Many2one('consumed.materials')
+    consumed_raw_id = fields.Many2one('stock.move')
     plan_raw_id = fields.Many2one('order.mrp.line')
     product_id = fields.Many2one('product.product', 'Product')
     qty_to_consume = fields.Float('To Consume', digits=dp.get_precision('Product Unit of Measure'))
@@ -81,3 +81,7 @@ class MrpProductProduceLine(models.TransientModel):
     @api.onchange('product_id')
     def _onchange_product_id(self):
         self.product_uom_id = self.product_id.uom_id.id
+
+    @api.onchange('qty_to_consume')
+    def _onchange_qty_to_consume(self):
+        self.qty_reserved = self.qty_to_consume

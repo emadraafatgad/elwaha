@@ -58,6 +58,7 @@ class OperationOrderMRPPlan(models.Model):
     vessel_name = fields.Char()
     company_id = fields.Many2one('res.company', default=lambda self: self.env.user.company_id)
     shipment_plan = fields.Many2one('delivery.plan', string="PLAN")
+
     @api.multi
     def action_create_mo(self):
         plan_lines = []
@@ -67,23 +68,32 @@ class OperationOrderMRPPlan(models.Model):
             ('usage', '=', 'internal')])[0]
         location_dest_id = self.env['stock.location'].search([
             ('usage', '=', 'production')])[0]
+        picking_type_id = self.env['stock.picking.type'].search([
+            ('code', '=', 'mrp_operation')])[0]
         for line in self.plan_lines:
             plan_lines.append((0, 0, {
                 'product_id': line.product_id.id,
-                'product_qty': line.product_qty,
+                'name': line.product_id.name,
+                'plan_line_id': line.id,
+                'product_uom_qty': line.product_qty,
                 'product_uom': line.product_uom.id,
                 'location_id': location_id.id,
                 'location_dest_id': location_dest_id.id,
-                'plan_line_id': line.id,
             }))
-
+        cr = self.env['stock.picking'].create({
+            'location_id': location_id.id,
+            'location_dest_id': location_dest_id.id,
+            'picking_type_id': picking_type_id.id,
+            'move_lines': plan_lines,
+        })
         self.env['actual.manufacturing'].create({
             'product_id': self.product.id,
             'product_qty': self.total_weight,
             'product_uom': self.product.uom_id.id,
             'origin': self.id,
             'contract_no': self.contract_no,
-            'raw_ids': plan_lines,
+            'picking_id': cr.id,
+
         })
         self.state = 'in_progress'
 

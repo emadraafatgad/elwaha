@@ -6,6 +6,7 @@
         <field name="padding">4</field>
         <field name="company_id" eval="False"/>
     </record>
+
     <record id="actual_manufacturing_action" model="ir.actions.act_window">
         <field name="name">Actual Manufacturing</field>
         <field name="res_model">actual.manufacturing</field>
@@ -14,18 +15,17 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
+
     <record id="view_actual_manufacturing_form" model="ir.ui.view">
         <field name="name">Actual Manufacturing Form</field>
         <field name="model">actual.manufacturing</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_check_availability" states="new"
-                            string="Check Availability" attrs="{'invisible': [('availability', 'in', ('available', 'none'))]}" type="object" class="oe_highlight"/>
+                    <button name="action_check_availability"
+                            string="Check Availability" type="object" class="oe_highlight" attrs="{'invisible': [('availability', '=', True)]}"/>
                     <button name="action_produce"
-                            string="Produce" type="object"/>
-                    <button name="cancel" attrs="{'invisible': [('state', '=', 'cancel')]}"
-                            string="Cancel" type="object" />
+                            string="Produce" type="object"  attrs="{'invisible': [('compute_produce', '=', True)]}"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="confirmed,in_progress,done"/>
                 </header>
@@ -36,7 +36,9 @@
                     <group>
                         <group>
 
-                            <field name="product_id" />
+                            <field name="product_id" readonly="0"/>
+                            <field name="availability" invisible="1"/>
+                            <field name="compute_produce" invisible="1"/>
                             <label for="product_qty"/>
                             <div class="o_row">
                                 <field name="product_qty"/>
@@ -45,43 +47,55 @@
                         </group>
                         <group>
                             <field name="date_planned_start"/>
-                            <field name="origin" />
+                            <field name="picking_id"/>
+                            <field name="origin"/>
                             <field name="contract_no"/>
                             <field name="user_id" />
                         </group>
-                        <group>
-                        </group>
+
                     </group>
                     <notebook>
-                        <page string="Consumed Materials">
-                            <field name="raw_ids">
-                                <tree editable="top">
+
+                            <page string="Consumed Materials">
+                            <field name="move_lines"  >
+                                <tree editable="bottom">
+                                    <field name="manufacturing_id" invisible="1"/>
+                                    <field name="plan_line_id" invisible="1"/>
                                     <field name="product_id" required="1"/>
-                                    <field name="manu_id" invisible="1"/>
-                                    <field name="product_uom" groups="uom.group_uom"/>
-                                    <field name="location_id" invisible="1"/>
-                                    <field name="location_dest_id" invisible="1"/>
-                                    <field name="product_qty"/>
-                                    <field name="reserved"/>
-                                    <field name="qty_done" readonly="1" string="Consumed"/>
-                                    <field name="state" invisible="0" readonly="1"/>
-                                </tree>
+                                    <field name="name" invisible="1"/>
+                                    <field name="product_id" required="1"/>
+                                    <field name="product_uom"/>
+                                    <field name="location_id"/>
+                                    <field name="location_dest_id" />
+                                    <field name="state" invisible="1"/>
+                                    <field name="product_uom_qty" string="To consume" />
+                                    <field name="reserved_availability" string="Reserved" />
+                                    <field name="quantity_done" string="Consumed"/>
+                                    </tree>
+                                <form>
+                                    <group>
+                                      <field name="product_id"/>
+                                      <field name="product_uom_qty"/>
+                                      <field name="quantity_done"/>
+                                    </group>
+                                    <page>
+                                        <field name="active_move_line_ids">
+                                            <tree>
+                                                <field name="product_uom_qty"/>
+                                                <field name="qty_done"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </form>
                             </field>
-                        </page>
-                        <page string="Other Information">
-                           <group>
-                               <group>
-                                   <field name="availability"/>
-                               </group>
-                           </group>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
+              <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
                     <field name="activity_ids" widget="mail_activity"/>
                     <field name="message_ids" widget="mail_thread"/>
-                </div>
+                    </div>
             </form>
         </field>
     </record>
@@ -94,7 +108,6 @@
                 <field name="name"/>
                 <field name="product_id"/>
                 <field name="product_qty"/>
-                <field name="availability"/>
                 <field name="origin"/>
                 <field name="state"/>
             </tree>
