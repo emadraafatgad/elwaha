@@ -35,10 +35,19 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="new"/>
-                    <field name="state" widget="statusbar" statusbar_visible="new,confirmed"/>
+                    <button name="action_create_mo" string="Create MO" type="object" states="new"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="in_progress"/>
+                    <button name="action_deliver" string="Deliver" type="object" attrs="{'invisible':['|',('show_delivery', '=',True),('state', '=','new')]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,in_progress,confirmed"/>
                 </header>
                 <sheet>
+                     <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" attrs="{'invisible':[('delivery_ids','=',[])]}">
+                            <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                            <field name="delivery_ids" invisible="1"/>
+                            <field name="show_delivery" invisible="1"/>
+                        </button>
+                    </div>
                     <h1>
                         <field name="code" readonly="1"/>
                     </h1>
@@ -82,6 +91,7 @@
                                     <field name="product_id" required="1"/>
                                     <field name="product_uom" required="1"/>
                                     <field name="product_qty" string="Qty"/>
+                                    <field name="consumed" string="Consumed Qty" readonly="1"/>
                                     <field name="plan_id" invisible="1"/>
                                 </tree>
                             </field>
