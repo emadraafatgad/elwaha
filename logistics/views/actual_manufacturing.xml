@@ -120,6 +120,6 @@
             </tree>
         </field>
     </record>
-    <menuitem id="menu_actual_manufacturing" sequence="4" name="Manufacturing" parent="menu_logistics_info"
+    <menuitem id="menu_actual_manufacturing" sequence="3" name="Manufacturing" parent="menu_logistics_info"
               action="actual_manufacturing_action" groups="logistics.group_operation_order_user"/>
 </odoo>

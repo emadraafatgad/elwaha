@@ -86,7 +86,7 @@ class OperationOrderMRPPlan(models.Model):
             'picking_type_id': picking_type_id.id,
             'move_lines': plan_lines,
         })
-        self.env['actual.manufacturing'].create({
+        man = self.env['actual.manufacturing'].create({
             'product_id': self.product.id,
             'product_qty': self.total_weight,
             'product_uom': self.product.uom_id.id,
@@ -95,6 +95,7 @@ class OperationOrderMRPPlan(models.Model):
             'picking_id': cr.id,
 
         })
+        cr.origin = man.name
         self.state = 'in_progress'
 
     show_delivery = fields.Boolean()
@@ -118,7 +119,7 @@ class OperationOrderMRPPlan(models.Model):
     def _compute_delivery(self):
         for line in self:
             delivery = self.env['stock.picking'].search([
-                ('origin', '=', self.contract_no)
+                ('origin', '=', self.name)
             ])
             line.delivery_ids = delivery
             line.delivery_count = len(delivery)
@@ -144,7 +145,7 @@ class OperationOrderMRPPlan(models.Model):
 
         ])
         picking = copy_record.create({
-            'origin': self.contract_no,
+            'origin': self.name,
             'priority': '1',
             'state': 'assigned',
             'move_lines': order_lines,
