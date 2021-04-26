@@ -15,6 +15,7 @@ class OperationOrderMRPPlan(models.Model):
     order_no = fields.Many2one('operation.order', string='Origin')
     state = fields.Selection([('new', 'New'), ('in_progress', 'In Progress'),('confirmed', 'Confirmed')], default='new', track_visibility="onchange")
     plan_lines = fields.One2many('order.mrp.line', 'plan_id')
+    consumed_lines = fields.One2many('consumed.line', 'plan_id')
 
     name = fields.Char('Order No', readonly=True, default='New')
     contract_no = fields.Char(readonly=True)
@@ -210,6 +211,13 @@ class MRPPlanLine(models.Model):
     consumed = fields.Float()
     product_uom = fields.Many2one('uom.uom', related='product_id.uom_po_id', string='Product Uom')
 
+class ConsumedPlanLine(models.Model):
+    _name = 'consumed.line'
+    plan_id = fields.Many2one('operation.order.mrp')
+    product_id = fields.Many2one('product.product')
+    product_qty = fields.Float()
+    consumed = fields.Float()
+    product_uom = fields.Many2one('uom.uom', related='product_id.uom_po_id', string='Product Uom')
 
 class MRPBomInherit(models.Model):
     _inherit = 'mrp.bom'
