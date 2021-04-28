@@ -45,18 +45,18 @@ class OperationOrder(models.Model):
     def get_default_cutt_of_date(self):
         for rec in self:
             if rec.travel_date:
-                print(rec.travel_date)
+                # print(rec.travel_date)
                 cutt_of_date = rec.travel_date - relativedelta(days=4)
-                print(cutt_of_date,type(cutt_of_date),"loooool")
+                # print(cutt_of_date,type(cutt_of_date),"loooool")
                 rec.end_date = cutt_of_date
 
     @api.depends('travel_date')
     def get_loading_date(self):
         for rec in self:
             if rec.travel_date:
-                print(rec.travel_date)
+                # print(rec.travel_date)
                 loading_date = rec.travel_date - relativedelta(days=6)
-                print(loading_date,"loooooooooooooooood")
+                # print(loading_date,"loooooooooooooooood")
                 rec.start_date = loading_date
 
     location_id = fields.Many2one('stock.location', required=True, default=default_location_id)
@@ -73,8 +73,7 @@ class OperationOrder(models.Model):
     delivery_date = fields.Date()
     inspection_company1 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     inspection_company2 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
-    customer = fields.Many2one('res.partner', related='shipment_plan.partner_id',
-                               domain=[('partner_type', '=', 'client')])
+    customer = fields.Many2one('res.partner', related='shipment_plan.partner_id', domain=[('partner_type', '=', 'client')])
     agree = fields.Char(readonly=True)
     bank_certificate = fields.Char(readonly=True)
     customer_code = fields.Char(readonly=True, string='Client Code', related='customer.client_code')
@@ -113,8 +112,8 @@ class OperationOrder(models.Model):
             rec.product = contract_line.product_id
             rec.packing = contract_line.packing
             rec.arrival_port = contract_line.to_port
-            rec.exit_port = contract_line.from_port
-            rec.shipment_port = contract_line.from_port
+            # rec.exit_port = contract_line.from_port
+            # rec.shipment_port = contract_line.from_port
             rec.price_unit = contract_line.price_unit
 
     @api.onchange('shipment_plan')
