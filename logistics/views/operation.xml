@@ -71,8 +71,8 @@
                             <field name="contract_no" readonly="1"/>
                             <field name="product"/>
                             <field name="reserve_no" />
-                            <field name="forwarder" />
-                            <field name="shipping_line" />
+                            <field name="forwarder" context="{'default_partner_type': 'forwarder','default_customer': False, 'default_supplier': True}"/>
+                            <field name="shipping_line"  context="{'default_partner_type': 'shipping_line','default_customer': False, 'default_supplier': True}"/>
                             <field name="vessel_name" />
                             <field name="customer" invisible="1" string="Client"/>
                             <field name="container_no" attrs="{'readonly':[('status','=','done')]}"/>
@@ -89,9 +89,7 @@
                         <group>
                             <field name="total_weight"/>
                             <field name="qty_done" string="Done Quantity"/>
-
                         </group>
-
                     </group>
                     <group>
                         <group>
@@ -110,13 +108,15 @@
                             <field name="shipment_port" />
                             <field name="loading_place" />
                             <field name="end_date" />
-                            <field name="inspection_company1"/>
+                            <field name="inspection_company1" context="{'default_partner_type': 'inspection_company','default_customer': False,
+                'default_supplier': True}"/>
                         </group>
                         <group>
                            <field name="arrival_port" />
                            <field name="start_date" />
                            <field name="travel_date" />
-                           <field name="inspection_company2"/>
+                           <field name="inspection_company2" context="{'default_partner_type': 'inspection_company','default_customer': False,
+                'default_supplier': True}"/>
                         </group>
                     </group>
                      <group>
@@ -138,11 +138,7 @@
                     <group>
                         <field name="notes"/>
                     </group>
-
-
-
                  </sheet>
-
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
                     <field name="message_ids" widget="mail_thread"/>

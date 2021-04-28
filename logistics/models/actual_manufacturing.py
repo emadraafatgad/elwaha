@@ -1,6 +1,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+
 class ActualManufacturing(models.Model):
     _name = 'actual.manufacturing'
     _description = 'Manufacturing'

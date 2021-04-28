@@ -27,7 +27,7 @@
                     <button name="action_produce"
                             string="Produce" class="oe_highlight" type="object"  attrs="{'invisible': [('compute_produce', '=', True)]}"/>
                     <button name="action_post_inventory"
-                            string="Post Inventory" type="object"  attrs="{'invisible': ['|',('compute_produce', '!=', True),('picking_state', 'in', ('done','cancel'))]}"/>
+                            string="Post Inventory" type="object" groups="stock.group_stock_manager" attrs="{'invisible': ['|',('compute_produce', '!=', True),('picking_state', 'in', ('done','cancel'))]}"/>
                     <button name="action_done"
                             string="Done" type="object"  attrs="{'invisible': [('check_done', '=', False)]}"/>
                     <field name="state" widget="statusbar"
@@ -62,7 +62,6 @@
 
                     </group>
                     <notebook>
-
                             <page string="Consumed Materials">
                             <field name="move_lines"  >
                                 <tree editable="bottom">
@@ -120,6 +119,6 @@
             </tree>
         </field>
     </record>
-    <menuitem id="menu_actual_manufacturing" sequence="4" name="Manufacturing" parent="menu_logistics_info"
+    <menuitem id="menu_actual_manufacturing" sequence="3" name="Manufacturing" parent="menu_logistics_info"
               action="actual_manufacturing_action" groups="logistics.group_operation_order_user"/>
 </odoo>

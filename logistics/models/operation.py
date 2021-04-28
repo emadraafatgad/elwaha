@@ -10,10 +10,10 @@ class OperationOrder(models.Model):
     _inherit = 'mail.thread'
     _description = 'Operation Order'
 
-    name = fields.Char('Order No', readonly=True, default='New')
-    contract_no = fields.Char()
+    name = fields.Char('Order No', readonly=True, track_visibility="onchange", default='New')
+    contract_no = fields.Char(track_visibility="onchange")
     contract_id = fields.Many2one('sale.order',readonly=True)
-    status = fields.Selection([('new', 'New'), ('done', 'Done')], default='new')
+    status = fields.Selection([('new', 'New'), ('done', 'Done')], track_visibility="onchange", default='new')
     state = fields.Selection(
         [('new', 'New'), ('confirmed', 'Under Stuffing'), ('waiting_port', 'Waiting At Port'), ('sailed', 'Sailed')],
         default='new', track_visibility="onchange")
@@ -261,13 +261,12 @@ class OperationOrder(models.Model):
             'product_id': self.product.id,
             'name': self.product.name,
             'product_uom_id': self.product.uom_id.id,
-            'price_unit': self.product.list_price,
+            'price_unit': self.price_unit,
             'discount': 0.0,
-            'quantity': self.total_weight,
+            'quantity': self.delivered_qty,
             'account_id': accounts.get('stock_input') and accounts['stock_input'].id or \
                           accounts['income'].id,
         }))
-
         vessel_voyage = self.vessel_name + ',' + self.vessel_name
         self.env['account.invoice'].create({
             'partner_id': self.customer.id,
@@ -319,15 +318,14 @@ class OperationOrder(models.Model):
         }).action_assign()
         self.show_delivery = True"""
 
-    @api.multi
-    def unlink(self):
-        for rec in self:
-            if rec.contract_no:
-                raise ValidationError(_('You cannot delete %s as it comes from contract') % rec.name)
-            if rec.state != 'new':
-                raise ValidationError(_('You cannot delete %s as it is confirmed') % rec.name)
-
-        return super(OperationOrder, self).unlink()
+    # @api.multi
+    # def unlink(self):
+    #     for rec in self:
+    #         if rec.contract_no:
+    #             raise ValidationError(_('You cannot delete %s as it comes from contract') % rec.name)
+    #         if rec.state != 'new':
+    #             raise ValidationError(_('You cannot delete %s as it is confirmed') % rec.name)
+        # return super(OperationOrder, self).unlink()
 
     @api.model
     def create(self, vals):

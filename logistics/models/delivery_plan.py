@@ -9,16 +9,17 @@ class DeliveryPLan(models.Model):
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _order = 'id desc'
 
-    name = fields.Char('Plan ref', default='New', readonly=True)
-    origin = fields.Char("Contract Ref")
-    state = fields.Selection([('new', 'New'), ('shipment', 'In Progress')], string="status", default='new',
-                             track_visibility="onchange")
-    partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,
+    name = fields.Char('Plan ref', default='New', track_visibility="onchange", readonly=True)
+    origin = fields.Char("Contract Ref",track_visibility="onchange")
+    state = fields.Selection([('new', 'New'), ('shipment', 'Completed')], string="status", default='new', track_visibility="onchange")
+    partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,track_visibility="onchange",
                                  domain=[('partner_type', '=', 'client')])
     # product_id = fields.Many2many('product.product', string='Commodity', required=True)
     shipment_company = fields.Many2one('res.partner', readonly=True, string="Forwarder",
                                        domain=[('partner_type', '=', 'forwarder')])
     line_ids = fields.One2many('operation.order', 'shipment_plan')
+    qty_done = fields.Float(readonly=True)
+    show_delivery = fields.Boolean()
     shipment_lines = fields.One2many('delivery.plan.line', 'shipment_plan')
     locked = fields.Boolean(compute='compute_lock')
     contract_id = fields.Many2one('sale.order')

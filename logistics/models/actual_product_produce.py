@@ -8,6 +8,7 @@ from odoo.addons import decimal_precision as dp
 from odoo.exceptions import UserError
 from odoo.tools import float_compare, float_round
 
+
 class ActualProductProduce(models.TransientModel):
     _name = "actual.product.produce"
     _description = "Record Production"
