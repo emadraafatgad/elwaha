@@ -19,6 +19,8 @@ class DeliveryPLan(models.Model):
     shipment_company = fields.Many2one('res.partner', readonly=True, string="Forwarder",
                                        domain=[('partner_type', '=', 'forwarder')])
     line_ids = fields.One2many('operation.order', 'shipment_plan')
+    qty_done = fields.Float(readonly=True)
+    show_delivery = fields.Boolean()
     shipment_lines = fields.One2many('delivery.plan.line', 'shipment_plan')
     locked = fields.Boolean(compute='compute_lock')
     contract_id = fields.Many2one('sale.order')

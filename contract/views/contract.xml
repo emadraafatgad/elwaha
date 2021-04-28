@@ -1,11 +1,11 @@
 <odoo>
 
     <record id="seq_contract" model="ir.sequence">
-            <field name="name">Contract</field>
-            <field name="code">contract.order</field>
-            <field name="prefix">/</field>
-            <field name="padding">4</field>
-            <field name="company_id" eval="False"/>
+        <field name="name">Contract</field>
+        <field name="code">contract.order</field>
+        <field name="prefix">/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
     </record>
 
     <record id="view_contract_fertilizer_tree" model="ir.ui.view">
@@ -14,11 +14,11 @@
         <field name="inherit_id" ref="sale.view_order_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//tree" position="replace">
-               <tree string="Sales Orders" decoration-bf="message_needaction==True" decoration-muted="state=='cancel'">
+                <tree string="Sales Orders" decoration-bf="message_needaction==True" decoration-muted="state=='cancel'">
                     <field name="message_needaction" invisible="1"/>
                     <field name="name" string="Contract Number"/>
                     <field name="partner_id" string="Client"/>
-<!--                    <field name="product" string="Commodity" widget="many2many_tags"/>-->
+                    <field name="date_order" string="Contract Date" attrs="{'readonly': [('state', '=', 'done')]}"/>
                     <field name="inspection_company"/>
                     <field name="partial_shipment"/>
                     <field name="user_id" string="Issued By"/>
@@ -38,13 +38,14 @@
         <field name="inherit_id" ref="sale.view_quotation_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//tree" position="replace">
-               <tree string="Quotation" class="o_sale_order" decoration-bf="message_needaction==True" decoration-muted="state=='cancel'">
+                <tree string="Quotation" class="o_sale_order" decoration-bf="message_needaction==True"
+                      decoration-muted="state=='cancel'">
                     <field name="message_needaction" invisible="1"/>
                     <field name="name" string="Contract Number"/>
                     <field name="date_order" string="Contract Date"/>
                     <field name="commitment_date" groups="sale.group_sale_order_dates"/>
                     <field name="expected_date" groups="sale.group_sale_order_dates"/>
-                     <field name="partner_id" string="Client"/>
+                    <field name="partner_id" string="Client"/>
                     <field name="user_id" string="Issued By"/>
                     <field name="amount_total" sum="Total Tax Included" widget="monetary"/>
                     <field name="currency_id" invisible="1"/>
@@ -60,30 +61,32 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-              <xpath expr="//header" position="replace">
-                   <header>
-                      <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
-                      <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale" invisible="1"/>
-                      <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/>
-                      <button name="action_done" type="object" string="Lock" states="sale" help="If the contract is locked, you can not modify it anymore."/>
-                      <button name="action_unlock" type="object" string="Unlock" states="done" groups="sales_team.group_sale_manager"/>
-                      <button name="action_update" type="object" string="Update" states="sale" groups="sales_team.group_sale_manager"/>
-                      <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
-                   </header>
-              </xpath>
+            <xpath expr="//header" position="replace">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"
+                            invisible="1"/>
+                    <button name="action_cancel" states="draft,sent,sale" type="object" string="Cancel"/>
+                    <button name="action_done" type="object" string="Lock" states="sale"
+                            help="If the contract is locked, you can not modify it anymore."/>
+                    <button name="action_unlock" type="object" string="Unlock" states="done"
+                            groups="sales_team.group_sale_manager"/>
+                    <button name="action_update" type="object" string="Update" states="sale"
+                            groups="sales_team.group_sale_manager"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+            </xpath>
 
             <xpath expr="//field[@name='partner_id']" position="after">
-<!--                  <field name="product" widget="many2many_tags" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>-->
-<!--                  <field name="total_qty" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>-->
-                  <field name="inspection_company" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
-                  <label for="margin" />
-                   <div>
-                       <field name="margin" style="width: 33%" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
-                       <span>%</span>
-                   </div>
-
-
-             </xpath>
+                <field name="inspection_company" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+                <field name="date_order" string="Contract Date"/>
+                <label for="margin"/>
+                <div>
+                    <field name="margin" style="width: 33%" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
+                    <span>%</span>
+                </div>
+            </xpath>
 
             <xpath expr="//field[@name='validity_date']" position="replace">
 
@@ -94,7 +97,10 @@
                 <field name="filename" invisible="1"/>
             </xpath>
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="incoterm_id" widget="Many2one"/>
+                <field name="incoterm_id" widget="Many2one"/>
+            </xpath>
+            <xpath expr="//field[@name='confirmation_date']" position="before">
+                <field name="date_order" string="Contract Date" attrs="{'readonly': [('state', '=', 'done')]}"/>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="string">Client</attribute>
@@ -106,175 +112,181 @@
                 <attribute name="required">False</attribute>
             </xpath>
             <xpath expr="//field[@name='name']" position="replace">
-                <field name="name" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                <field name="name" readonly="0"/>
 
-                </xpath>
+            </xpath>
             <xpath expr="//div[@class='oe_title']" position="replace">
                 <div class='oe_title'>
                     <h1>
                         <field name="name"/>
                     </h1>
                 </div>
-                </xpath>
+            </xpath>
 
 
             <xpath expr="//group[@name='sale_pay']" position="replace">
-               <group name="sale_pay" string="Invoicing">
-                                    <field name="date_order" string="Contract Date"  attrs="{'readonly': [('state', '=', 'done')]}"/>
-                                    <field name="date_string" invisible="1"/>
-                                    <field name="customer_code" invisible="1"/>
-                                    <field name="company_name" invisible="1"/>
-                                    <field name="fiscal_position_id" options="{'no_create': True}" invisible="1"/>
-                                    <field name="invoice_status" invisible="1"/>
-               </group>
-                </xpath>
-            <xpath expr="//group[@name='sales_person']" position="replace">
-               <group string="Sales Information" name="sales_person">
-                    <field name="user_id" string="Issued By" readonly="1"/>
-                    <field name="client_order_ref" string="Client Ref" />
-                    <field name="reference" readonly="1" attrs="{'invisible': [('reference', '=', False)]}"/>
-                    <field name="company_id" options="{'no_create': True}"  attrs="{'readonly': [('state', '=', 'done')]}"/>
-                    <field name="analytic_account_id" context="{'default_partner_id':partner_invoice_id, 'default_name':name}" attrs="{'readonly': [('invoice_count','!=',0),('state','=','sale')]}" groups="analytic.group_analytic_accounting" force_save="1"/>
+                <group name="sale_pay" string="Invoicing">
+                    <field name="date_order" string="Contract Date" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <field name="date_string" invisible="1"/>
+                    <field name="customer_code" invisible="1"/>
+                    <field name="company_name" invisible="1"/>
+                    <field name="fiscal_position_id" options="{'no_create': True}" invisible="1"/>
+                    <field name="invoice_status" invisible="1"/>
                 </group>
             </xpath>
-             <xpath expr="//field[@name='order_line']//tree//field[@name='qty_delivered']" position="attributes">
-                  <attribute name="invisible">1</attribute>
-             </xpath>
+            <xpath expr="//group[@name='sales_person']" position="replace">
+                <group string="Sales Information" name="sales_person">
+                    <field name="user_id" string="Issued By" readonly="1"/>
+                    <field name="client_order_ref" string="Client Ref"/>
+                    <field name="reference" readonly="1" attrs="{'invisible': [('reference', '=', False)]}"/>
+                    <field name="company_id" options="{'no_create': True}"
+                           attrs="{'readonly': [('state', '=', 'done')]}"/>
+                    <field name="analytic_account_id"
+                           context="{'default_partner_id':partner_invoice_id, 'default_name':name}"
+                           attrs="{'readonly': [('invoice_count','!=',0),('state','=','sale')]}"
+                           groups="analytic.group_analytic_accounting" force_save="1"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='qty_delivered']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <xpath expr="//field[@name='order_line']//tree//field[@name='qty_invoiced']" position="attributes">
-                  <attribute name="invisible">1</attribute>
-             </xpath>
+                <attribute name="invisible">1</attribute>
+            </xpath>
             <xpath expr="//field[@name='order_line']//tree//field[@name='product_uom_qty']" position="after">
-                  <field name="packing"/>
-                  <field name="delivery_date" required="1" options="{'no_create_edit':False}"/>
-                  <field name="from_port"/>
-                  <field name="to_port"/>
-             </xpath>
+                <field name="packing"/>
+                <field name="delivery_date" required="1" options="{'no_create_edit':False}"/>
+                <field name="from_port"/>
+                <field name="to_port"/>
+            </xpath>
             <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="attributes">
-                    <attribute name="string">Unit Rate</attribute>
-                </xpath>
-               <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="attributes">
-                    <attribute name="string">Commodity</attribute>
-                </xpath>
+                <attribute name="string">Unit Rate</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="attributes">
+                <attribute name="string">Commodity</attribute>
+            </xpath>
             <xpath expr="//field[@name='order_line']//tree//field[@name='product_uom']" position="attributes">
-                  <attribute name="invisible">1</attribute>
-             </xpath>
-             <xpath expr="//field[@name='order_line']//tree//field[@name='tax_id']" position="attributes">
-                  <attribute name="invisible">1</attribute>
-             </xpath>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='tax_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
 
             <xpath expr="//form//control" position="replace">
             </xpath>
 
-          <xpath expr="//page[@name='other_information']" position="after">
-                    <page string="Contract Tracking" invisible="1">
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page string="Contract Tracking" invisible="1">
 
-                    </page>
-                </xpath>
+                </page>
+            </xpath>
         </field>
     </record>
 
     <menuitem id="menu_contract_info" sequence="11" name="Contract Info" parent="sale.menu_sale_config"/>
     <menuitem id="sale.sale_menu_root"
-            name="Contract"
-            web_icon="sale,static/description/icon.png"
-            sequence="7"/>
+              name="Contract"
+              web_icon="sale,static/description/icon.png"
+              sequence="7"/>
     <menuitem id="sale.menu_sale_quotations"
-                action="sale.action_quotations_with_onboarding"
-                parent="sale.sale_order_menu"
-                active="False"
-                groups="sales_team.group_sale_salesman"/>
+              action="sale.action_quotations_with_onboarding"
+              parent="sale.sale_order_menu"
+              active="False"
+              groups="sales_team.group_sale_salesman"/>
     <menuitem id="sale.sale_order_menu"
-            name="Contract"
-            parent="sale.sale_menu_root"
-            sequence="1"/>
+              name="Contract"
+              parent="sale.sale_menu_root"
+              sequence="1"/>
     <menuitem id="sale.menu_sale_order"
-            name="Contracts"
-            action="sale.action_orders"
-            parent="sale.sale_order_menu"
-            sequence="2" groups="sales_team.group_sale_salesman"/>
+              name="Contracts"
+              action="sale.action_orders"
+              parent="sale.sale_order_menu"
+              sequence="2" groups="sales_team.group_sale_salesman"/>
     <menuitem name="Clients"
               id="sale.res_partner_menu"
               parent="sale.sale_order_menu"
               action="base.action_partner_form"
               sequence="4" groups="sales_team.group_sale_salesman"/>
     <record id="make_invisible" model="res.groups">
-         <field name="name">Invisible</field>
+        <field name="name">Invisible</field>
     </record>
     <record model="ir.ui.menu" id="sale.report_sales_team">
         <field name="groups_id" eval="[(6,0,[ref('make_invisible')])]"/>
     </record>
 
-
     <record id="sale.view_sales_order_filter" model="ir.ui.view">
-            <field name="name">sale.order.list.select</field>
-            <field name="model">sale.order</field>
-            <field name="arch" type="xml">
-                <search>
-                    <field name="partner_id" string="Client"/>
-<!--                    <field name="product" string="Commodity"/>-->
-                    <field name="inspection_company"/>
-                    <field name="date_order" string="Contract Date"/>
-                    <separator/>
-                    <filter name="draft" string="Draft"
-                            domain="[('state','=','draft')]"/>
-                    <filter name="in_progress" string="InProgress"
-                            domain="[('state','=','done')]"/>
-                    <filter name="editing" string="Editing"
-                            domain="[('state','=','sale')]"/>
-                    <filter string="Today" name="today" domain="[('create_date','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
-                    <filter string="This Week" name="this_week" domain="[
+        <field name="name">sale.order.list.select</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id" string="Client"/>
+                <!--                    <field name="product" string="Commodity"/>-->
+                <field name="inspection_company"/>
+                <field name="date_order" string="Contract Date"/>
+                <separator/>
+                <filter name="draft" string="Draft"
+                        domain="[('state','=','draft')]"/>
+                <filter name="in_progress" string="InProgress"
+                        domain="[('state','=','done')]"/>
+                <filter name="editing" string="Editing"
+                        domain="[('state','=','sale')]"/>
+                <filter string="Today" name="today" domain="[('create_date','&gt;=',time.strftime('%%Y-%%m-%%d'))]"/>
+                <filter string="This Week" name="this_week" domain="[
                                 '&amp;',
                                 ('create_date', '>=', (context_today() + relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')),
                                 ('create_date', '&lt;=', (context_today() + relativedelta(weekday=6)).strftime('%Y-%m-%d')),]"/>
-                    <filter string="This Month" name="this_month" domain="[('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
-                    <filter string="This Year" name="this_year" domain="[('create_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
-                  <group expand="0" string="Group By">
-                        <filter string="Client" name="client" domain="[]" context="{'group_by':'partner_id'}"/>
-                        <filter string="Issued By" name="user" domain="[]" context="{'group_by':'user_id'}"/>
-                    </group>
-                </search>
-            </field>
-        </record>
-    <record id="sale.action_orders" model="ir.actions.act_window">
-            <field name="name">Contract</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">sale.order</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
-            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
-            <field name="context">{}</field>
-            <field name="domain">[]</field>
-            <field name="help" type="html">
-                <p class="o_view_nocontent_smiling_face">
-                    Create a new contract
-                </p>
-            </field>
-        </record>
-<record id="view_partner_inherit_contract" model="ir.ui.view">
-            <field name="name">Partner Inherits</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form" />
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='type']" position="after">
-
-                        <field name="partner_type" />
-                        <field name="client_code" attrs="{'invisible':[('partner_type', '!=', 'client')],'required':[('partner_type', '=', 'client')]}"/>
-
-                </xpath>
-
-            </field>
+                <filter string="This Month" name="this_month"
+                        domain="[('create_date','&gt;=',time.strftime('%%Y-%%m-01'))]"/>
+                <filter string="This Year" name="this_year"
+                        domain="[('create_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Client" name="client" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Issued By" name="user" domain="[]" context="{'group_by':'user_id'}"/>
+                </group>
+            </search>
+        </field>
     </record>
+
+    <record id="sale.action_orders" model="ir.actions.act_window">
+        <field name="name">Contract</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+        <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new contract
+            </p>
+        </field>
+    </record>
+
+    <record id="view_partner_inherit_contract" model="ir.ui.view">
+        <field name="name">Partner Inherits</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="partner_type"/>
+                <field name="client_code"
+                       attrs="{'invisible':[('customer', '!=', True)],'required':[('customer', '=', True)]}"/>
+            </xpath>
+        </field>
+    </record>
+
     <record id="view_sale_management_inherit_contract" model="ir.ui.view">
-            <field name="name">Sale Management Inherit</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page/field[@name='sale_order_option_ids']/.." position="replace">
+        <field name="name">Sale Management Inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/field[@name='sale_order_option_ids']/.." position="replace">
 
             </xpath>
-                <xpath expr="//field[@name='sale_order_template_id']" position="replace">
-                </xpath>
-            </field>
+            <xpath expr="//field[@name='sale_order_template_id']" position="replace">
+            </xpath>
+        </field>
     </record>
     <record id="sale_order_view_form_manage_inherit" model="ir.ui.view">
         <field name="name">sale.order.form.inherit</field>
@@ -286,42 +298,44 @@
             </xpath>
             <xpath expr="//button[@name='action_quotation_send']" position="replace">
                 <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
-                    type="action" class="btn-primary"
-                    attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" invisible="1"/>
+                        type="action" class="btn-primary"
+                        attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}" invisible="1"/>
                 <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
-                    type="action" context="{'default_advance_payment_method': 'percentage'}"
-                    attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}" invisible="1"/>
+                        type="action" context="{'default_advance_payment_method': 'percentage'}"
+                        attrs="{'invisible': ['|',('invoice_status', '!=', 'no'), ('state', '!=', 'sale')]}"
+                        invisible="1"/>
             </xpath>
         </field>
     </record>
-     <record id="view_stock_picking_inherit_contract" model="ir.ui.view">
-            <field name="name">stock.picking.inherit</field>
-            <field name="model">stock.picking</field>
-            <field name="inherit_id" ref="stock.view_picking_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='move_ids_without_package']//field[@name='quantity_done']" position="before">
-                    <field name="suppose_qty"/>
-                </xpath>
-            </field>
+    <record id="view_stock_picking_inherit_contract" model="ir.ui.view">
+        <field name="name">stock.picking.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids_without_package']//field[@name='quantity_done']" position="before">
+                <field name="suppose_qty"/>
+            </xpath>
+        </field>
     </record>
     <record id="view_stock_move_purchase_edit" model="ir.ui.view">
-            <field name="name">stock.move.inherit</field>
-            <field name="model">stock.move</field>
-            <field name="inherit_id" ref="stock.view_move_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='date']" position="before">
-                    <field name="suppose_qty"/>
-                </xpath>
-            </field>
+        <field name="name">stock.move.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="before">
+                <field name="suppose_qty"/>
+            </xpath>
+        </field>
     </record>
 
-     <record id="tree_purchase_order_line_move" model="ir.ui.view">
-            <field name="name">stock.move.purchase.tree</field>
-            <field name="model">stock.move</field>
-            <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
-            <field name="arch" type="xml">
-                 <xpath expr="//tree" position="replace">
-                     <tree decoration-muted="state == 'cancel'" default_order='date_expected, picking_id, sequence' string="Moves">
+    <record id="tree_purchase_order_line_move" model="ir.ui.view">
+        <field name="name">stock.move.purchase.tree</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree decoration-muted="state == 'cancel'" default_order='date_expected, picking_id, sequence'
+                      string="Moves">
                     <field name="date_expected" widget='date'/>
                     <field name="date" widget="date"/>
                     <field name="picking_id" string="Reference" invisible="1"/>
@@ -330,18 +344,18 @@
                     <field name="product_id"/>
                     <field name="product_uom_qty"/>
                     <field name="suppose_qty"/>
-                    <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit of Measure" groups="uom.group_uom"/>
+                    <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit of Measure"
+                           groups="uom.group_uom"/>
                     <field name="location_id" invisible="1"/>
                     <field name="location_dest_id" invisible="1"/>
                     <field name="create_date" invisible="1"/>
                     <field name="state"/>
                 </tree>
 
-                 </xpath>
+            </xpath>
 
-            </field>
+        </field>
     </record>
-
 
 
 </odoo>

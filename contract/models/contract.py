@@ -11,11 +11,10 @@ class contract(models.Model):
     partial_shipment = fields.Selection([
         ('allowed', 'Allowed'),
         ('not_allowed', 'Not Allowed')], required=True)
-    name = fields.Char(default='/')
-    date_order = fields.Date(default=date.today())
+    name = fields.Char(default='/',readonly=False)
+    date_order = fields.Date(string="Contract Date")
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', help="Pricelist for current sales order.")
-    currency_id = fields.Many2one("res.currency", string="Currency", readonly=False,
-                                  required=True)
+    currency_id = fields.Many2one("res.currency", string="Currency", readonly=False, required=True)
     date_string = fields.Char()
     inspection_company = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     margin = fields.Float(string="Tolerance Margin", default=10)
@@ -45,19 +44,19 @@ class contract(models.Model):
     customer_code = fields.Char()
     company_name = fields.Char()
 
-    @api.multi
-    @api.onchange('date_order')
-    def _onchange_date_order(self):
-        for rec in self:
-            date = datetime.strptime(str(rec.date_order), DEFAULT_SERVER_DATE_FORMAT)
-            day = date.day
-            if day < 10:
-                day = '0'+str(day)
-            month = date.month
-            if month < 10:
-                month = '0'+str(month)
-            year = date.year
-            rec.date_string = str(day) + str(month) + str(year)[-2:]
+    # @api.multi
+    # @api.onchange('date_order')
+    # def _onchange_date_order(self):
+    #     for rec in self:
+    #         date = datetime.strptime(str(rec.date_order), DEFAULT_SERVER_DATE_FORMAT)
+    #         day = date.day
+    #         if day < 10:
+    #             day = '0'+str(day)
+    #         month = date.month
+    #         if month < 10:
+    #             month = '0'+str(month)
+    #         year = date.year
+    #         rec.date_string = str(day) + str(month) + str(year)[-2:]
 
     @api.multi
     @api.onchange('company_id', 'partner_id')
@@ -183,18 +182,19 @@ class contract(models.Model):
                 }
                 return {'warning': warning}
 
-    @api.model
-    def create(self, vals):
-        seq = self.env['ir.sequence'].next_by_code('contract.order')
-        customer_code = vals.get('customer_code') or ''
-        company_name = vals.get('company_name')
-        date_string = vals.get('date_string')
-        vals['name'] = customer_code + '.' + company_name + '. /' + date_string + seq
-        return super(contract, self).create(vals)
+    # @api.model
+    # def create(self, vals):
+        # seq = self.env['ir.sequence'].next_by_code('contract.order')
+        # customer_code = vals.get('customer_code') or ''
+        # company_name = vals.get('company_name')
+        # date_string = vals.get('date_string')
+        # vals['name'] = customer_code + '.' + company_name + '. /' + date_string + seq
+        # return super(contract, self).create(vals)
 
 
 class OrderLineContract(models.Model):
     _inherit = 'sale.order.line'
+
     product_uom_qty = fields.Float(string='Ordered Quantity', required=True, default=0.0)
     container_no = fields.Integer('Container No')
     container_type = fields.Many2one('container.type')

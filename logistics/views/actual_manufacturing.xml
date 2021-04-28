@@ -62,7 +62,6 @@
 
                     </group>
                     <notebook>
-
                             <page string="Consumed Materials">
                             <field name="move_lines"  >
                                 <tree editable="bottom">

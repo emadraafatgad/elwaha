@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
+
 class OperationOrder(models.Model):
     _name = 'operation.order'
     _inherit = 'mail.thread'
@@ -318,15 +319,14 @@ class OperationOrder(models.Model):
         }).action_assign()
         self.show_delivery = True"""
 
-    @api.multi
-    def unlink(self):
-        for rec in self:
-            if rec.contract_no:
-                raise ValidationError(_('You cannot delete %s as it comes from contract') % rec.name)
-            if rec.state != 'new':
-                raise ValidationError(_('You cannot delete %s as it is confirmed') % rec.name)
-
-        return super(OperationOrder, self).unlink()
+    # @api.multi
+    # def unlink(self):
+    #     for rec in self:
+    #         if rec.contract_no:
+    #             raise ValidationError(_('You cannot delete %s as it comes from contract') % rec.name)
+    #         if rec.state != 'new':
+    #             raise ValidationError(_('You cannot delete %s as it is confirmed') % rec.name)
+        # return super(OperationOrder, self).unlink()
 
     @api.model
     def create(self, vals):
