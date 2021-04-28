@@ -1,0 +1,116 @@
+<odoo>
+
+<!--    <record id="fees_payment_type_action" model="ir.actions.act_window">-->
+<!--        <field name="name">Payment Type</field>-->
+<!--        <field name="res_model">fees.payment.type</field>-->
+<!--        <field name="view_type">form</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+
+<!--    <record id="view_fees_payment_type_form" model="ir.ui.view">-->
+<!--        <field name="name">Fees Payment Type</field>-->
+<!--        <field name="model">fees.payment.type</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="Payment Type">-->
+<!--                <sheet>-->
+<!--                    <separator string="Name" />-->
+<!--                    <group col="2" >-->
+<!--                        <field name="name" placeholder="Stage" />-->
+<!--                        <field name="max_intervals" invisible="1"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--        <record id="view_fees_payment_type_tree" model="ir.ui.view">-->
+<!--        <field name="name">Fees Payment Type</field>-->
+<!--        <field name="model">fees.payment.type</field>-->
+<!--                <field name="arch" type="xml">-->
+<!--                <tree string="Payment Type" editable="top">-->
+<!--                    <field name="name"/>-->
+<!--                    <field name="max_intervals" invisible="1"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+        <menuitem id="menu_fees_form" sequence="80" name="Study Fees" parent="menu_configuration" />
+<!--        <menuitem id="menu_fees_payment_type_form" name="Payment Category" parent="menu_fees_form" action="fees_payment_type_action" />-->
+
+        <record id="fees_type_action" model="ir.actions.act_window">
+            <field name="name">Fees </field>
+            <field name="res_model">fees.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <record id="view_fees_type_form" model="ir.ui.view">
+        <field name="name">Fees</field>
+        <field name="model">fees.type</field>
+        <field name="arch" type="xml">
+            <form string="Fees Type">
+                <sheet>
+<!--                    <separator string="Name" />-->
+                    <group>
+                        <group col="2" >
+                            <field name="name" invisible="1" placeholder="Fees"/>
+                            <field name="payment_type"/>
+                            <field name="amount"/>
+                            <field name="currency_id"/>
+                        </group>
+                        <group>
+                            <field name="academic_year"/>
+                            <field name="education_stage"/>
+                            <field name="education_stage_year"/>
+                        </group>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="max_intervals" invisible="1"/>
+                        </group>
+                    </group>
+                        <notebook>
+                            <page string="Installments">
+                                <field name="installment_ids" context="{'default_amount':amount}">
+                                    <tree editable="bottom">
+                                        <field name="installments"/>
+                                        <field name="installment_date"/>
+                                        <field name="amount" invisible="1"/>
+                                        <field name="percentage"/>
+                                        <field name="amount_after_percentage"/>
+                                        <field name="currency_id" readonly="1"/>
+                                    </tree>
+                                </field>
+                            </page>
+<!--                            <page string="Detailes">-->
+<!--                                <group>-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="type"/>-->
+<!--                                </group>-->
+<!--                                <group>-->
+<!--                                    <field name="categ_id"/>-->
+<!--                                    <field name="property_account_income_id"/>-->
+<!--                                </group>-->
+<!--                            </page>-->
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fees_type_tree" model="ir.ui.view">
+    <field name="name">Fees Type</field>
+    <field name="model">fees.type</field>
+            <field name="arch" type="xml">
+            <tree string="Payment Type" >
+                <field name="payment_type"/>
+                <field name="academic_year"/>
+                <field name="education_stage_year"/>
+                <field name="amount"/>
+                <field name="currency_id"/>
+                <field name="max_intervals"/>
+            </tree>
+        </field>
+    </record>
+
+    <menuitem id="menu_fees_type_form" name="Fees Amounts" parent="menu_fees_form" action="fees_type_action" />
+
+</odoo>

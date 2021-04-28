@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="student_fees_payment_code" model="ir.sequence">
+        <field name="name">Fees Payment</field>
+        <field name="code">fees.payment</field>
+        <field name="prefix">PF</field>
+        <field name="padding">5</field>
+    </record>
+     <record id="installments_sequence_code" model="ir.sequence">
+        <field name="name">Installment Count</field>
+        <field name="code">installment.count</field>
+        <field name="padding">2</field>
+    </record>
+
+    <record id="action_fees_payment_form" model="ir.actions.act_window">
+        <field name="name">Fees Payment</field>
+        <field name="res_model">fees.payment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+    </record>
+
+    <record id="view_fees_payment_form" model="ir.ui.view">
+        <field name="name">Fees Payment</field>
+            <field name="model">fees.payment</field>
+        <field name="arch" type="xml">
+            <form string="Rules Structure">
+                <header>
+                    <button name="action_invoice_create" confirm="You Will Create Invoice To Accounting. !!" string="Create Invoice" states="confirm" class="oe_highlight" type="object"/>
+                    <button name="compute_fees_structure"  string="Compute" states="draft" class="oe_highlight" type="object"/>
+                    <button name="confirm_state" string="Confirm" states="draft" class="oe_highlight" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,invoiced"/>
+                </header>
+                <sheet>
+                    <div>
+<!--                        <label for="name" class="oe_edit_only"/>-->
+                        <h3>
+                            <field name="name" readonly="True"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group col="2" >
+                            <field name="student_id" attrs="{'readonly':[('state','in',['confirm','invoiced'])]}"/>
+<!--                            <field name="fees_structure" required="1"/>-->
+                            <field name="invoice_installment" invisible="1"/>
+                            <field name="installments_id"/>
+                            <field name="one_time_installment"/>
+                        </group>
+                        <group>
+                            <field name="education_stage" required="1"/>
+                            <field name="stage_level" required="1"/>
+                            <field name="student_sequence_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Rules Lines">
+                            <field name="fees_structure_line">
+                                <form>
+                                    <group>
+                                        <field name="fees_type"/>
+                                        <field name="intervals"/>
+                                    </group>
+                                    <group>
+                                        <field name="amount"/>
+                                        <field name="currency_id"/>
+                                    </group>
+                                </form>
+                                <tree   editable="top" delete="0" create="0">
+                                    <field name="fees_type"/>
+                                    <field name="sequence_discount"/>
+                                    <field name="amount" />
+                                    <field name="currency_id"/>
+                                </tree>
+                            </field>
+                            </page>
+                            <page string="Deduction Payments">
+<!--                            <separator string="Deduction Payment"/>-->
+                                <field name="payment_input">
+                                    <form>
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="fees_type" invisible="1"/>
+                                            <field name="name"/>
+<!--                                            <field name="installments"/>-->
+                                            <field name="installments_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="amount"/>
+                                            <field name="currency_id"/>
+                                        </group>
+                                    </form>
+                                    <tree editable="top" delete="0" create="1">
+                                        <field name="product_id"/>
+                                        <field name="fees_type" invisible="1"/>
+                                        <field name="name"/>
+<!--                                        <field name="installments" invisible="1"/>-->
+                                        <field name="installments_id"/>
+                                        <field name="tax_ids" widget="many2many_tags"/>
+                                        <field name="amount"/>
+                                        <field name="currency_id"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                        </page>
+                        <page string="To Invoice">
+                            <field name="fees_to_invoice">
+                                <form>
+                                    <form>
+                                        <group>
+                                            <field name="fees_type"/>
+<!--                                            <field name="installments"/>-->
+                                            <field name="installments_id"/>
+                                            <field name="due_date"/>
+                                        </group>
+                                        <group>
+                                            <field name="amount"/>
+                                            <field name="currency_id"/>
+                                        </group>
+                                    </form>
+                                </form>
+                                <tree editable="top" delete="0" create="0">
+                                    <field name="fees_type"/>
+<!--                                    <field name="installments"/>-->
+                                    <field name="installments_id" />
+                                    <field name="due_date"/>
+                                    <field name="tax_ids" widget="many2many_tags"/>
+                                    <field name="amount" />
+                                    <field name="currency_id"/>
+<!--                                    <button name="send_to_invoice" states="confirm" string="Send To Invoice" class="btn btn-success" type="object"/>-->
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                            <group>
+                                <field name="total_amount"/>
+                                <field name="invoiced_amount"/>
+                                <field name="invoice_state"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fees_payment_tree" model="ir.ui.view">
+    <field name="name">Fees Payment</field>
+        <field name="model">fees.payment</field>
+            <field name="arch" type="xml">
+            <tree string="Rules">
+                <field name="name"/>
+                <field name="student_id" />
+                <field name="student_sequence_id"/>
+                <field name="state" invisible="1"/>
+                <field name="installments_id" invisible="1"/>
+                <field name="stage_level"/>
+                <field name="one_time_installment"/>
+                <field name="state"/>
+                <field name="invoice_state" invisible="1"/>
+            </tree>
+            </field>
+    </record>
+
+    <record id="view_fees_payment_pivot" model="ir.ui.view">
+        <field name="name">Fees Payment</field>
+            <field name="model">fees.payment</field>
+        <field name="arch" type="xml">
+            <pivot string="Fees Payment">
+                <field name="student_id" type="row"/>
+                <field name="total_amount" type="measure" />
+                <field name="invoiced_amount"  type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="view_fees_payment_graph" model="ir.ui.view">
+        <field name="name">Fees Payment graph</field>
+            <field name="model">fees.payment</field>
+        <field name="arch" type="xml">
+            <graph string="Fees Payment">
+                <field name="stage_level" type="row"/>
+                <field name="total_amount" type="measure" />
+                <field name="invoiced_amount"  type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_fees_payment" name="Fees Payment" sequence="50"
+              parent="menu_classera_root"/>
+
+    <menuitem id="menu_student_fees_payment" name="Student Fees Payment"
+              sequence="10"
+               action="action_fees_payment_form"
+              parent="menu_fees_payment"/>
+
+</odoo>

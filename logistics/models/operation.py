@@ -4,6 +4,7 @@ from odoo.exceptions import ValidationError
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
+
 class OperationOrder(models.Model):
     _name = 'operation.order'
     _inherit = 'mail.thread'

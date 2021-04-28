@@ -105,6 +105,12 @@
             <xpath expr="//field[@name='pricelist_id']" position="attributes">
                 <attribute name="required">False</attribute>
             </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">False</attribute>
+            </xpath>
             <xpath expr="//field[@name='name']" position="replace">
                 <field name="name" attrs="{'readonly': [('state', '=', 'done')]}"/>
 

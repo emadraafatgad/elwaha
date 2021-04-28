@@ -1,0 +1,6 @@
+<odoo>
+    <menuitem id="menu_classera_root" name="Classera" web_icon="school_management,static/description/ems.png" sequence="1"/>
+    <menuitem id="menu_configuration" name="Configurations" parent="menu_classera_root" sequence="90" groups="group_school_administration" />
+
+
+</odoo>

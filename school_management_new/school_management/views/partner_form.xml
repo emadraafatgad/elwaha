@@ -1,0 +1,72 @@
+<odoo>
+        <record id="view_partner_property_form_worker" model="ir.ui.view">
+            <field name="name">view_partner_property_form_worker</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+               <xpath expr="//field[@name='type']" position="after">
+<!--                   <group>-->
+                   <field name="classera_id"/>
+                   <field name="is_parent"/>
+<!--                   </group>-->
+               </xpath>
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+                    <attribute name="attrs">{'invisible':False}</attribute>
+               </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Family" attrs="{'invisible':[('is_parent','=',False)]}">
+                        <field name="student_ids">
+                            <tree>
+                                <field name="student_sequence"/>
+                                <field name="student_sequence_id"/>
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="student_sequence_id"/>
+                                <field name="phone"/>
+                                <field name="gender"/>
+                                <field name="date_of_birth"/>
+                                <field name="year"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">Parent fields</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="before">
+                <separator/>
+                <field name="is_parent"/>
+                <filter string="Parent" name="is_parent" domain="[('is_parent','=',True), ('parent_id', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_partner_parents_form" model="ir.actions.act_window">
+            <field name="name">Parents</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"search_default_is_parent":1}</field>
+            <field name="search_view_id" ref="view_res_partner_filter"/>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new customer in your address book
+              </p><p>
+                Odoo helps you easily track all activities related to a customer.
+              </p>
+            </field>
+        </record>
+
+    <menuitem id="res_partner_parents_menu"
+            name="Parents"
+            parent="menu_classera_profile"
+            action="action_partner_parents_form"
+            sequence="90"/>
+
+</odoo>

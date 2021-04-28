@@ -1,0 +1,145 @@
+<odoo>
+        <record id="education_stage_code" model="ir.sequence">
+            <field name="name">Education Stage</field>
+            <field name="code">education.stage</field>
+            <field name="prefex"></field>
+            <field name="padding">5</field>
+        </record>
+
+    <record id="action_education_stage_form" model="ir.actions.act_window">
+        <field name="name">Education stage</field>
+        <field name="res_model">education.stage</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_education_stage_form" model="ir.ui.view">
+        <field name="name">Education stage</field>
+            <field name="model">education.stage</field>
+        <field name="arch" type="xml">
+            <form string="Education Stage">
+                <sheet>
+                    <separator string="Name" />
+                    <group col="2" >
+                        <field name="name" placeholder="Stage" required="1"/>
+                    </group>
+                    <group>
+                        <field name="code"/>
+                        <field name="classera_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="view_education_stage_tree" model="ir.ui.view">
+        <field name="name">Education stage</field>
+            <field name="model">education.stage</field>
+                <field name="arch" type="xml">
+                <tree string="Stage" editable="top">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="classera_id"/>
+                </tree>
+                </field>
+        </record>
+    <menuitem id="menu_education_stages_root" name="Education" sequence="20" parent="menu_configuration" />
+    <menuitem id="menu_education_stage_form" name="Education Stage" parent="menu_education_stages_root" action="action_education_stage_form" />
+
+
+    <record id="education_stage_year_code" model="ir.sequence">
+            <field name="name">Education Stage</field>
+            <field name="code">education.stage.year</field>
+            <field name="padding">5</field>
+        </record>
+
+    <record id="education_stage_year_action" model="ir.actions.act_window">
+            <field name="name">Education Levels</field>
+            <field name="res_model">education.stage.year</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <record id="education_stage_year_form" model="ir.ui.view">
+        <field name="name">Education Stage Year</field>
+        <field name="model">education.stage.year</field>
+        <field name="arch" type="xml">
+            <form string="Education Stage">
+                <sheet>
+                    <group col="2" >
+                        <field name="name" placeholder="Stage Year" />
+                        <field name="stage_id"/>
+                        <field name="code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="education_stage_year_tree" model="ir.ui.view">
+            <field name="name">Education Levels</field>
+            <field name="model">education.stage.year</field>
+            <field name="arch" type="xml">
+                    <tree string="Education Stage Year" editable="bottom">
+                        <field name="name" placeholder="Stage" />
+                        <field name="code"/>
+                        <field name="stage_id"/>
+                        <field name="classera_id"/>
+                    </tree>
+                </field>
+        </record>
+        <menuitem id="menu_education_stage_year_form"
+                  name="Stages Levels"
+                  parent="menu_education_stages_root"
+                  action="education_stage_year_action" />
+
+
+        <record id="education_class_action" model="ir.actions.act_window">
+            <field name="name">Education Class</field>
+            <field name="res_model">education.classes</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    <record id="education_class_form" model="ir.ui.view">
+        <field name="name">Level Classes</field>
+        <field name="model">education.classes</field>
+        <field name="arch" type="xml">
+            <form string="Education Classes">
+                <sheet>
+                    <group col="2" >
+                        <group>
+                            <field name="name" placeholder="Class" />
+                            <field name="stage_year"/>
+                        </group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="classera_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="education_class_tree" model="ir.ui.view">
+            <field name="name">Level Classes</field>
+            <field name="model">education.classes</field>
+            <field name="arch" type="xml">
+                    <tree string="Education class" >
+                        <field name="name" placeholder="Class" />
+                        <field name="stage_year"/>
+                        <field name="capacity"/>
+                        <field name="classera_id"/>
+                    </tree>
+                </field>
+        </record>
+        <menuitem id="menu_education_class_form"
+                  name="Levels classes"
+                  parent="menu_education_stages_root"
+                  action="education_class_action" />
+
+
+</odoo>

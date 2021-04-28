@@ -13,7 +13,7 @@ class contract(models.Model):
         ('not_allowed', 'Not Allowed')], required=True)
     name = fields.Char(default='/')
     date_order = fields.Date(default=date.today())
-    pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', help="Pricelist for current sales order.")
+    pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=False, help="Pricelist for current sales order.")
     currency_id = fields.Many2one("res.currency", string="Currency", readonly=False,
                                   required=True)
     date_string = fields.Char()

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record id="student_code_sequence" model="ir.sequence">
+            <field name="name">Student Coding</field>
+            <field name="code">student.student</field>
+            <field name="prefix" >ST/</field>
+            <field name="padding">5</field>
+    </record>
+    <!-- Form View 1 Of Student's Profiles -->
+    <record id="view_student_student_form_1" model="ir.ui.view">
+        <field name="name">student.student.form.1</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form string="Student Information" create="true" delete="false">
+                <sheet>
+                    <div class="oe_button_box" name="buttons">
+                    </div>
+                    <div>
+                        <field name="image" widget='image' class="oe_left oe_avatar"
+                               options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                            <h3>
+                                <field name="code"/>
+                            </h3>
+                        </div>
+                    </div>
+                    <group colspan="8">
+                        <group colspan="4">
+                            <group col="2" string="Student Information">
+                                <field name="admission_date"/>
+                                <field name="year" placeholder="Year" widget="selection" help="Academic year of Student"/>
+                                <field name="classera_id"/>
+                            </group>
+                            <group col="2" string="Contact">
+                                <field name="phone" placeholder="Phone Number" />
+                                <field name="mobile" placeholder="Mobile Number" />
+                                <field name="email" placeholder="Email Address" String="Email"/>
+                            </group>
+                        </group>
+                        <group colspan="8">
+                            <group col="2" >
+                                <field name="parent_id"
+                                    widget="res_partner_many2one"
+                                    placeholder="Parent"
+                                    domain="[('is_company', '=', True),('is_parent', '=', True)]"
+                                required="1"/>
+                                <field name="student_sequence" invisible="1"/>
+                                <field name="student_sequence_id"/>
+                                <field name="student_sequence_id_ids" invisible="1"/>
+                            </group>
+                            <group >
+                                <field name="education_stage" required="1"/>
+                                <field name="stage_level"/>
+                                <field name="education_class_id"/>
+                                <field name="nationality_id"/>
+                            </group>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="General" name="general">
+                            <group>
+                                <group>
+                                    <field name="gender"  placeholder="Gender" required="1"/>
+                                    <field name="date_of_birth" widget="date" placeholder="Birthdate" />
+                                    <field name="age"/>
+                                </group>
+                                <group>
+                                    <field name="mother_tongue" placeholder="Mother Tounge"/>
+                                </group>
+                                <newline />
+                                <newline />
+                            </group>
+                        </page>
+                        <page name="fees_amounts" string="Fees Amounts">
+                            <field name="fees_type">
+                                <tree>
+                                    <field name="payment_type"/>
+                                    <field name="amount"/>
+                                    <field name="currency_id"/>
+                                    <field name="max_intervals"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View 1 Of Student's Profiles -->
+    <record id="view_student_student_tree_1" model="ir.ui.view">
+        <field name="name">student.student.tree.1</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <tree string="Student Information" create="false" delete="false">
+                <field name="name" />
+                <field name="year" widget="selection" />
+                <field name="admission_date" />
+                <field name="gender" />
+            </tree>
+        </field>
+    </record>
+    <!-- Search View 1 Of Student's Profiles -->
+    <record id="view_student_student_search_1" model="ir.ui.view">
+        <field name="name">student.student.search.1</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <search string="Student Information">
+                <group col="10" colspan="4">
+                    <field name="year" />
+                    <field name="gender" />
+                </group>
+                <newline />
+                <group expand="0" string="Group By..." colspan="12" col="10">
+                    <filter name="gender" string="Gender" help="By Gender" context="{'group_by':'gender'}" />
+                    <filter name="name" string="Name" help="By Class" context="{'group_by':'name'}" />
+                </group>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+<!--    &lt;!&ndash; Action Of Form, Tree & Kanban Views Of Student Information &ndash;&gt;-->
+     <record model="ir.ui.view" id="student_profile_kanban_view">
+        <field name="name">student Profile</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="phone"/>
+                <field name="image"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                            <div class="o_kanban_image_fill_left d-none d-md-block"
+                                 t-attf-style="background-image: url(#{kanban_image('student.student', 'image_medium', record.id.raw_value)})"
+                                 role="img"/>
+                            <div class="oe_kanban_details">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <field name="name"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div t-if="record.age.value">
+                                    <t t-esc="record.age.value"/>
+                                </div>
+                                <div t-if="record.gender.value">
+                                    <t t-esc="record.gender.value"/>
+                                </div>
+                                <div t-if="record.phone.value">
+                                    <t t-esc="record.phone.value"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+
+        </field>
+    </record>
+    <record id="action_student_student_form_12" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">student.student</field>
+        <field name="view_type">form</field>
+<!--        <field name="view_id" ref="" />-->
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+    <menuitem id="menu_classera_profile" name="Profile" parent="menu_classera_root" sequence="5" groups="group_school_administration" />
+    <menuitem id="menu_classera_student" action="action_student_student_form_12" name="Student" parent="menu_classera_profile" sequence="13" groups="group_school_administration" />
+    <menuitem id="account.menu_finance" name="Accounting" sequence="40" />
+
+    <record id="students_education_class_form" model="ir.ui.view">
+            <field name="name">education_class_form</field>
+            <field name="model">education.classes</field>
+            <field name="inherit_id" ref="school_management.education_class_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Students" >
+                        <field name="student_ids" readonly="1">
+                            <tree>
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="phone"/>
+                                <field name="gender"/>
+                                <field name="date_of_birth"/>
+                                <field name="year"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+    </record>
+</odoo>

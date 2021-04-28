@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <record id="action_fees_rules_line_form" model="ir.actions.act_window">
+        <field name="name">Fees Rules Line</field>
+        <field name="res_model">fees.rules.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_fees_rules_line_form" model="ir.ui.view">
+        <field name="name">Fees Rules Line</field>
+            <field name="model">fees.rules.line</field>
+        <field name="arch" type="xml">
+            <form string="Rules">
+                <sheet>
+                    <separator string="Name" />
+                    <group>
+                        <group col="2" >
+                             <field name="academic_year"/>
+                            <field name="stage_level"/>
+                            <field name="student_sequence"/>
+                            <field name="student_sequence_id"/>
+                            <field name="fees_type"/>
+                        </group>
+                        <group>
+                            <field name="amount"/>
+                <field name="discount"/>
+                <field name="total_amount"/>
+                <field name="currency_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_fees_rules_line_tree" model="ir.ui.view">
+    <field name="name">Fees Rules Line</field>
+        <field name="model">fees.rules.line</field>
+            <field name="arch" type="xml">
+            <tree string="Rules">
+                <field name="academic_year"/>
+                <field name="stage_level"/>
+                <field name="fees_type"/>
+                <field name="student_sequence"/>
+                <field name="student_sequence_id"/>
+                <field name="amount"/>
+                <field name="discount"/>
+                <field name="total_amount"/>
+                <field name="currency_id"/>
+            </tree>
+            </field>
+    </record>
+
+<!--    <menuitem id="menu_fees_rules_line" name="Fees Rule Line"-->
+<!--              action="action_fees_rules_line_form" sequence="80"-->
+<!--              parent="menu_fees_rules_root"/>-->
+
+
+</odoo>
