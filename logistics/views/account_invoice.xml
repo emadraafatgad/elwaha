@@ -18,6 +18,11 @@
                                 <field name="pod"/>
                                 <field name="vessel_voyage_no"/>
                             </group>
+                            <group>
+                                 <field name="gross_weight"/>
+                                <field name="container_no"/>
+                                <field name="travel_date"/>
+                            </group>
                         </group>
                     </page>
                 </xpath>

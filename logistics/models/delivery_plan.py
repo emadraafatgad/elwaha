@@ -28,6 +28,23 @@ class DeliveryPLan(models.Model):
         ('not_allowed', 'Not Allowed')], required=True)
     company_id = fields.Many2one('res.company')
 
+    @api.model
+    @api.onchange('contract_id')
+    def get_attachments(self):
+        attachments = self.env['ir.attachment'].search([('res_model', '=', 'sale.order'), ('res_id', '=', self.contract_id.id)])
+        for attachment in  attachments:
+            attachment = self.env['ir.attachment'].create({
+                'name': attachments.name,
+                'datas': attachments.datas,
+                'datas_fname': attachments.datas_fname,
+                'res_model': self._name,
+                'res_id': self.id,
+                'type': 'binary',  # override default_type from context, possibly meant for another model!
+            })
+            self.write({'attachment_id': attachment.id})
+
+
+
     @api.depends('line_ids')
     def compute_lock(self):
         qty = 0.0

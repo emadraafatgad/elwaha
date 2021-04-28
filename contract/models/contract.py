@@ -12,7 +12,7 @@ class contract(models.Model):
         ('allowed', 'Allowed'),
         ('not_allowed', 'Not Allowed')], required=True)
 
-    name = fields.Char(default='/')
+    name = fields.Char(default='')
     date_order = fields.Date(string="Contract Date")
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=False,readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]}, help="Pricelist for current sales order.")
     currency_id = fields.Many2one("res.currency", string="Currency",store=True, readonly=False,  required=True)
@@ -99,8 +99,8 @@ class contract(models.Model):
             'contract_id': self.id,
             'partial_shipment': self.partial_shipment,
             'shipment_lines': shipment_line,
+        }).get_attachments()
 
-        })
         print("iam to purchase")
         if self.attachment:
             self.env['purchase.plan'].create({
@@ -157,6 +157,7 @@ class contract(models.Model):
             'partial_shipment': self.partial_shipment,
             'shipment_lines': shipment_line,
         })
+        delivery_plan.get_attachments()
 
         # delivery_plan.shipment_lines = [(5, 0, delivery_plan.shipment_lines )]
         # delivery_plan.shipment_lines = shipment_line
@@ -217,44 +218,19 @@ class OrderLineContract(models.Model):
             :param tuple price_and_rule: tuple(price, suitable_rule) coming from pricelist computation
             :param obj uom: unit of measure of current order line
             :param integer pricelist_id: pricelist id of sales order"""
-        PricelistItem = self.env['product.pricelist.item']
-        field_name = 'lst_price'
-        currency_id = None
-        product_currency = product.currency_id
-        if rule_id:
-            pricelist_item = PricelistItem.browse(rule_id)
-            if pricelist_item.pricelist_id.discount_policy == 'without_discount':
-                while pricelist_item.base == 'pricelist' and pricelist_item.base_pricelist_id and pricelist_item.base_pricelist_id.discount_policy == 'without_discount':
-                    price, rule_id = pricelist_item.base_pricelist_id.with_context(uom=uom.id).get_product_price_rule(product, qty, self.order_id.partner_id)
-                    pricelist_item = PricelistItem.browse(rule_id)
+        currency_id = self.currency_id
+        return 0, currency_id
 
-            if pricelist_item.base == 'standard_price':
-                field_name = 'standard_price'
-                product_currency = product.cost_currency_id
-            elif pricelist_item.base == 'pricelist' and pricelist_item.base_pricelist_id:
-                field_name = 'price'
-                product = product.with_context(pricelist=pricelist_item.base_pricelist_id.id)
-                product_currency = pricelist_item.base_pricelist_id.currency_id
-            currency_id = pricelist_item.pricelist_id.currency_id
+    @api.multi
+    def _get_display_price(self, product):
+        # TO DO: move me in master/saas-16 on sale.order
+        # awa: don't know if it's still the case since we need the "product_no_variant_attribute_value_ids" field now
+        # to be able to compute the full price
 
-        if not currency_id:
-            currency_id = product_currency
-            cur_factor = 1.0
-        else:
-            if currency_id.id == product_currency.id:
-                cur_factor = 1.0
-            else:
-                cur_factor = currency_id._get_conversion_rate(product_currency, currency_id, self.company_id or self.env.user.company_id, self.order_id.date_order or fields.Date.today())
+        # it is possible that a no_variant attribute is still in a variant if
+        # the type of the attribute has been changed after creation.
 
-        product_uom = self.env.context.get('uom') or product.uom_id.id
-        if uom and uom.id != product_uom:
-            # the unit price is in a different uom
-            uom_factor = uom._compute_price(1.0, product.uom_id)
-        else:
-            uom_factor = 1.0
-
-        return product[field_name] * 1, currency_id
-
+        return max(0, 0)
     # @api.onchange('product_id')
     # def _onchange_order_line_Product(self):
     #     for line in self:

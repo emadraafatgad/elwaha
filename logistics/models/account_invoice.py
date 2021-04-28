@@ -40,6 +40,9 @@ class AccountInvoice(models.Model):
     pol = fields.Many2one('container.port', string='Port Of Loading')
     pod = fields.Many2one('container.port', string='Port Of Discharge')
     vessel_voyage_no = fields.Char(string='Vessel & Voyage No')
+    gross_weight = fields.Float(string="Gross Weight")
+    container_no = fields.Float('Containers No')
+    travel_date = fields.Date('Sailing Date')
 
     @api.multi
     def action_invoice_open(self):

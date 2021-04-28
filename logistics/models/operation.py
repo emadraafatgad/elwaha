@@ -60,8 +60,8 @@ class OperationOrder(models.Model):
                 rec.start_date = loading_date
 
     location_id = fields.Many2one('stock.location', required=True, default=default_location_id)
-    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port', compute="get_all_fields")
-    shipment_port = fields.Many2one('container.port', 'POL', compute="get_all_fields")
+    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port')
+    shipment_port = fields.Many2one('container.port', 'POL')
     arrival_port = fields.Many2one('container.port', 'POD', compute="get_all_fields")
     loading_place = fields.Many2one('loading.place')
     invoice_id = fields.Many2one('account.invoice')
@@ -74,16 +74,16 @@ class OperationOrder(models.Model):
     inspection_company1 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     inspection_company2 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     customer = fields.Many2one('res.partner', related='shipment_plan.partner_id', domain=[('partner_type', '=', 'client')])
-    agree = fields.Char(readonly=True)
-    bank_certificate = fields.Char(readonly=True)
+    agree = fields.Char()
+    bank_certificate = fields.Char()
     customer_code = fields.Char(readonly=True, string='Client Code', related='customer.client_code')
-    delivered_qty = fields.Float(string="Total QTY")
+    delivered_qty = fields.Float(string="Net Weight")
+    gross_weight = fields.Float(string="Gross Weight")
     notes = fields.Text()
     total_after_increase = fields.Float(compute='compute_total_after_increase')
     clearance_finished = fields.Boolean()
     vessel_name = fields.Char()
     company_id = fields.Many2one('res.company')
-
     shipment_plan = fields.Many2one('delivery.plan', string="PLAN", required=True)
 
     @api.model
@@ -98,8 +98,7 @@ class OperationOrder(models.Model):
             print(res, "res")
         return res
 
-    shipment_plan_line_id = fields.Many2one('delivery.plan.line', string="Commodity", required=True,
-                                            domain="[('contract_id','=',contract_id)]")
+    shipment_plan_line_id = fields.Many2one('delivery.plan.line', string="Commodity", required=True, domain="[('contract_id','=',contract_id)]")
 
     # domain="[('id','in',shipment_plan.shipment_lines.ids)]")
     # domain = lambda self: self._get_employee_id_domain())
@@ -274,10 +273,12 @@ class OperationOrder(models.Model):
             'origin': self.contract_no,
             'bl_no': self.bill_of_lading,
             'ship_date': self.travel_date,
-            # 'ship_via': '',
+            'travel_date': self.travel_date,
             'pol': self.shipment_port.id,
             'pod': self.arrival_port.id,
             'vessel_voyage_no': vessel_voyage,
+            'gross_weight': self.gross_weight,
+            'container_no':self.container_no,
             'journal_id': sale_journal.id,
             'account_id': self.customer.property_account_receivable_id.id,
             'invoice_line_ids': invoice_line,
