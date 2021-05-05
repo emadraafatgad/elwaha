@@ -11,9 +11,10 @@ class DeliveryPLan(models.Model):
 
     name = fields.Char('Plan ref', default='New', track_visibility="onchange", readonly=True)
     origin = fields.Char("Contract Ref",track_visibility="onchange")
-    state = fields.Selection([('new', 'New'), ('shipment', 'Completed')], string="status", default='new', track_visibility="onchange")
-    partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,track_visibility="onchange",
-                                 domain=[('partner_type', '=', 'client')])
+    state = fields.Selection([('new', 'New'), ('shipment', 'Completed')], string="status", default='new',
+                             track_visibility="onchange")
+    partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,
+                                 track_visibility="onchange", domain=[('partner_type', '=', 'client')])
     # product_id = fields.Many2many('product.product', string='Commodity', required=True)
     shipment_company = fields.Many2one('res.partner', readonly=True, string="Forwarder",
                                        domain=[('partner_type', '=', 'forwarder')])
@@ -29,19 +30,20 @@ class DeliveryPLan(models.Model):
     company_id = fields.Many2one('res.company')
 
     @api.model
-    @api.onchange('contract_id')
+    # @api.onchange('contract_id')
     def get_attachments(self):
         attachments = self.env['ir.attachment'].search([('res_model', '=', 'sale.order'), ('res_id', '=', self.contract_id.id)])
-        for attachment in  attachments:
-            attachment = self.env['ir.attachment'].create({
-                'name': attachments.name,
-                'datas': attachments.datas,
-                'datas_fname': attachments.datas_fname,
-                'res_model': self._name,
-                'res_id': self.id,
-                'type': 'binary',  # override default_type from context, possibly meant for another model!
-            })
-            self.write({'attachment_id': attachment.id})
+        if attachments:
+            for attachment in  attachments:
+                attachment = self.env['ir.attachment'].create({
+                    'name': attachments.name,
+                    'datas': attachments.datas,
+                    'datas_fname': attachments.datas_fname,
+                    'res_model': self._name,
+                    'res_id': self.id,
+                    'type': 'binary',  # override default_type from context, possibly meant for another model!
+                })
+                self.write({'attachment_id': attachment.id})
 
 
 
@@ -111,15 +113,17 @@ class DeliveryPlanLine(models.Model):
     product_id = fields.Many2one('product.product', string='Commodity', required=True)
     description = fields.Char()
     quantity = fields.Float(required=True, string="QTY")
-    price_unit = fields.Float(string="Unit Rate", required=True)
+    currency_id = fields.Many2one('res.currency', string='Currency')
+    price_unit = fields.Monetary(string="Unit Rate", currency_field='currency_id',required=True)
     delivery_date = fields.Many2one('estimated.date', string="ETD", required=True)
     from_port = fields.Many2one('container.port', string='POL', required=True)
     to_port = fields.Many2one('container.port', string='POD', required=True)
     packing = fields.Many2one('product.packing', string='Packing', required=True)
     contract_id = fields.Many2one('sale.order')
+    contract_line_id = fields.Many2one('sale.order.line')
 
 
-class contract(models.Model):
+class Contract(models.Model):
     _inherit = 'sale.order'
 
     shipment_lines = fields.One2many('delivery.plan.line', 'contract_id',readonly=True)

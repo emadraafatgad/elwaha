@@ -63,6 +63,7 @@
                                     <field name="description"/>
                                     <field name="quantity"/>
                                     <field name="price_unit"/>
+                                    <field name="currency_id" invisible="1"/>
                                     <field name="delivery_date"/>
                                     <field name="from_port"/>
                                     <field name="to_port"/>
@@ -108,11 +109,12 @@
                                                 <field name="arrival_port"/>
                                             </group>
                                             <group>
-
                                                 <field name="bill_of_lading"/>
                                                 <field name="reserve_no"/>
                                                 <field name="price_unit" invisible="1"
-                                                       attrs="{'readonly':[('state','=','confirmed')]}"/>
+                                                       attrs="{'readonly':[('state','=','confirmed')]}"
+                                                       widget="monetary"/>
+                                                <field name="currency_id" invisible="1"/>
                                                 <field name="name"/>
                                             </group>
                                         </group>
@@ -141,9 +143,9 @@
                                     <field name="shipping_line"/>
                                     <field name="bill_of_lading"/>
                                     <field name="reserve_no"/>
-                                    <field name="price_unit" attrs="{'readonly':[('state','=','confirmed')]}"/>
+                                    <field name="price_unit" widget="monetary" attrs="{'readonly':[('state','=','confirmed')]}"/>
+                                    <field name="currency_id" invisible="1"/>
                                     <field name="name"/>
-
                                     <field name="shipment_plan" invisible="1"/>
                                 </tree>
                             </field>

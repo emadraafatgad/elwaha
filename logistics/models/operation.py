@@ -10,7 +10,10 @@ class OperationOrder(models.Model):
     _inherit = 'mail.thread'
     _description = 'Operation Order'
 
-    name = fields.Char('Order No', readonly=True, track_visibility="onchange", default='New')
+    name = fields.Char('Order No', track_visibility="onchange", default='New')
+
+    _sql_constraints = [('name_uniq', 'unique (name)', 'Sequence Must Be Unique')]
+
     contract_no = fields.Char(track_visibility="onchange")
     contract_id = fields.Many2one('sale.order',readonly=True)
     status = fields.Selection([('new', 'New'), ('done', 'Done')], track_visibility="onchange", default='new')
@@ -66,7 +69,8 @@ class OperationOrder(models.Model):
     loading_place = fields.Many2one('loading.place')
     invoice_id = fields.Many2one('account.invoice')
     invoice_no = fields.Char('Invoice Number', related='invoice_id.number')
-    price_unit = fields.Float('Unit Price', required=True, compute="get_all_fields")
+    price_unit = fields.Monetary('Unit Price', required=True,currency_field='currency_id', compute="get_all_fields")
+    currency_id = fields.Many2one('res.currency', compute="get_all_fields",store=True, string='Currency')
     start_date = fields.Date('Start Loading Date',compute='get_loading_date')
     end_date = fields.Date('Cut Off',compute='get_default_cutt_of_date' )
     travel_date = fields.Date('Sailing Date')
@@ -98,7 +102,7 @@ class OperationOrder(models.Model):
             print(res, "res")
         return res
 
-    shipment_plan_line_id = fields.Many2one('delivery.plan.line', string="Commodity", required=True, domain="[('contract_id','=',contract_id)]")
+    shipment_plan_line_id = fields.Many2one('delivery.plan.line', string="Commodity", domain="[('contract_id','=',contract_id)]")
 
     # domain="[('id','in',shipment_plan.shipment_lines.ids)]")
     # domain = lambda self: self._get_employee_id_domain())
@@ -114,6 +118,7 @@ class OperationOrder(models.Model):
             # rec.exit_port = contract_line.from_port
             # rec.shipment_port = contract_line.from_port
             rec.price_unit = contract_line.price_unit
+            rec.currency_id = contract_line.currency_id
 
     @api.onchange('shipment_plan')
     def onchange_shipment_plan(self):
@@ -279,10 +284,10 @@ class OperationOrder(models.Model):
             'vessel_voyage_no': vessel_voyage,
             'gross_weight': self.gross_weight,
             'container_no':self.container_no,
+            'currency_id':self.currency_id.id,
             'journal_id': sale_journal.id,
             'account_id': self.customer.property_account_receivable_id.id,
             'invoice_line_ids': invoice_line,
-
         })
         self.show = True
 

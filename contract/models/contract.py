@@ -115,40 +115,54 @@ class contract(models.Model):
 
     @api.multi
     def action_update(self):
-        order_line = []
+        purchase_order_line = []
         shipment_line = []
         l = []
         delivery_plan = self.env['delivery.plan'].search([('origin', '=', self.name)])
         purchase_plan = self.env['purchase.plan'].search([('origin', '=', self.name)])
         for rec in self.order_line:
-            order_line.append((0, 0, {
+            purchase_order_line.append((0, 0, {
                 'product': rec.product_id.id,
                 'description': rec.name,
                 'qty': rec.product_uom_qty,
                 'delivery_date': rec.delivery_date.id,
             }))
+            if not rec.product_id:
+                raise ValidationError('There is No Commodity')
+            elif not rec.name:
+                raise  ValidationError('There is NO Description')
+            elif rec.quantity <= 1:
+                raise  ValidationError('There is NO Quantity')
+            elif not rec.delivery_date:
+                raise  ValidationError('There is NO Delivery Date')
+            elif not rec.from_port:
+                raise  ValidationError('There is NO POL')
+            elif not rec.to_port:
+                raise  ValidationError('There is NO POD')
+            elif not rec.packing:
+                raise  ValidationError('There is NO Packing')
+
             shipment_line.append((0,0,{
                 'product_id': rec.product_id.id,
                 'description': rec.name,
                 'quantity': rec.product_uom_qty,
                 'price_unit': rec.price_unit,
+                'currency_id': rec.currency_id.id,
                 'delivery_date': rec.delivery_date.id,
                 'from_port': rec.from_port.id,
                 'to_port': rec.to_port.id,
                 'packing': rec.packing.id,
-                'contract_id': rec.order_id.id
+                # 'contract_id': rec.order_id.id
             }))
         for rec in delivery_plan.line_ids:
             rec.unlink()
-
         for record in delivery_plan.shipment_lines :
             record.unlink()
-
         purchase_plan.write({
             'origin': self.name,
             'filename': self.filename,
             'company_id': self.company_id.id,
-            'line_ids': order_line})
+            'line_ids': purchase_order_line})
 
         delivery_plan.write({
             'partner_id': self.partner_id.id,
@@ -203,13 +217,21 @@ class OrderLineContract(models.Model):
     container_no = fields.Integer('Container No')
     container_type = fields.Many2one('container.type')
     commodity_type = fields.Many2one('commodity.type')
-    packing = fields.Many2one('product.packing', string='Packing', required=True)
+    packing = fields.Many2one('product.packing', string='Packing')
     inspection_company = fields.Many2one('res.partner', related='order_id.inspection_company',
                                          domain=[('partner_type', '=', 'inspection_company')])
-    delivery_date = fields.Many2one('estimated.date', string="ETD", required=True)
-    from_port = fields.Many2one('container.port', string='POL', required=True)
-    to_port = fields.Many2one('container.port', string='POD', required=True)
+    delivery_date = fields.Many2one('estimated.date', string="ETD")
+    from_port = fields.Many2one('container.port', string='POL')
+    to_port = fields.Many2one('container.port', string='POD')
 
+    def get_sale_order_line_multiline_description_sale(self, product):
+        """ Compute a default multiline description for this sales order line.
+        This method exists so it can be overridden in other modules to change how the default name is computed.
+        In general only the product is used to compute the name, and this method would not be necessary (we could directly override the method in product).
+        BUT in event_sale we need to know specifically the sales order line as well as the product to generate the name:
+            the product is not sufficient because we also need to know the event_id and the event_ticket_id (both which belong to the sale order line).
+        """
+        return False
 
     def _get_real_price_currency(self, product, rule_id, qty, uom, pricelist_id):
         """Retrieve the price before applying the pricelist
