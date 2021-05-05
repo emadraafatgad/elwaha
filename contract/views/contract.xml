@@ -81,7 +81,7 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="inspection_company"  context="{'default_partner_type': 'inspection_company','default_customer': False,
                 'default_supplier': True}" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
-                <field name="date_order" string="Contract Date"/>
+<!--                <field name="date_order" string="Contract Date"/>-->
                 <label for="margin"/>
                 <div>
                     <field name="margin" style="width: 33%" attrs="{'readonly':[('state','in',('done','cancel'))]}"/>
@@ -98,7 +98,7 @@
 <!--                <field name="filename" invisible="1"/>-->
             </xpath>
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="incoterm_id" widget="Many2one"/>
+                <field name="incoterm_id"/>
             </xpath>
             <xpath expr="//field[@name='confirmation_date']" position="before">
                 <field name="date_order" string="Contract Date" attrs="{'readonly': [('state', '=', 'done')]}"/>
@@ -251,6 +251,7 @@
                 <filter string="This Year" name="this_year"
                         domain="[('create_date','&gt;=',time.strftime('%%Y-01-01'))]"/>
                 <group expand="0" string="Group By">
+                    <filter string="Currency" name="currency_id" domain="[]" context="{'group_by':'currency_id'}"/>
                     <filter string="Client" name="client" domain="[]" context="{'group_by':'partner_id'}"/>
                     <filter string="Issued By" name="user" domain="[]" context="{'group_by':'user_id'}"/>
                 </group>

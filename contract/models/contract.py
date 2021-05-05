@@ -21,8 +21,7 @@ class contract(models.Model):
     margin = fields.Float(string="Tolerance Margin", default=10)
     attachment = fields.Binary()
     filename = fields.Char()
-    incoterm_id = fields.Many2one(
-        'account.incoterms', 'Incoterms',
+    incoterm_id = fields.Many2one('account.incoterms', 'Incoterms',
         help="International Commercial Terms are a series of predefined commercial terms used in international transactions.")
 
     # product = fields.Many2many('product.product',string="Commodity", required=True,store=True)
