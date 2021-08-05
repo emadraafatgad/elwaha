@@ -14,15 +14,17 @@ class contract(models.Model):
 
     name = fields.Char(default='')
     date_order = fields.Date(string="Contract Date")
-    pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=False,readonly=True, states={'draft': [('readonly', False)], 'sent': [('readonly', False)]}, help="Pricelist for current sales order.")
-    currency_id = fields.Many2one("res.currency", string="Currency",store=True, readonly=False,  required=True)
+    pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=False, readonly=True,
+                                   states={'draft': [('readonly', False)], 'sent': [('readonly', False)]},
+                                   help="Pricelist for current sales order.")
+    currency_id = fields.Many2one("res.currency", string="Currency", store=True, readonly=False, required=True)
     date_string = fields.Char()
     inspection_company = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     margin = fields.Float(string="Tolerance Margin", default=10)
     attachment = fields.Binary()
     filename = fields.Char()
     incoterm_id = fields.Many2one('account.incoterms', 'Incoterms',
-        help="International Commercial Terms are a series of predefined commercial terms used in international transactions.")
+                                  help="International Commercial Terms are a series of predefined commercial terms used in international transactions.")
 
     # product = fields.Many2many('product.product',string="Commodity", required=True,store=True)
     # total_qty = fields.Float(required=True,string="QTY")
@@ -43,7 +45,6 @@ class contract(models.Model):
         default='draft')
     customer_code = fields.Char()
     company_name = fields.Char()
-
 
     # @api.multi
     # @api.onchange('date_order')
@@ -129,19 +130,19 @@ class contract(models.Model):
             if not rec.product_id:
                 raise ValidationError('There is No Commodity')
             elif not rec.name:
-                raise  ValidationError('There is NO Description')
+                raise ValidationError('There is NO Description')
             elif rec.quantity <= 1:
-                raise  ValidationError('There is NO Quantity')
+                raise ValidationError('There is NO Quantity')
             elif not rec.delivery_date:
-                raise  ValidationError('There is NO Delivery Date')
+                raise ValidationError('There is NO Delivery Date')
             elif not rec.from_port:
-                raise  ValidationError('There is NO POL')
+                raise ValidationError('There is NO POL')
             elif not rec.to_port:
-                raise  ValidationError('There is NO POD')
+                raise ValidationError('There is NO POD')
             elif not rec.packing:
-                raise  ValidationError('There is NO Packing')
+                raise ValidationError('There is NO Packing')
 
-            shipment_line.append((0,0,{
+            shipment_line.append((0, 0, {
                 'product_id': rec.product_id.id,
                 'description': rec.name,
                 'quantity': rec.product_uom_qty,
@@ -155,7 +156,7 @@ class contract(models.Model):
             }))
         for rec in delivery_plan.line_ids:
             rec.unlink()
-        for record in delivery_plan.shipment_lines :
+        for record in delivery_plan.shipment_lines:
             record.unlink()
         purchase_plan.write({
             'origin': self.name,
@@ -201,12 +202,12 @@ class contract(models.Model):
 
     # @api.model
     # def create(self, vals):
-        # seq = self.env['ir.sequence'].next_by_code('contract.order')
-        # customer_code = vals.get('customer_code') or ''
-        # company_name = vals.get('company_name')
-        # date_string = vals.get('date_string')
-        # vals['name'] = customer_code + '.' + company_name + '. /' + date_string + seq
-        # return super(contract, self).create(vals)
+    # seq = self.env['ir.sequence'].next_by_code('contract.order')
+    # customer_code = vals.get('customer_code') or ''
+    # company_name = vals.get('company_name')
+    # date_string = vals.get('date_string')
+    # vals['name'] = customer_code + '.' + company_name + '. /' + date_string + seq
+    # return super(contract, self).create(vals)
 
 
 class OrderLineContract(models.Model):
@@ -365,3 +366,13 @@ class Pricelist(models.Model):
     @api.multi
     def name_get(self):
         return [(pricelist.id, '%s' % (pricelist.currency_id.name)) for pricelist in self]
+
+
+class AccountIncoterms(models.Model):
+    _inherit = 'account.incoterms'
+    _description = 'Incoterms'
+
+    name = fields.Char(
+        'Name', required=True, translate=True,
+        help="Incoterms are series of sales terms. They are used to divide transaction costs and responsibilities between buyer and seller and reflect state-of-the-art transportation practices.")
+    code = fields.Char('Code', size=3, required=False, help="Incoterm Standard Code")

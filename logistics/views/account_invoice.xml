@@ -19,7 +19,10 @@
                                 <field name="vessel_voyage_no"/>
                             </group>
                             <group>
+                                <field name="packing" widget="selection"/>
                                  <field name="gross_weight"/>
+                            </group>
+                            <group>
                                 <field name="container_no"/>
                                 <field name="travel_date"/>
                             </group>
@@ -48,5 +51,19 @@
 <!--                </xpath>-->
         </field>
     </record>
+    <record id="account_invoice_tree_view_inherit" model="ir.ui.view">
+        <field name="name">Edit account invoice view</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="travel_date"/>
+                    <field name="packing"/>
+                    <field name="container_no"/>
+                    <field name="gross_weight"/>
+                </xpath>
+            </field>
+    </record>
+
 
 </odoo>

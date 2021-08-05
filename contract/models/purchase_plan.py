@@ -73,7 +73,7 @@ class PurchaseOrderEdit(models.Model):
 
     @api.multi
     def initial_approve(self):
-        self.state = 'approved'
+        self.state = 'to approve'
 
     @api.multi
     def button_confirm(self):

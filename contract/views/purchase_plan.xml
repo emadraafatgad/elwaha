@@ -104,15 +104,13 @@
             <field name="model">purchase.order</field>
             <field name="inherit_id" ref="purchase.purchase_order_form"/>
             <field name="arch" type="xml">
-
-
                 <xpath expr="//header" position="replace">
                     <header>
                     <button name="action_rfq_send" states="draft" string="Send by Email" type="object" context="{'send_rfq':True}" class="oe_highlight"/>
                     <button name="print_quotation" string="Print RFQ" type="object" states="draft" class="oe_highlight" groups="base.group_user"/>
                     <button name="initial_approve" string="Approve" type="object" class="oe_highlight" states="draft,sent" groups="contract.group_gm_user,purchase.group_purchase_manager"/>
                     <button name="button_confirm" type="object" states="approved" string="Confirm Order" class="oe_highlight" id="bid_confirm" groups="contract.group_gm_user"/>
-                    <button name="button_approve" type="object"  string="Approve Order" class="oe_highlight"/>
+                    <button name="button_approve" type="object" states="to approve" string="Approve Order" class="oe_highlight" groups="contract.group_gm_user"/>
                     <button name="action_view_invoice" string="Create Bill" type="object" class="oe_highlight" context="{'create_bill':True}" attrs="{'invisible': ['|', ('state', 'not in', ('purchase', 'done')), ('invoice_status', 'in', ('no', 'invoiced'))]}"/>
                     <button name="action_rfq_send" states="sent" string="Re-Send by Email" type="object" context="{'send_rfq':True}"/>
                     <button name="print_quotation" string="Print RFQ" type="object" states="sent" groups="base.group_user"/>

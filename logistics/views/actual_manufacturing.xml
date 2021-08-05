@@ -84,14 +84,14 @@
                                       <field name="product_uom_qty"/>
                                       <field name="quantity_done"/>
                                     </group>
-                                    <page>
-                                        <field name="active_move_line_ids">
-                                            <tree>
-                                                <field name="product_uom_qty"/>
-                                                <field name="qty_done"/>
-                                            </tree>
-                                        </field>
-                                    </page>
+<!--                                    <page>-->
+<!--                                        <field name="active_move_line_ids">-->
+<!--                                            <tree>-->
+<!--                                                <field name="product_uom_qty"/>-->
+<!--                                                <field name="qty_done"/>-->
+<!--                                            </tree>-->
+<!--                                        </field>-->
+<!--                                    </page>-->
                                 </form>
                             </field>
                         </page>
@@ -119,6 +119,7 @@
             </tree>
         </field>
     </record>
-    <menuitem id="menu_actual_manufacturing" sequence="3" name="Manufacturing" parent="menu_logistics_info"
-              action="actual_manufacturing_action" groups="logistics.group_operation_order_user"/>
+
+    <menuitem id="menu_actual_manufacturing" sequence="3" name="Manufacturing" parent="menu_actual_manufacturing_root"
+              action="actual_manufacturing_action" groups="logistics.group_manufacturing_manager"/>
 </odoo>
