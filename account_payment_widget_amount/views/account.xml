@@ -18,6 +18,7 @@
 
                 <xpath expr="//field[@name='payment_transaction_id']" position="after">
                     <field name="invoice_id_for_filtration"/>
+                    <field name="invoice_id_for_contracts"/>
                 </xpath>
 
             </field>

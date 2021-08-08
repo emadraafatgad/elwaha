@@ -51,10 +51,8 @@
                         .p4{text-align: left;padding-left: 7px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
                         .p5{text-align: left;padding-left: 12px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
                         .p6{text-align: left;padding-left: 14px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-                        .p7{text-align: right;width: 50px;padding-right: 14px;margin-top: 0px;margin-bottom:
-                        0px;white-space: nowrap;}
-                        .p17{text-align: right;width: 10px;padding-right: 14px;margin-top: 0px;margin-bottom:
-                        0px;white-space: nowrap;}
+                        .p7{text-align: right;width: 50px;padding-right: 14px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
+                        .p17{text-align: right;width: 10px;padding-right: 14px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
                         .p8{text-align: right;padding-right: 13px;margin-top: 0px;margin-bottom: 0px;white-space:
                         nowrap;}
                         .p9{text-align: left;padding-left: 13px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
@@ -67,14 +65,13 @@
                         .p13{text-align: center;padding-left: 22px;margin-top: 0px;margin-bottom: 0px;white-space:
                         nowrap;}
                         .p14{text-align: right;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
-                        .p15{text-align: left; width: 50px;padding-left: 4px;margin-top: 0px;margin-bottom:
-                        0px;white-space: nowrap;}
+                        .p15{text-align: left; width: 50px;padding-left: 4px;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
                         .p16{text-align: left;padding-left: 108px;margin-top: 0px;margin-bottom: 0px;white-space:
                         nowrap;}
 
                         .td0{padding: 0px;margin: 0px;width: 100px;vertical-align: bottom;}
                         .td1{padding: 0px;margin: 0px;width: 341px;vertical-align: bottom;}
-                        .td2{padding: 1px;margin: 1px;width: 300px;vertical-align: bottom;}
+                        .td2{padding: 0px;margin: 0px;width: 138px;vertical-align: bottom;}
                         .td3{padding: 0px;margin: 0px;width: 14px;vertical-align: bottom;}
                         .td4{padding: 0px;margin: 0px;width: 91px;vertical-align: bottom;}
                         .td5{border-bottom: #44546a 1px solid;padding: 0px;margin: 0px;width: 140px;vertical-align:
@@ -100,7 +97,7 @@
                         bottom;}
                         .td16{border-bottom: #333f4f 1px solid;padding: 0px;margin: 0px;width: 91px;vertical-align:
                         bottom;}
-                        .td17{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 50px;vertical-align:
+                        .td17{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 100px;vertical-align:
                         bottom;background: #fafafa;}
                         .td18{border-bottom: #fafafa 1px solid;padding: 0px;margin: 0px;width: 341px;vertical-align:
                         bottom;background: #fafafa;}
@@ -326,7 +323,7 @@
                                 <TD class="tr7 td5">
                                     <P class="p5 ft9">QUANTITY</P>
                                 </TD>
-                                <TD class="tr7 td6" style="width: 20px;">
+                                <TD class="tr7 td6"  style="width: 20px;">
                                     <pr class="p6 ft9">DESCRIPTION OF GOODS</pr>
                                 </TD>
                                 <TD class="tr7 td7">
@@ -407,9 +404,9 @@
                                 <TD class="tr12 td17">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
                                 </TD>
-                                                                <TD class="tr12 td18">
-                                                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                                                </TD>
+                                <TD class="tr12 td18">
+                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
+                                </TD>
                                 <TD class="tr12 td19">
                                     <P class="p7 ft12">SUBTOTALS</P>
                                 </TD>
@@ -447,9 +444,9 @@
                                 <TD class="tr12 td17">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
                                 </TD>
-                                <!--                                <TD class="tr12 td18">-->
-                                <!--                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>-->
-                                <!--                                </TD>-->
+                                <TD class="tr12 td18">
+                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
+                                </TD>
                                 <TD class="tr12 td19">
                                     <P class="p7 ft12">Discount</P>
                                 </TD>
@@ -493,17 +490,11 @@
                                     <TD class="tr12 td19">
                                         <P class="p7 ft12">SUBTOTALS</P>
                                     </TD>
-                                    <TD class="tr12 td18">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
                                     <TD class="tr12 td20">
                                         <P class="p12 ft12">
                                             <span t-esc="doc.currency_id.symbol"
                                             />
                                         </P>
-                                    </TD>
-                                    <TD class="tr12 td18">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
                                     </TD>
                                     <TD class="tr12 td21">
                                         <P class="p13 ft13">
@@ -614,19 +605,13 @@
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
                                 </TD>
                                 <TD class="tr10 td2">
-                                    <p class="p7 ft12">Advance Payment</p>
-                                </TD>
-                                <TD class="tr12 td18">
-                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
+                                    <P class="p7 ft12">Advance Payment</P>
                                 </TD>
                                 <TD class="tr10 td3">
                                     <P class="p12 ft12">
                                         <span t-esc="doc.currency_id.symbol"
                                         />
                                     </P>
-                                </TD>
-                                <TD class="tr12 td18">
-                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
                                 </TD>
                                 <t t-set="total_before" t-value="doc.amount_total"/>
                                 <t t-set="total_after" t-value="doc.residual"/>

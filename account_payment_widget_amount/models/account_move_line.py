@@ -27,7 +27,10 @@ class account_invoice(models.Model):
             operation_order = self.env['operation.order'].search([('contract_no','=',self.origin)])
             contract_id = self.env['sale.order'].search([('name','=',self.origin)])
             print(contract_id)
-            account_payment_inv = self.env['account.payment'].search([('invoice_id_for_filtration', '=', contract_id.id)],limit=1)
+            print("COntract")
+            print(('invoice_id_for_contracts', 'in', contract_id.id))
+            account_payment_inv = self.env['account.payment'].search([('invoice_id_for_contracts', 'in', [contract_id.id])])
+            print(account_payment_inv,"aavvavvavvvvvv")
             return account_payment_inv
     @api.one
     def _get_outstanding_info_JSON(self):
@@ -56,7 +59,7 @@ class account_invoice(models.Model):
             if len(lines) != 0:
                 for line in lines:
                     if account_payment_inv:
-                        if line.payment_id.id == account_payment_inv.id:
+                        if line.payment_id.id in account_payment_inv.ids:
                             if line.currency_id and line.currency_id == self.currency_id:
                                 amount_to_show = abs(line.amount_residual_currency)
                             else:
@@ -222,9 +225,13 @@ class AccountMoveLine(models.Model):
 class account_payment(models.Model):
     _inherit = 'account.payment'
 
-    invoice_id_for_filtration=fields.Many2one(
+    invoice_id_for_filtration = fields.Many2one(
         comodel_name='sale.order',
-        string='Contract NO',)
+        string='Contract NO', )
+
+    invoice_id_for_contracts = fields.Many2many(
+        comodel_name='sale.order',domain="[('partner_id','=',partner_id)]",
+        string='Contract NO', )
 
 
 

@@ -28,10 +28,9 @@ class account_payment(models.Model):
         for rec in self:
             for rec_ids in rec.invoice_ids:
                 if rec.partner_type == 'customer':
-                    invoice = self.env['account.invoice'].search([('number','=',rec.communication)],limit=1)
+                    invoice = self.env['account.invoice'].search([('number','=',rec.communication)])
                 elif rec.partner_type == 'supplier':
-                    invoice = self.env['account.invoice'].search([('number','=',rec.communication)],limit=1)
-                print(invoice)
+                    invoice = self.env['account.invoice'].search([('number','=',rec.communication)])
                 if invoice.id == rec_ids.id:
                     rec.invoice_id = rec_ids.id
         
