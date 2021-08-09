@@ -7,6 +7,9 @@ from odoo import _, api, exceptions, fields, models
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    request_type = fields.Selection([('row', 'Raw Material'), ('maintenance', 'Maintenance Materials'),
+                                     ('office', 'Office Supplies'), ('general', 'General')], default='row')
+
     @api.multi
     def _purchase_request_confirm_message_content(self, request,
                                                   request_dict):
@@ -18,7 +21,7 @@ class PurchaseOrder(models.Model):
         message = '<h3>%s</h3><ul>' % title
         message += _('The following requested items from Purchase Request %s '
                      'have now been confirmed in Purchase Order %s:') % (
-            request.name, self.name)
+                       request.name, self.name)
 
         for line in request_dict.values():
             message += _(
@@ -80,8 +83,8 @@ class PurchaseOrder(models.Model):
         for rec in self:
             for alloc in rec.order_line.mapped(
                     'purchase_request_lines').mapped(
-                    'purchase_request_allocation_ids').filtered(
-                    lambda alloc: alloc.purchase_line_id.order_id.id == rec.id
+                'purchase_request_allocation_ids').filtered(
+                lambda alloc: alloc.purchase_line_id.order_id.id == rec.id
             ):
                 alloc_to_unlink += alloc
         res = super().unlink()
@@ -103,7 +106,7 @@ class PurchaseOrderLine(models.Model):
         comodel_name='purchase.request.allocation',
         inverse_name='purchase_line_id',
         string='Purchase Request Allocation',
-        copy=False,)
+        copy=False, )
 
     @api.multi
     def action_openRequestLineTreeView(self):
@@ -183,7 +186,7 @@ class PurchaseOrderLine(models.Model):
         message += _('The following requested services from Purchase'
                      ' Request %s requested by %s '
                      'have now been received:') % (
-            message_data['request_name'], message_data['requestor'])
+                       message_data['request_name'], message_data['requestor'])
         message += '<ul>'
         message += _(
             '<li><b>%s</b>: Received quantity %s %s</li>'

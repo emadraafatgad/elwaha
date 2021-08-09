@@ -16,6 +16,8 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                                   required=True,
                                   domain=[('supplier', '=', True),
                                           ('is_company', '=', True)])
+    request_type = fields.Selection([('row', 'Raw Material'), ('maintenance', 'Maintenance Materials'),
+                                     ('office', 'Office Supplies'), ('general', 'General')], default='row')
     item_ids = fields.One2many(
         'purchase.request.line.make.purchase.order.item',
         'wiz_id', string='Items')
@@ -99,13 +101,18 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
         request_line_ids = []
         if active_model == 'purchase.request.line':
             request_line_ids += self.env.context.get('active_ids', [])
+
         elif active_model == 'purchase.request':
+
             request_ids = self.env.context.get('active_ids', False)
+            request_type = self.env[active_model].browse(
+                request_ids).request_type
             request_line_ids += self.env[active_model].browse(
                 request_ids).mapped('line_ids.id')
         if not request_line_ids:
             return res
         res['item_ids'] = self.get_items(request_line_ids)
+        res['request_type'] = request_type
         request_lines = self.env['purchase.request.line'].browse(
             request_line_ids)
         supplier_ids = request_lines.mapped('supplier_id').ids
@@ -122,6 +129,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
         data = {
             'origin': origin,
             'partner_id': self.supplier_id.id,
+            'request_type':self.request_type,
             'fiscal_position_id': supplier.property_account_position_id and
             supplier.property_account_position_id.id or False,
             'picking_type_id': picking_type.id,

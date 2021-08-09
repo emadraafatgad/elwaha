@@ -1,22 +1,8 @@
-from collections import OrderedDict
 import json
-import re
-import uuid
-from functools import partial
 
-from lxml import etree
-from dateutil.relativedelta import relativedelta
-from werkzeug.urls import url_encode
-
-from odoo import api, exceptions, fields, models, _
-from odoo.tools import email_re, email_split, email_escape_char, float_is_zero, float_compare, \
-    pycompat, date_utils
-from odoo.tools.misc import formatLang
-
-from odoo.exceptions import AccessError, UserError, RedirectWarning, ValidationError, Warning
-
-from odoo.addons import decimal_precision as dp
-import logging
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+from odoo.tools import float_is_zero
 
 
 class account_invoice(models.Model):
@@ -24,14 +10,16 @@ class account_invoice(models.Model):
 
     def get_contract_id_for_payment(self):
         if self.type in ('out_invoice', 'in_refund') and self.origin:
-            operation_order = self.env['operation.order'].search([('contract_no','=',self.origin)])
-            contract_id = self.env['sale.order'].search([('name','=',self.origin)])
+            operation_order = self.env['operation.order'].search([('contract_no', '=', self.origin)])
+            contract_id = self.env['sale.order'].search([('name', '=', self.origin)])
             print(contract_id)
             print("COntract")
             print(('invoice_id_for_contracts', 'in', contract_id.id))
-            account_payment_inv = self.env['account.payment'].search([('invoice_id_for_contracts', 'in', [contract_id.id])])
-            print(account_payment_inv,"aavvavvavvvvvv")
+            account_payment_inv = self.env['account.payment'].search(
+                [('invoice_id_for_contracts', 'in', [contract_id.id])])
+            print(account_payment_inv, "aavvavvavvvvvv")
             return account_payment_inv
+
     @api.one
     def _get_outstanding_info_JSON(self):
         self.outstanding_credits_debits_widget = json.dumps(False)
@@ -170,7 +158,7 @@ class AccountMoveLine(models.Model):
         paid_amt = self.env.context.get('paid_amount', 0.0)
         if not paid_amt:
             return temp_amount_residual, temp_amount_residual_currency, \
-                amount_reconcile
+                   amount_reconcile
         paid_amt = float(paid_amt)
         if paid_amt < 0:
             raise UserError(_(
@@ -201,10 +189,10 @@ class AccountMoveLine(models.Model):
                                    -credit_move.amount_residual,
                                    paid_amt)
         amount_reconcile = temp_amount_residual_currency or \
-            temp_amount_residual
+                           temp_amount_residual
 
         return temp_amount_residual, temp_amount_residual_currency, \
-            amount_reconcile
+               amount_reconcile
 
     @api.model
     def _check_remove_debit_move(self, amount_reconcile, debit_move, field):
@@ -222,6 +210,7 @@ class AccountMoveLine(models.Model):
             return True
         return res
 
+
 class account_payment(models.Model):
     _inherit = 'account.payment'
 
@@ -230,8 +219,5 @@ class account_payment(models.Model):
         string='Contract NO', )
 
     invoice_id_for_contracts = fields.Many2many(
-        comodel_name='sale.order',domain="[('partner_id','=',partner_id)]",
+        comodel_name='sale.order', domain="[('partner_id','=',partner_id)]",
         string='Contract NO', )
-
-
-

@@ -22,6 +22,7 @@
                  <newline/>
                  <group>
                      <field name="supplier_id"/>
+                     <field name="request_type"/>
                  </group>
                  <newline/>
                  <group>

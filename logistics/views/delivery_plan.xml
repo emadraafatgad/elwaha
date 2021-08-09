@@ -44,6 +44,8 @@
                         <group>
                             <!--                                  <field name="product_id" attrs="{'readonly':[('state','=','shipment')]}" widget="many2many_tags"/>-->
                             <field name="partner_id" readonly="1"/>
+                            <field name="attachment" filename="filename"/>
+                            <field name="filename" invisible="1"/>
                             <field name="contract_id" invisible="1"/>
                         </group>
                         <group>
@@ -75,27 +77,30 @@
                     </notebook>
                     <notebook>
                         <page string="Orders">
-                            <field name="line_ids" context="{'default_contract_id': contract_id,'default_contract_no':origin}">
+                            <field name="line_ids"
+                                   context="{'default_contract_id': contract_id,'default_contract_no':origin}">
                                 <form>
                                     <sheet>
-<!--                                        <header>-->
-<!--                                            <button name="action_confirm" string="Confirm" type="object"-->
-<!--                                                    class="oe_highlight"-->
-<!--                                                    states="new"/>-->
-<!--                                            <field name="state" widget="statusbar"-->
-<!--                                                   statusbar_visible="new,confirmed,waiting_port,sailed"/>-->
-<!--                                        </header>-->
+                                        <!--                                        <header>-->
+                                        <!--                                            <button name="action_confirm" string="Confirm" type="object"-->
+                                        <!--                                                    class="oe_highlight"-->
+                                        <!--                                                    states="new"/>-->
+                                        <!--                                            <field name="state" widget="statusbar"-->
+                                        <!--                                                   statusbar_visible="new,confirmed,waiting_port,sailed"/>-->
+                                        <!--                                        </header>-->
                                         <group>
                                             <group>
-                                                <field name="state" />
+                                                <field name="state"/>
                                                 <field name="contract_id" invisible="1"/>
                                                 <field name="contract_no" invisible="1"/>
                                                 <field name="shipment_plan_line_id"/>
                                                 <field name="product" invisible="1"
                                                        attrs="{'readonly':[('state','=','confirmed')]}"/>
                                                 <field name="vessel_name"/>
-                                                <field name="shipping_line"  context="{'default_partner_type': 'shipping_line','default_customer': False, 'default_supplier': True}"/>
-                                                <field name="forwarder" context="{'default_partner_type': 'forwarder','default_customer': False, 'default_supplier': True}"/>
+                                                <field name="shipping_line"
+                                                       context="{'default_partner_type': 'shipping_line','default_customer': False, 'default_supplier': True}"/>
+                                                <field name="forwarder"
+                                                       context="{'default_partner_type': 'forwarder','default_customer': False, 'default_supplier': True}"/>
                                                 <field name="travel_date"/>
                                                 <field name="estimated_arrival"/>
                                             </group>
@@ -143,7 +148,8 @@
                                     <field name="shipping_line"/>
                                     <field name="bill_of_lading"/>
                                     <field name="reserve_no"/>
-                                    <field name="price_unit" widget="monetary" attrs="{'readonly':[('state','=','confirmed')]}"/>
+                                    <field name="price_unit" widget="monetary"
+                                           attrs="{'readonly':[('state','=','confirmed')]}"/>
                                     <field name="currency_id" invisible="1"/>
                                     <field name="name"/>
                                     <field name="shipment_plan" invisible="1"/>

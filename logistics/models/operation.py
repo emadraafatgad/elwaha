@@ -1,8 +1,7 @@
-from odoo import models, fields, api, _
-from odoo.tools import formatLang, DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.exceptions import ValidationError
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class OperationOrder(models.Model):
@@ -59,9 +58,7 @@ class OperationOrder(models.Model):
     def get_loading_date(self):
         for rec in self:
             if rec.travel_date:
-                # print(rec.travel_date)
                 loading_date = rec.travel_date - relativedelta(days=6)
-                # print(loading_date,"loooooooooooooooood")
                 rec.start_date = loading_date
 
     location_id = fields.Many2one('stock.location', required=True, default=default_location_id)
@@ -117,7 +114,7 @@ class OperationOrder(models.Model):
             # print(rec.shipment_plan,rec.shipment_plan.name,rec._context.get('active_id'))
             contract_line = rec.shipment_plan_line_id
             rec.product = contract_line.product_id
-            rec.packing = contract_line.packing
+            # rec.packing = contract_line.packing
             rec.arrival_port = contract_line.to_port
             # rec.exit_port = contract_line.from_port
             # rec.shipment_port = contract_line.from_port
@@ -200,7 +197,7 @@ class OperationOrder(models.Model):
             'loading_place': self.loading_place.id,
             'start_date': self.start_date,
             'end_date': self.end_date,
-            'notes':self.notes,
+            'notes': self.notes,
             'travel_date': self.travel_date,
             'inspection_company1': self.inspection_company1.id,
             'inspection_company2': self.inspection_company2.id,
@@ -208,6 +205,51 @@ class OperationOrder(models.Model):
         })
         self.status = 'done'
         self.state = 'confirmed'
+
+    @api.multi
+    def update_mrp(self):
+        self.ensure_one()
+        for rec in self:
+            if not rec.reserve_no:
+                raise ValidationError(_('You must enter booking no.'))
+            if not rec.forwarder:
+                raise ValidationError(_('You must enter Forwarder.'))
+            if not rec.shipping_line:
+                raise ValidationError(_('You must enter shipping line.'))
+            if rec.container_no <= 0:
+                raise ValidationError(_('Container no must be bigger than Zero.'))
+            if rec.container_weight <= 0:
+                raise ValidationError(_('Container weight must be bigger than Zero.'))
+            if not rec.loading_place:
+                raise ValidationError(_('You must enter loading Place.'))
+            if not rec.travel_date:
+                raise ValidationError(_('You must enter start sailing date.'))
+            if not rec.price_unit:
+                raise ValidationError(_('You must enter unit rate.'))
+            mrp_order_id =  self.env['operation.order.mrp'].search([('order_no','=' ,rec.id)])
+            print(mrp_order_id)
+            print("mrp_order_id", rec.packing.name,)
+            values ={
+                'packing': rec.packing.id,
+                'contract_no': rec.contract_no,
+                'reserve_no': rec.reserve_no,
+                'shipping_line': rec.shipping_line.id,
+                'forwarder': rec.forwarder.id,
+                'container_type': rec.container_type.id,
+                'container_no': rec.container_no,
+                'container_weight': rec.container_weight,
+                'container_bag_no': rec.container_bag_no,
+                'bag_type': rec.bag_type,
+                'loading_place': rec.loading_place.id,
+                'start_date': rec.start_date,
+                'end_date': rec.end_date,
+                'notes': rec.notes,
+                'travel_date': rec.travel_date,
+                'inspection_company1': rec.inspection_company1.id,
+                'inspection_company2': rec.inspection_company2.id,
+            }
+            print(values)
+            mrp_order_id.write(values)
 
     show = fields.Boolean()
     show_delivery = fields.Boolean()

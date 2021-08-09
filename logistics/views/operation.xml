@@ -42,6 +42,8 @@
                     <button name="action_confirm" string="Inprogress" type="object" class="oe_highlight" states="new"/>
                     <button name="action_invoice" string="Invoice" type="object" class="oe_highlight"
                             attrs="{'invisible':['|',('show', '=',True),('state', '=','new')]}"/>
+                    <button name="update_mrp" string="Update" type="object" class="oe_highlight"
+                            attrs="{'invisible':['|',('show', '=',True),('state', '=','new')]}"/>
                     <!-- <button name="action_deliver" string="Deliver" type="object" attrs="{'invisible':['|',('show_delivery', '=',True),('state', '=','new')]}"/>-->
                     <field name="status" widget="statusbar" statusbar_visible="new,done"/>
                 </header>

@@ -1,7 +1,5 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-from datetime import datetime, date, time
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 
 class contract(models.Model):
@@ -96,6 +94,8 @@ class contract(models.Model):
             'partner_id': self.partner_id.id,
             'origin': self.name,
             'company_id': self.company_id.id,
+            'attachment': self.attachment,
+            'filename': self.filename,
             'contract_id': self.id,
             'partial_shipment': self.partial_shipment,
             'shipment_lines': shipment_line,
@@ -131,7 +131,7 @@ class contract(models.Model):
                 raise ValidationError('There is No Commodity')
             elif not rec.name:
                 raise ValidationError('There is NO Description')
-            elif rec.quantity <= 1:
+            elif rec.product_uom_qty <= 1:
                 raise ValidationError('There is NO Quantity')
             elif not rec.delivery_date:
                 raise ValidationError('There is NO Delivery Date')
@@ -141,23 +141,39 @@ class contract(models.Model):
                 raise ValidationError('There is NO POD')
             elif not rec.packing:
                 raise ValidationError('There is NO Packing')
-
-            shipment_line.append((0, 0, {
-                'product_id': rec.product_id.id,
-                'description': rec.name,
-                'quantity': rec.product_uom_qty,
-                'price_unit': rec.price_unit,
-                'currency_id': rec.currency_id.id,
-                'delivery_date': rec.delivery_date.id,
-                'from_port': rec.from_port.id,
-                'to_port': rec.to_port.id,
-                'packing': rec.packing.id,
-                # 'contract_id': rec.order_id.id
-            }))
-        for rec in delivery_plan.line_ids:
-            rec.unlink()
-        for record in delivery_plan.shipment_lines:
-            record.unlink()
+            shipment_model = self.env['delivery.plan.line']
+            shipment_obj = shipment_model.search([('contract_line_id', '=', rec.id)])
+            print(shipment_obj,"shipmentobj for update")
+            if shipment_obj:
+                shipment_obj.write({
+                    'product_id': rec.product_id.id,
+                    'description': rec.name,
+                    'quantity': rec.product_uom_qty,
+                    'price_unit': rec.price_unit,
+                    'currency_id': rec.currency_id.id,
+                    'delivery_date': rec.delivery_date.id,
+                    'from_port': rec.from_port.id,
+                    'to_port': rec.to_port.id,
+                    'packing': rec.packing.id,
+                    # 'contract_id': rec.order_id.id
+                })
+            else:
+                shipment_model.create({
+                    'product_id': rec.product_id.id,
+                    'description': rec.name,
+                    'quantity': rec.product_uom_qty,
+                    'price_unit': rec.price_unit,
+                    'currency_id': rec.currency_id.id,
+                    'delivery_date': rec.delivery_date.id,
+                    'from_port': rec.from_port.id,
+                    'to_port': rec.to_port.id,
+                    'packing': rec.packing.id,
+                    'contract_id': rec.order_id.id,
+                    'contract_line_id': rec.id,
+                    'shipment_plan':delivery_plan.id,
+                })
+        # for record in delivery_plan.shipment_lines:
+        #     record.unlink()
         purchase_plan.write({
             'origin': self.name,
             'filename': self.filename,
@@ -169,9 +185,10 @@ class contract(models.Model):
             'origin': self.name,
             'company_id': self.company_id.id,
             'partial_shipment': self.partial_shipment,
-            'shipment_lines': shipment_line,
+            'attachment': self.attachment,
+            'filename': self.filename,
         })
-        delivery_plan.get_attachments()
+        # delivery_plan.get_attachments()
 
         # delivery_plan.shipment_lines = [(5, 0, delivery_plan.shipment_lines )]
         # delivery_plan.shipment_lines = shipment_line

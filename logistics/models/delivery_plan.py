@@ -28,6 +28,8 @@ class DeliveryPLan(models.Model):
         ('allowed', 'Allowed'),
         ('not_allowed', 'Not Allowed')], required=True)
     company_id = fields.Many2one('res.company')
+    attachment = fields.Binary()
+    filename = fields.Char()
 
     @api.model
     # @api.onchange('contract_id')
