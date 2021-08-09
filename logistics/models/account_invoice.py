@@ -29,10 +29,10 @@ class SpecialDiscount(models.Model):
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    operation_id = fields.Many2one('operation.order')
     advanced_payment = fields.Float()
     discount_amount = fields.Monetary(string='Discount Total',
                                       store=True, readonly=True, compute='_compute_amount')
-
     bl_no = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
     ship_date = fields.Date(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
     ship_via = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True, )

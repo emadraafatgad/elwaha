@@ -323,6 +323,7 @@ class OperationOrder(models.Model):
             'state': 'draft',
             'type': 'out_invoice',
             'origin': self.contract_no,
+            'operation_id': self.id,
             'bl_no': self.bill_of_lading,
             'ship_date': self.travel_date,
             'travel_date': self.travel_date,
