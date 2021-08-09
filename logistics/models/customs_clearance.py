@@ -2,10 +2,12 @@ from odoo import models, fields, api,_
 from datetime import date
 from odoo.exceptions import ValidationError
 
+
 class CustomsClearance(models.Model):
     _name = 'customs.clearance'
     _description = 'Clearance'
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
+
     name =fields.Char('Sequence',default='New',readonly=True)
     state = fields.Selection([('new', 'New'),('confirmed', 'Confirmed')], default='new', track_visibility="onchange")
     order_ids = fields.Many2many('operation.order')

@@ -9,23 +9,46 @@ class DeliveryPLan(models.Model):
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _order = 'id desc'
 
-    name = fields.Char('Plan ref', default='New', readonly=True)
-    origin = fields.Char("Contract Ref")
-    state = fields.Selection([('new', 'New'), ('shipment', 'In Progress')], string="status", default='new',
+    name = fields.Char('Plan ref', default='New', track_visibility="onchange", readonly=True)
+    origin = fields.Char("Contract Ref",track_visibility="onchange")
+    state = fields.Selection([('new', 'New'), ('shipment', 'Completed')], string="status", default='new',
                              track_visibility="onchange")
     partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,
-                                 domain=[('partner_type', '=', 'client')])
+                                 track_visibility="onchange", domain=[('partner_type', '=', 'client')])
     # product_id = fields.Many2many('product.product', string='Commodity', required=True)
     shipment_company = fields.Many2one('res.partner', readonly=True, string="Forwarder",
                                        domain=[('partner_type', '=', 'forwarder')])
     line_ids = fields.One2many('operation.order', 'shipment_plan')
+    qty_done = fields.Float(readonly=True)
+    show_delivery = fields.Boolean()
     shipment_lines = fields.One2many('delivery.plan.line', 'shipment_plan')
     locked = fields.Boolean(compute='compute_lock')
     contract_id = fields.Many2one('sale.order')
+    contract_date = fields.Date()
     partial_shipment = fields.Selection([
         ('allowed', 'Allowed'),
         ('not_allowed', 'Not Allowed')], required=True)
     company_id = fields.Many2one('res.company')
+    attachment = fields.Binary()
+    filename = fields.Char()
+
+    @api.model
+    # @api.onchange('contract_id')
+    def get_attachments(self):
+        attachments = self.env['ir.attachment'].search([('res_model', '=', 'sale.order'), ('res_id', '=', self.contract_id.id)])
+        if attachments:
+            for attachment in  attachments:
+                attachment = self.env['ir.attachment'].create({
+                    'name': attachments.name,
+                    'datas': attachments.datas,
+                    'datas_fname': attachments.datas_fname,
+                    'res_model': self._name,
+                    'res_id': self.id,
+                    'type': 'binary',  # override default_type from context, possibly meant for another model!
+                })
+                self.write({'attachment_id': attachment.id})
+
+
 
     @api.depends('line_ids')
     def compute_lock(self):
@@ -93,15 +116,17 @@ class DeliveryPlanLine(models.Model):
     product_id = fields.Many2one('product.product', string='Commodity', required=True)
     description = fields.Char()
     quantity = fields.Float(required=True, string="QTY")
-    price_unit = fields.Float(string="Unit Rate", required=True)
+    currency_id = fields.Many2one('res.currency', string='Currency')
+    price_unit = fields.Monetary(string="Unit Rate", currency_field='currency_id',required=True)
     delivery_date = fields.Many2one('estimated.date', string="ETD", required=True)
     from_port = fields.Many2one('container.port', string='POL', required=True)
     to_port = fields.Many2one('container.port', string='POD', required=True)
     packing = fields.Many2one('product.packing', string='Packing', required=True)
     contract_id = fields.Many2one('sale.order')
+    contract_line_id = fields.Many2one('sale.order.line')
 
 
-class contract(models.Model):
+class Contract(models.Model):
     _inherit = 'sale.order'
 
     shipment_lines = fields.One2many('delivery.plan.line', 'contract_id',readonly=True)

@@ -1,40 +1,45 @@
-from odoo import models, fields, api, _
-from odoo.tools import formatLang, DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.exceptions import ValidationError
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
+
 
 class OperationOrder(models.Model):
     _name = 'operation.order'
-    _inherit = 'mail.thread'
     _description = 'Operation Order'
+    _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char('Order No', readonly=True, default='New')
-    contract_no = fields.Char()
-    contract_id = fields.Many2one('sale.order',readonly=True)
-    status = fields.Selection([('new', 'New'), ('done', 'Done')], default='new')
+    name = fields.Char('Order No', track_visibility="onchange", default='New')
+    _sql_constraints = [('name_uniq', 'unique (name)', 'Sequence Must Be Unique')]
+
+    contract_no = fields.Char(track_visibility="onchange")
+    contract_id = fields.Many2one('sale.order',related='shipment_plan.contract_id',store=True)
+    contract_date = fields.Date(related='shipment_plan.contract_date',store=True)
+    status = fields.Selection([('new', 'New'), ('done', 'Done')], track_visibility="onchange", default='new')
     state = fields.Selection(
         [('new', 'New'), ('confirmed', 'Under Stuffing'), ('waiting_port', 'Waiting At Port'), ('sailed', 'Sailed')],
         default='new', track_visibility="onchange")
-    container_type = fields.Many2one('container.type')
-    reserve_no = fields.Char('Booking No')
-    estimated_arrival = fields.Date('ETA')
-    forwarder = fields.Many2one('res.partner', domain=[('partner_type', '=', 'forwarder')])
-    shipping_line = fields.Many2one('res.partner', string="Shipping Line",
+    container_type = fields.Many2one('container.type', track_visibility="onchange", )
+    reserve_no = fields.Char('Booking No', track_visibility="onchange", )
+    estimated_arrival = fields.Date('ETA', track_visibility="onchange", )
+    forwarder = fields.Many2one('res.partner', track_visibility="onchange", domain=[('partner_type', '=', 'forwarder')])
+    shipping_line = fields.Many2one('res.partner', track_visibility="onchange", string="Shipping Line",
                                     domain=[('partner_type', '=', 'shipping_line')])
-    container_no = fields.Float('Containers No', required=True)
-    uom = fields.Many2one('uom.uom')
-    commodity_type = fields.Many2one('commodity.type')
-    container_weight = fields.Float('Container Weight')
-    total_weight = fields.Float(compute='compute_total', string='Stander Quantity')
+    container_no = fields.Float('Containers No', track_visibility="onchange", required=True)
+    uom = fields.Many2one('uom.uom', track_visibility="onchange", )
+    commodity_type = fields.Many2one('commodity.type', track_visibility="onchange", )
+    container_weight = fields.Float('Container Weight', track_visibility="onchange", digits=(16, 3), )
+    total_weight = fields.Float(compute='compute_total', track_visibility="onchange", digits=(16, 3),
+                                string='Stander Quantity')
     qty_done = fields.Float(readonly=True)
-    amount = fields.Float(compute='compute_amount')
-    container_bag_no = fields.Float(string="Container Bags NO.")
+    amount = fields.Float(compute='compute_amount', track_visibility="onchange", digits=(16, 3), )
+    container_bag_no = fields.Float(string="Container Bags NO.", track_visibility="onchange", digits=(16, 3), )
     total_bags = fields.Float(string="Total Bags")
-    bag_type = fields.Char()
-    bill_of_lading = fields.Char(string="BL Ref.")
-    packing = fields.Many2one('product.packing')
-    product = fields.Many2one('product.product', required=True, string='Commodity', compute="get_all_fields")
+    bag_type = fields.Char(track_visibility="onchange", )
+    bill_of_lading = fields.Char(track_visibility="onchange", string="BL Ref.")
+    packing = fields.Many2one('product.packing', track_visibility="onchange", )
+    product = fields.Many2one('product.product', track_visibility="onchange", required=True, string='Commodity',
+                              compute="get_all_fields")
 
     def default_location_id(self):
         location = self.env['stock.location'].search([('usage', '=', 'internal')])
@@ -44,46 +49,45 @@ class OperationOrder(models.Model):
     def get_default_cutt_of_date(self):
         for rec in self:
             if rec.travel_date:
-                print(rec.travel_date)
+                # print(rec.travel_date)
                 cutt_of_date = rec.travel_date - relativedelta(days=4)
-                print(cutt_of_date,type(cutt_of_date),"loooool")
+                # print(cutt_of_date,type(cutt_of_date),"loooool")
                 rec.end_date = cutt_of_date
 
     @api.depends('travel_date')
     def get_loading_date(self):
         for rec in self:
             if rec.travel_date:
-                print(rec.travel_date)
                 loading_date = rec.travel_date - relativedelta(days=6)
-                print(loading_date,"loooooooooooooooood")
                 rec.start_date = loading_date
 
     location_id = fields.Many2one('stock.location', required=True, default=default_location_id)
-    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port', compute="get_all_fields")
-    shipment_port = fields.Many2one('container.port', 'POL', compute="get_all_fields")
+    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port')
+    shipment_port = fields.Many2one('container.port', 'POL')
     arrival_port = fields.Many2one('container.port', 'POD', compute="get_all_fields")
     loading_place = fields.Many2one('loading.place')
     invoice_id = fields.Many2one('account.invoice')
     invoice_no = fields.Char('Invoice Number', related='invoice_id.number')
-    price_unit = fields.Float('Unit Price', required=True, compute="get_all_fields")
-    start_date = fields.Date('Start Loading Date',compute='get_loading_date')
-    end_date = fields.Date('Cut Off',compute='get_default_cutt_of_date' )
+    price_unit = fields.Monetary('Unit Price', required=True, currency_field='currency_id', compute="get_all_fields")
+    currency_id = fields.Many2one('res.currency', compute="get_all_fields", store=True, string='Currency')
+    start_date = fields.Date('Start Loading Date', compute='get_loading_date')
+    end_date = fields.Date('Cut Off', compute='get_default_cutt_of_date')
     travel_date = fields.Date('Sailing Date')
     delivery_date = fields.Date()
     inspection_company1 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     inspection_company2 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
     customer = fields.Many2one('res.partner', related='shipment_plan.partner_id',
                                domain=[('partner_type', '=', 'client')])
-    agree = fields.Char(readonly=True)
-    bank_certificate = fields.Char(readonly=True)
+    agree = fields.Char()
+    bank_certificate = fields.Char()
     customer_code = fields.Char(readonly=True, string='Client Code', related='customer.client_code')
-    delivered_qty = fields.Float(string="Total QTY")
+    delivered_qty = fields.Float(string="Net Weight", digits=(16, 3), )
+    gross_weight = fields.Float(string="Gross Weight", digits=(16, 3), )
     notes = fields.Text()
-    total_after_increase = fields.Float(compute='compute_total_after_increase')
+    total_after_increase = fields.Float(compute='compute_total_after_increase', digits=(16, 3), )
     clearance_finished = fields.Boolean()
     vessel_name = fields.Char()
     company_id = fields.Many2one('res.company')
-
     shipment_plan = fields.Many2one('delivery.plan', string="PLAN", required=True)
 
     @api.model
@@ -98,7 +102,7 @@ class OperationOrder(models.Model):
             print(res, "res")
         return res
 
-    shipment_plan_line_id = fields.Many2one('delivery.plan.line', string="Commodity", required=True,
+    shipment_plan_line_id = fields.Many2one('delivery.plan.line', string="Commodity",
                                             domain="[('contract_id','=',contract_id)]")
 
     # domain="[('id','in',shipment_plan.shipment_lines.ids)]")
@@ -110,11 +114,12 @@ class OperationOrder(models.Model):
             # print(rec.shipment_plan,rec.shipment_plan.name,rec._context.get('active_id'))
             contract_line = rec.shipment_plan_line_id
             rec.product = contract_line.product_id
-            rec.packing = contract_line.packing
+            # rec.packing = contract_line.packing
             rec.arrival_port = contract_line.to_port
-            rec.exit_port = contract_line.from_port
-            rec.shipment_port = contract_line.from_port
+            # rec.exit_port = contract_line.from_port
+            # rec.shipment_port = contract_line.from_port
             rec.price_unit = contract_line.price_unit
+            rec.currency_id = contract_line.currency_id
 
     @api.onchange('shipment_plan')
     def onchange_shipment_plan(self):
@@ -175,30 +180,76 @@ class OperationOrder(models.Model):
         if not self.price_unit:
             raise ValidationError(_('You must enter unit rate.'))
         self.env['operation.order.mrp'].create({
-             'order_no': self.id,
-             'shipment_plan': self.shipment_plan.id,
-             'product': self.product.id,
-            'shipment_plan_line_id':self.shipment_plan_line_id.id,
-             'packing': self.packing.id,
-             'contract_no': self.contract_no,
-             'reserve_no': self.reserve_no,
-             'shipping_line': self.shipping_line.id,
-             'forwarder': self.forwarder.id,
-             'container_type': self.container_type.id,
-             'container_no': self.container_no,
-             'container_weight': self.container_weight,
-             'container_bag_no': self.container_bag_no,
-             'bag_type': self.bag_type,
-             'loading_place': self.loading_place.id,
-             'start_date': self.start_date,
-             'end_date': self.end_date,
-             'travel_date': self.travel_date,
-             'inspection_company1': self.inspection_company1.id,
-             'inspection_company2': self.inspection_company2.id,
-             'company_id': self.company_id.id,
+            'order_no': self.id,
+            'shipment_plan': self.shipment_plan.id,
+            'product': self.product.id,
+            'shipment_plan_line_id': self.shipment_plan_line_id.id,
+            'packing': self.packing.id,
+            'contract_no': self.contract_no,
+            'reserve_no': self.reserve_no,
+            'shipping_line': self.shipping_line.id,
+            'forwarder': self.forwarder.id,
+            'container_type': self.container_type.id,
+            'container_no': self.container_no,
+            'container_weight': self.container_weight,
+            'container_bag_no': self.container_bag_no,
+            'bag_type': self.bag_type,
+            'loading_place': self.loading_place.id,
+            'start_date': self.start_date,
+            'end_date': self.end_date,
+            'notes': self.notes,
+            'travel_date': self.travel_date,
+            'inspection_company1': self.inspection_company1.id,
+            'inspection_company2': self.inspection_company2.id,
+            'company_id': self.company_id.id,
         })
         self.status = 'done'
         self.state = 'confirmed'
+
+    @api.multi
+    def update_mrp(self):
+        self.ensure_one()
+        for rec in self:
+            if not rec.reserve_no:
+                raise ValidationError(_('You must enter booking no.'))
+            if not rec.forwarder:
+                raise ValidationError(_('You must enter Forwarder.'))
+            if not rec.shipping_line:
+                raise ValidationError(_('You must enter shipping line.'))
+            if rec.container_no <= 0:
+                raise ValidationError(_('Container no must be bigger than Zero.'))
+            if rec.container_weight <= 0:
+                raise ValidationError(_('Container weight must be bigger than Zero.'))
+            if not rec.loading_place:
+                raise ValidationError(_('You must enter loading Place.'))
+            if not rec.travel_date:
+                raise ValidationError(_('You must enter start sailing date.'))
+            if not rec.price_unit:
+                raise ValidationError(_('You must enter unit rate.'))
+            mrp_order_id =  self.env['operation.order.mrp'].search([('order_no','=' ,rec.id)])
+            print(mrp_order_id)
+            print("mrp_order_id", rec.packing.name,)
+            values ={
+                'packing': rec.packing.id,
+                'contract_no': rec.contract_no,
+                'reserve_no': rec.reserve_no,
+                'shipping_line': rec.shipping_line.id,
+                'forwarder': rec.forwarder.id,
+                'container_type': rec.container_type.id,
+                'container_no': rec.container_no,
+                'container_weight': rec.container_weight,
+                'container_bag_no': rec.container_bag_no,
+                'bag_type': rec.bag_type,
+                'loading_place': rec.loading_place.id,
+                'start_date': rec.start_date,
+                'end_date': rec.end_date,
+                'notes': rec.notes,
+                'travel_date': rec.travel_date,
+                'inspection_company1': rec.inspection_company1.id,
+                'inspection_company2': rec.inspection_company2.id,
+            }
+            print(values)
+            mrp_order_id.write(values)
 
     show = fields.Boolean()
     show_delivery = fields.Boolean()
@@ -260,30 +311,33 @@ class OperationOrder(models.Model):
             'product_id': self.product.id,
             'name': self.product.name,
             'product_uom_id': self.product.uom_id.id,
-            'price_unit': self.product.list_price,
+            'price_unit': self.price_unit,
             'discount': 0.0,
-            'quantity': self.total_weight,
+            'quantity': self.delivered_qty,
             'account_id': accounts.get('stock_input') and accounts['stock_input'].id or \
                           accounts['income'].id,
         }))
-
         vessel_voyage = self.vessel_name + ',' + self.vessel_name
-        self.env['account.invoice'].create({
+        cr = self.env['account.invoice'].create({
             'partner_id': self.customer.id,
             'state': 'draft',
             'type': 'out_invoice',
             'origin': self.contract_no,
             'bl_no': self.bill_of_lading,
             'ship_date': self.travel_date,
-            # 'ship_via': '',
+            'travel_date': self.travel_date,
             'pol': self.shipment_port.id,
             'pod': self.arrival_port.id,
             'vessel_voyage_no': vessel_voyage,
+            'packing': self.packing.id,
+            'gross_weight': self.gross_weight,
+            'container_no': self.container_no,
+            'currency_id': self.currency_id.id if self.currency_id else 2,
             'journal_id': sale_journal.id,
             'account_id': self.customer.property_account_receivable_id.id,
             'invoice_line_ids': invoice_line,
-
         })
+        self.invoice_id = cr.id
         self.show = True
 
     """@api.multi
@@ -318,15 +372,14 @@ class OperationOrder(models.Model):
         }).action_assign()
         self.show_delivery = True"""
 
-    @api.multi
-    def unlink(self):
-        for rec in self:
-            if rec.contract_no:
-                raise ValidationError(_('You cannot delete %s as it comes from contract') % rec.name)
-            if rec.state != 'new':
-                raise ValidationError(_('You cannot delete %s as it is confirmed') % rec.name)
-
-        return super(OperationOrder, self).unlink()
+    # @api.multi
+    # def unlink(self):
+    #     for rec in self:
+    #         if rec.contract_no:
+    #             raise ValidationError(_('You cannot delete %s as it comes from contract') % rec.name)
+    #         if rec.state != 'new':
+    #             raise ValidationError(_('You cannot delete %s as it is confirmed') % rec.name)
+    # return super(OperationOrder, self).unlink()
 
     @api.model
     def create(self, vals):

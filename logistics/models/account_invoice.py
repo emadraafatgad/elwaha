@@ -7,15 +7,15 @@ class SpecialDiscount(models.Model):
     _name = 'special.discount'
 
     product_id = fields.Many2one('product.product')
-    name = fields.Char('Description',required=True)
-    product_qty= fields.Integer(required=True,default=1)
+    name = fields.Char('Description', required=True)
+    product_qty = fields.Integer(required=True, default=1)
     price_unit = fields.Float(required=True)
     price_subtotal = fields.Monetary(string='Subtotal Amount', store=True, readonly=True, currency_field='currency_id',
                                      compute='_compute_amount',
-                                      track_visibility='always')
+                                     track_visibility='always')
     invoice_id = fields.Many2one('account.invoice')
-    currency_id = fields.Many2one('res.currency',related='invoice_id.currency_id')
-    account_id = fields.Many2one('account.account',required=True)
+    currency_id = fields.Many2one('res.currency', related='invoice_id.currency_id')
+    account_id = fields.Many2one('account.account', required=True)
 
     @api.depends('product_qty', 'price_unit')
     def _compute_amount(self):
@@ -31,22 +31,30 @@ class AccountInvoice(models.Model):
 
     advanced_payment = fields.Float()
     discount_amount = fields.Monetary(string='Discount Total',
-        store=True, readonly=True, compute='_compute_amount')
+                                      store=True, readonly=True, compute='_compute_amount')
 
-    # special_discount_ids = fields.One2many('special.discount','invoice_id')
-    bl_no = fields.Char()
-    ship_date = fields.Date()
-    ship_via = fields.Char()
-    pol = fields.Many2one('container.port', string='Port Of Loading')
-    pod = fields.Many2one('container.port', string='Port Of Discharge')
-    vessel_voyage_no = fields.Char(string='Vessel & Voyage No')
+    bl_no = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
+    ship_date = fields.Date(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
+    ship_via = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
+    pol = fields.Many2one('container.port', readonly=True, states={'draft': [('readonly', False)]}, index=True,
+                          string='Port Of Loading')
+    pod = fields.Many2one('container.port', readonly=True, states={'draft': [('readonly', False)]}, index=True,
+                          string='Port Of Discharge')
+    vessel_voyage_no = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True,
+                                   string='Vessel & Voyage No')
+    gross_weight = fields.Float(readonly=True, states={'draft': [('readonly', False)]}, index=True,
+                                string="Gross Weight", digits=(16, 3))
+    container_no = fields.Float('Containers No', readonly=True, states={'draft': [('readonly', False)]}, index=True,
+                                digits=(16, 3))
+    travel_date = fields.Date('Sailing Date', readonly=True, states={'draft': [('readonly', False)]}, index=True, )
+    packing = fields.Many2one('product.packing', readonly=True, states={'draft': [('readonly', False)]}, index=True, )
 
     @api.multi
     def action_invoice_open(self):
         origin = self.env['operation.order'].search([('name', '=', self.origin)])
         for org in origin:
             org.invoice_id = self.id
-        return super(AccountInvoice , self).action_invoice_open()
+        return super(AccountInvoice, self).action_invoice_open()
 
     # @api.one
     # @api.depends('invoice_line_ids.price_subtotal', 'tax_line_ids.amount', 'tax_line_ids.amount_rounding',

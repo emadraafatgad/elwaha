@@ -1,0 +1,15 @@
+
+  <odoo>
+    <data>
+
+         <report
+            id="operation_order_xlx_report_id"
+            model="operation.order"
+            string="Operation Order Excel"
+            report_type="xlsx"
+            name="reports.report_operation_order_xlx"
+            file="reports.report_operation_order_xlx"
+        />
+
+    </data>
+</odoo>

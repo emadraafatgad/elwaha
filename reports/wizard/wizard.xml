@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_wizard_contract_report" model="ir.ui.view">
+        <field name="name">Contract Report between dates</field>
+        <field name="model">wizard.contract.report</field>
+        <field name="arch" type="xml">
+        <form>
+                <p class="oe_gray">
+                </p>
+                <group>
+                    <group>
+                        <field name="date_from" required="True"/>
+                        <field name="date_to" required="True" />
+                    </group>
+                    <grpup>
+                        <field name="file_name" invisible="1"/>
+	                <field name="report_file" readonly="1" attrs="{'invisible':[('printed','=',False)]}" filename="file_name"/>
+	                <field name="printed" invisible="1"/>
+                    </grpup>
+                </group>
+                <footer>
+                        <button string="Print Excel Report" class="btn-primary" name="action_contract_report" type="object" />
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+        </form>
+        </field>
+        </record>
+
+        <record id="action_wizard_contract" model="ir.actions.act_window">
+        <field name="name">Wizard Contract Report</field>
+        <field name="res_model">wizard.contract.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_wizard_contract_report"/>
+        <field name="target">new</field>
+        </record>
+        <menuitem
+                id="main_menu_waha_reports"
+                name="Reports"
+                parent="logistics.menu_logistics_info"
+        />
+        <menuitem
+                id="menu_wizard_contract"
+                name="Contract Report"
+                action="action_wizard_contract"
+                parent="main_menu_waha_reports"
+                sequence="1"
+        />
+
+    </data>
+</odoo>

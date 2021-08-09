@@ -1,11 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_container_port,container_port,model_container_port,,1,1,1,1
-access_product_packing,product_packing,model_product_packing,,1,1,1,1
-access_commodity_type,commodity_type,model_commodity_type,,1,1,1,1
-access_purchase_plan,purchase_plan,model_purchase_plan,,1,1,1,1
-access_purchase_plan_line,purchase_plan_line,model_purchase_plan_line,,1,1,1,1
-access_container_type,container_type,model_container_type,,1,1,1,1
-access_estimated_date,estimated_date,model_estimated_date,,1,1,1,1
-access_purchase_project_plan,purchase_project_plan,model_purchase_project_plan,,1,1,1,1
-access_purchase_project_line,purchase_project_line,model_purchase_project_line,,1,1,1,1
+access_container_port,container_port,model_container_port,,1,1,1,0
+access_product_packing,product_packing,model_product_packing,,1,1,1,0
+access_commodity_type,commodity_type,model_commodity_type,,1,1,1,0
+access_purchase_plan,purchase_plan,model_purchase_plan,,1,1,1,0
+access_purchase_plan_line,purchase_plan_line,model_purchase_plan_line,,1,1,1,0
+access_container_type,container_type,model_container_type,,1,1,1,0
+access_estimated_date,estimated_date,model_estimated_date,,1,1,1,0
+access_purchase_project_plan,purchase_project_plan,model_purchase_project_plan,,1,1,1,0
+access_purchase_project_line,purchase_project_line,model_purchase_project_line,,1,1,1,0
 
