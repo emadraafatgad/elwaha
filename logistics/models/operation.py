@@ -19,11 +19,11 @@ class OperationOrder(models.Model):
     state = fields.Selection(
         [('new', 'New'), ('confirmed', 'Under Stuffing'), ('waiting_port', 'Waiting At Port'), ('sailed', 'Sailed')],
         default='new', track_visibility="onchange")
-    container_type = fields.Many2one('container.type', track_visibility="onchange", )
+    container_type = fields.Many2one('container.type',ondelete='restrict', track_visibility="onchange", )
     reserve_no = fields.Char('Booking No', track_visibility="onchange", )
     estimated_arrival = fields.Date('ETA', track_visibility="onchange", )
-    forwarder = fields.Many2one('res.partner', track_visibility="onchange", domain=[('partner_type', '=', 'forwarder')])
-    shipping_line = fields.Many2one('res.partner', track_visibility="onchange", string="Shipping Line",
+    forwarder = fields.Many2one('res.partner',ondelete='restrict', track_visibility="onchange", domain=[('partner_type', '=', 'forwarder')])
+    shipping_line = fields.Many2one('res.partner',ondelete='restrict', track_visibility="onchange", string="Shipping Line",
                                     domain=[('partner_type', '=', 'shipping_line')])
     container_no = fields.Float('Containers No', track_visibility="onchange", required=True)
     uom = fields.Many2one('uom.uom', track_visibility="onchange", )
@@ -31,7 +31,7 @@ class OperationOrder(models.Model):
     container_weight = fields.Float('Container Weight', track_visibility="onchange", digits=(16, 3), )
     total_weight = fields.Float(compute='compute_total', track_visibility="onchange", digits=(16, 3),
                                 string='Stander Quantity')
-    qty_done = fields.Float(readonly=True)
+    qty_done = fields.Float( digits=(16, 3),readonly=True)
     amount = fields.Float(compute='compute_amount', track_visibility="onchange", digits=(16, 3), )
     container_bag_no = fields.Float(string="Container Bags NO.", track_visibility="onchange", digits=(16, 3), )
     total_bags = fields.Float(string="Total Bags")
@@ -62,9 +62,9 @@ class OperationOrder(models.Model):
                 rec.start_date = loading_date
 
     location_id = fields.Many2one('stock.location', required=True, default=default_location_id)
-    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port')
-    shipment_port = fields.Many2one('container.port', 'POL')
-    arrival_port = fields.Many2one('container.port', 'POD', compute="get_all_fields")
+    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port',ondelete='restrict',)
+    shipment_port = fields.Many2one('container.port', ondelete='restrict',string='POL')
+    arrival_port = fields.Many2one('container.port',string='POD',ondelete='restrict', compute="get_all_fields")
     loading_place = fields.Many2one('loading.place')
     invoice_id = fields.Many2one('account.invoice')
     invoice_no = fields.Char('Invoice Number', related='invoice_id.number')
@@ -74,9 +74,9 @@ class OperationOrder(models.Model):
     end_date = fields.Date('Cut Off', compute='get_default_cutt_of_date')
     travel_date = fields.Date('Sailing Date')
     delivery_date = fields.Date()
-    inspection_company1 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
-    inspection_company2 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
-    customer = fields.Many2one('res.partner', related='shipment_plan.partner_id',
+    inspection_company1 = fields.Many2one('res.partner',ondelete='restrict', domain=[('partner_type', '=', 'inspection_company')])
+    inspection_company2 = fields.Many2one('res.partner', ondelete='restrict',domain=[('partner_type', '=', 'inspection_company')])
+    customer = fields.Many2one('res.partner',ondelete='restrict', related='shipment_plan.partner_id',
                                domain=[('partner_type', '=', 'client')])
     agree = fields.Char()
     bank_certificate = fields.Char()
@@ -331,6 +331,8 @@ class OperationOrder(models.Model):
             'vessel_voyage_no': vessel_voyage,
             'packing': self.packing.id,
             'gross_weight': self.gross_weight,
+            'net_weight': self.delivered_qty,
+            'order_number':self.name,
             'container_no': self.container_no,
             'currency_id': self.currency_id.id if self.currency_id else 2,
             'journal_id': sale_journal.id,

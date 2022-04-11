@@ -36,18 +36,22 @@ class AccountInvoice(models.Model):
     bl_no = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
     ship_date = fields.Date(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
     ship_via = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True, )
-    pol = fields.Many2one('container.port', readonly=True, states={'draft': [('readonly', False)]}, index=True,
+    pol = fields.Many2one('container.port',ondelete='restrict', readonly=True, states={'draft': [('readonly', False)]}, index=True,
                           string='Port Of Loading')
-    pod = fields.Many2one('container.port', readonly=True, states={'draft': [('readonly', False)]}, index=True,
+    pod = fields.Many2one('container.port',ondelete='restrict', readonly=True, states={'draft': [('readonly', False)]}, index=True,
                           string='Port Of Discharge')
     vessel_voyage_no = fields.Char(readonly=True, states={'draft': [('readonly', False)]}, index=True,
                                    string='Vessel & Voyage No')
     gross_weight = fields.Float(readonly=True, states={'draft': [('readonly', False)]}, index=True,
                                 string="Gross Weight", digits=(16, 3))
+    net_weight = fields.Float(readonly=True, states={'draft': [('readonly', False)]}, index=True,
+                                string="Net Weight", digits=(16, 3))
+    order_number = fields.Char()
     container_no = fields.Float('Containers No', readonly=True, states={'draft': [('readonly', False)]}, index=True,
                                 digits=(16, 3))
     travel_date = fields.Date('Sailing Date', readonly=True, states={'draft': [('readonly', False)]}, index=True, )
     packing = fields.Many2one('product.packing', readonly=True, states={'draft': [('readonly', False)]}, index=True, )
+
 
     @api.multi
     def action_invoice_open(self):

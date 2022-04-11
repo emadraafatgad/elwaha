@@ -16,11 +16,11 @@ class OperationOrder(models.Model):
     state = fields.Selection(
         [('new', 'New'), ('confirmed', 'Under Stuffing'), ('waiting_port', 'Waiting At Port'), ('sailed', 'Sailed')],
         default='new', track_visibility="onchange")
-    container_type = fields.Many2one('container.type')
+    container_type = fields.Many2one('container.type',ondelete='restrict',)
     reserve_no = fields.Char('Booking No')
     estimated_arrival = fields.Date('ETA')
-    forwarder = fields.Many2one('res.partner', domain=[('partner_type', '=', 'forwarder')])
-    shipping_line = fields.Many2one('res.partner', string="Shipping Line",
+    forwarder = fields.Many2one('res.partner', ondelete='restrict',domain=[('partner_type', '=', 'forwarder')])
+    shipping_line = fields.Many2one('res.partner', ondelete='restrict',string="Shipping Line",
                                     domain=[('partner_type', '=', 'shipping_line')])
     container_no = fields.Float('Containers No', required=True)
     uom = fields.Many2one('uom.uom')
@@ -40,20 +40,20 @@ class OperationOrder(models.Model):
         return location[0]
 
     location_id = fields.Many2one('stock.location', required=True, default=default_location_id)
-    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port')
+    exit_port = fields.Many2one('container.port', 'Containers Withdrawl Port',ondelete='restrict',)
     shipment_port = fields.Many2one('container.port', 'POL')
-    arrival_port = fields.Many2one('container.port', 'POD')
-    loading_place = fields.Many2one('loading.place')
-    invoice_id = fields.Many2one('account.invoice')
+    arrival_port = fields.Many2one('container.port', 'POD',ondelete='restrict',)
+    loading_place = fields.Many2one('loading.place',ondelete='restrict',)
+    invoice_id = fields.Many2one('account.invoice',)
     invoice_no = fields.Char('Invoice Number', related='invoice_id.number')
     price_unit = fields.Float('Unit Price', required=True)
     start_date = fields.Date('Start Loading Date')
     end_date = fields.Date('Cut Off')
     travel_date = fields.Date('Sailing Date')
     delivery_date = fields.Date()
-    inspection_company1 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
-    inspection_company2 = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
-    customer = fields.Many2one('res.partner', related='shipment_plan.partner_id',
+    inspection_company1 = fields.Many2one('res.partner',ondelete='restrict', domain=[('partner_type', '=', 'inspection_company')])
+    inspection_company2 = fields.Many2one('res.partner',ondelete='restrict', domain=[('partner_type', '=', 'inspection_company')])
+    customer = fields.Many2one('res.partner',ondelete='restrict', related='shipment_plan.partner_id',
                                domain=[('partner_type', '=', 'client')])
     agree = fields.Char(readonly=True)
     bank_certificate = fields.Char(readonly=True)
@@ -290,8 +290,8 @@ class OperationOrderInvoice(models.Model):
     bl_no = fields.Char()
     ship_date = fields.Date()
     ship_via = fields.Char()
-    pol = fields.Many2one('container.port', string='Port Of Loading')
-    pod = fields.Many2one('container.port', string='Port Of Discharge')
+    pol = fields.Many2one('container.port',ondelete='restrict', string='Port Of Loading')
+    pod = fields.Many2one('container.port',ondelete='restrict', string='Port Of Discharge')
     vessel_voyage_no = fields.Char(string='Vessel & Voyage No')
 
     @api.multi

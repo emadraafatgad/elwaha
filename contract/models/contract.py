@@ -17,7 +17,7 @@ class contract(models.Model):
                                    help="Pricelist for current sales order.")
     currency_id = fields.Many2one("res.currency", string="Currency", store=True, readonly=False, required=True)
     date_string = fields.Char()
-    inspection_company = fields.Many2one('res.partner', domain=[('partner_type', '=', 'inspection_company')])
+    inspection_company = fields.Many2one('res.partner',ondelete='restrict', domain=[('partner_type', '=', 'inspection_company')])
     margin = fields.Float(string="Tolerance Margin", default=10)
     attachment = fields.Binary()
     filename = fields.Char()
@@ -235,7 +235,7 @@ class OrderLineContract(models.Model):
     container_type = fields.Many2one('container.type')
     commodity_type = fields.Many2one('commodity.type')
     packing = fields.Many2one('product.packing', string='Packing')
-    inspection_company = fields.Many2one('res.partner', related='order_id.inspection_company',
+    inspection_company = fields.Many2one('res.partner',ondelete='restrict', related='order_id.inspection_company',
                                          domain=[('partner_type', '=', 'inspection_company')])
     delivery_date = fields.Many2one('estimated.date', string="ETD")
     from_port = fields.Many2one('container.port', string='POL')

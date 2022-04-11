@@ -14,11 +14,8 @@
                 <t t-foreach="docs" t-as="doc">
                     <style type="text/css">
                         body {margin-top: 0px;margin-left: 0px;}
-
                         #page_1 {position:relative; overflow: hidden;margin: 168px 0px 118px 49px;padding: 0px;border:
                         none;width: 724px;}
-
-
                         .ft0{font: 1px 'Calibri';line-height: 1px;}
                         .ft1{font: 25px 'Calibri Light';line-height: 31px;}
                         .ft2{font: 1px 'Calibri';line-height: 12px;}
@@ -37,9 +34,9 @@
                         .ft15{font: 14px 'Calibri';line-height: 16px;}
                         .ft16{font: bold 14px 'Calibri';color: #44546a;line-height: 16px;}
                         .ft17{font: bold 13px 'Verdana';line-height: 16px;}
-                        .ft18{font: 12px 'Trebuchet MS';text-decoration: underline;line-height: 17px;}
+                        .ft18{font: 12px 'trebuchet MS';text-decoration: underline;line-height: 17px;}
                         .ft19{font: bold 14px 'Calibri';line-height: 17px;}
-                        .ft20{font: bold 12px 'Trebuchet MS';line-height: 17px;}
+                        .ft20{font: bold 12px 'trebuchet MS';line-height: 17px;}
                         .ft21{font: 1px 'Calibri';line-height: 7px;}
 
                         .p0{text-align: left;margin-top: 0px;margin-bottom: 0px;white-space: nowrap;}
@@ -159,766 +156,738 @@
                     </style>
 
 
-                    <DIV id="page_1">
+                    <div >
 
 
-                        <TABLE style="width: 100%; max-width: 600px;" cellpadding="0" cellspacing="0" class="t0">
-                            <TR>
-                                <TD class="tr0 td0">
+                        <table style="width: 100%; " cellpadding="0" cellspacing="0" class="t0">
+                            <tr>
+                                <td class="tr0 td0">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr0 td1">
+                                </td>
+                                <td class="tr0 td1">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr0 td2">
+                                </td>
+                                <td class="tr0 td2">
                                     <P class="p1 ft1">
                                         <span t-esc="doc.number"/>
                                     </P>
-                                </TD>
-                                <TD class="tr0 td3">
+                                </td>
+                                <td class="tr0 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <!--	<TD class="tr0 td4"><P class="p1 ft1"><NOBR>32-2020</NOBR></P></TD>-->
-                            </TR>
-                            <TR>
-                                <TD class="tr1 td5">
+                                </td>
+                                <!--	<td class="tr0 td4"><P class="p1 ft1"><NOBR>32-2020</NOBR></P></td>-->
+                            </tr>
+                            <tr>
+                                <td class="tr1 td5">
                                     <P class="p0 ft2"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr1 td6">
+                                </td>
+                                <td class="tr1 td6">
                                     <P class="p0 ft2"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr1 td7">
+                                </td>
+                                <td class="tr1 td7">
                                     <P class="p0 ft2"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr1 td8">
+                                </td>
+                                <td class="tr1 td8">
                                     <P class="p0 ft2"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr1 td9">
+                                </td>
+                                <td class="tr1 td9">
                                     <P class="p0 ft2"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td0">
                                     <P class="p2 ft3">BILL TO :-</P>
-                                </TD>
-                                <TD class="tr2 td1">
+                                </td>
+                                <td class="tr2 td1">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td2">
+                                </td>
+                                <td class="tr2 td2">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td3">
+                                </td>
+                                <td class="tr2 td3">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td4">
+                                </td>
+                                <td class="tr2 td4">
                                     <!--                                    <P class="p3 ft3">-->
                                     <NOBR>
                                         <span t-esc="doc.date_due"/>
                                     </NOBR>
                                     <!--                                    </P>-->
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD colspan="2" class="tr3 td10">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="tr3 td10">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td7">
+                                </td>
+                                <td class="tr3 td7">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td8">
+                                </td>
+                                <td class="tr3 td8">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td9">
+                                </td>
+                                <td class="tr3 td9">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD colspan="2" class="tr2 td11">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="tr2 td11">
                                     <P class="p2 ft6">
                                         <span t-esc="doc.partner_id.name"/>
                                     </P>
-                                </TD>
-                                <TD class="tr2 td2">
+                                </td>
+                                <td class="tr2 td2">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td3">
+                                </td>
+                                <td class="tr2 td3">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td4">
+                                </td>
+                                <td class="tr2 td4">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr4 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr4 td0">
                                     <P class="p2 ft7">
                                         <span t-esc="doc.partner_id.street"/>
                                     </P>
-                                </TD>
-                                <TD class="tr4 td1">
+                                </td>
+                                <td class="tr4 td1">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr4 td2">
+                                </td>
+                                <td class="tr4 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr4 td3">
+                                </td>
+                                <td class="tr4 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr4 td4">
+                                </td>
+                                <td class="tr4 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD colspan="2" class="tr5 td11">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="tr5 td11">
                                     <P class="p4 ft7">
                                         <span t-esc="doc.partner_id.city"/>
                                     </P>
-                                </TD>
-                                <TD class="tr5 td2">
+                                </td>
+                                <td class="tr5 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr5 td3">
+                                </td>
+                                <td class="tr5 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr5 td4">
+                                </td>
+                                <td class="tr5 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr5 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr5 td0">
                                     <P class="p4 ft7">
                                         <span t-esc="doc.partner_id.country_id.name"/>
                                     </P>
-                                </TD>
-                                <TD class="tr5 td1">
+                                </td>
+                                <td class="tr5 td1">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr5 td2">
+                                </td>
+                                <td class="tr5 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr5 td3">
+                                </td>
+                                <td class="tr5 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr5 td4">
+                                </td>
+                                <td class="tr5 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr6 td12">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr6 td12">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td13">
+                                </td>
+                                <td class="tr6 td13">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td14">
+                                </td>
+                                <td class="tr6 td14">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td15">
+                                </td>
+                                <td class="tr6 td15">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td16">
+                                </td>
+                                <td class="tr6 td16">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr7 td5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr7 td5">
                                     <P class="p5 ft9">QUANTITY</P>
-                                </TD>
-                                <TD class="tr7 td6"  style="width: 20px;">
+                                </td>
+                                <td class="tr7 td6"  style="width: 20px;">
                                     <pr class="p6 ft9">DESCRIPTION OF GOODS</pr>
-                                </TD>
-                                <TD class="tr7 td7">
+                                </td>
+                                <td class="tr7 td7">
                                     <P class="p7 ft9">UNIT PRICE</P>
-                                </TD>
-                                <TD class="tr7 td8">
+                                </td>
+                                <td class="tr7 td8">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr7 td9">
+                                </td>
+                                <td class="tr7 td9">
                                     <P class="p8 ft9">TOTAL</P>
-                                </TD>
-                            </TR>
+                                </td>
+                            </tr>
                             <t-set count="1"/>
 
-                            <TR t-foreach="doc.invoice_line_ids" t-as="line">
+                            <tr t-foreach="doc.invoice_line_ids" t-as="line">
 
-                                <TD class="tr4 td17">
+                                <td class="tr4 td17">
                                     <P class="p9 ft10">
                                         <span t-esc="line.quantity"/>
                                     </P>
-                                </TD>
-                                <!--                                <TD class="tr4 td18">-->
-                                <TD class="tr4 td17" style="width: 25px;" name="account_invoice_line_name">
+                                </td>
+                                <!--                                <td class="tr4 td18">-->
+                                <td class="tr4 td17" style="width: 25px;" name="account_invoice_line_name">
                                     <span class="ft10 " style="width: 25px;" t-field="line.name"/>
-                                </TD>
-                                <!--                                </TD>-->
-                                <TD class="tr4 td19">
+                                </td>
+                                <!--                                </td>-->
+                                <td class="tr4 td19">
                                     <P class="p7 ft10">
                                         <span t-esc="line.price_unit"/>
                                     </P>
-                                </TD>
-                                <TD class="tr4 td20">
+                                </td>
+                                <td class="tr4 td20">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr4 td21">
-                                    <P class="p11 ft10">
+                                </td>
+                                <td >
+                                    <p class="p11 ft10">
                                         <span t-esc="line.price_subtotal"/>
-                                    </P>
-                                </TD>
-                                <TR>
-                                    <TD class="tr8 td0">
+                                    </p>
+                                </td>
+                                <tr>
+                                    <td class="tr8 td0">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr8 td1">
+                                    </td>
+                                    <td class="tr8 td1">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr8 td2">
+                                    </td>
+                                    <td class="tr8 td2">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr8 td3">
+                                    </td>
+                                    <td class="tr8 td3">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr8 td4">
+                                    </td>
+                                    <td class="tr8 td4">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                </TR>
-                            </TR>
+                                    </td>
+                                </tr>
+                            </tr>
 
 
-                            <TR>
-                                <TD class="tr12 td27">
+                            <tr>
+                                <td class="tr12 td27">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td28">
+                                </td>
+                                <td class="tr12 td28">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td29">
+                                </td>
+                                <td class="tr12 td29">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td30">
+                                </td>
+                                <td class="tr12 td30">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td31">
+                                </td>
+                                <td class="tr12 td31">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr12 td17">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr12 td17">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td18">
+                                </td>
+                                <td class="tr12 td18">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td19">
+                                </td>
+                                <td class="tr12 td19">
                                     <P class="p7 ft12">SUBTOTALS</P>
-                                </TD>
-                                <TD class="tr12 td20">
+                                </td>
+                                <td class="tr12 td20">
                                     <P class="p12 ft12">
                                         <span t-esc="doc.currency_id.symbol"
                                         />
                                     </P>
-                                </TD>
-                                <TD class="tr12 td21">
+                                </td>
+                                <td class="tr12 td21">
                                     <P class="p13 ft13">
                                         <span t-esc="doc.amount_untaxed"/>
                                     </P>
-                                </TD>
-                            </TR>
+                                </td>
+                            </tr>
 
-                            <TR>
-                                <TD class="tr12 td27">
+                            <tr>
+                                <td class="tr12 td27">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td28">
+                                </td>
+                                <td class="tr12 td28">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td29">
+                                </td>
+                                <td class="tr12 td29">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td30">
+                                </td>
+                                <td class="tr12 td30">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td31">
+                                </td>
+                                <td class="tr12 td31">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr12 td17">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr12 td17">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td18">
+                                </td>
+                                <td class="tr12 td18">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr12 td19">
+                                </td>
+                                <td class="tr12 td19">
                                     <P class="p7 ft12">Discount</P>
-                                </TD>
-                                <TD class="tr12 td20">
+                                </td>
+                                <td class="tr12 td20">
                                     <P class="p12 ft12">
                                         <span t-esc="doc.currency_id.symbol"
                                         />
                                     </P>
-                                </TD>
-                                <TD class="tr12 td21">
+                                </td>
+                                <td class="tr12 td21">
                                     <P class="p13 ft13">
                                         <span t-esc="doc.ks_amount_discount"/>
                                     </P>
-                                </TD>
-                            </TR>
-                            <T t-foreach="doc.amount_by_group" t-as="amount_by_group">
-                                <TR>
-                                    <TD class="tr12 td27">
+                                </td>
+                            </tr>
+                            <t t-foreach="doc.amount_by_group" t-as="amount_by_group">
+                                <tr>
+                                    <td class="tr12 td27">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr12 td28">
+                                    </td>
+                                    <td class="tr12 td28">
                                         <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr12 td29">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr12 td30">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr12 td31">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                </TR>
-                                <TR>
-                                    <TD class="tr12 td17">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr12 td18">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr12 td19">
-                                        <P class="p7 ft12">SUBTOTALS</P>
-                                    </TD>
-                                    <TD class="tr12 td20">
-                                        <P class="p12 ft12">
+                                    </td>
+                                    <td class="tr12 td29">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr12 td30">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr12 td31">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tr12 td17">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr12 td18">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr12 td19">
+                                        <p class="p7 ft12">SUBTOTALS</p>
+                                    </td>
+                                    <td class="tr12 td20">
+                                        <p class="p12 ft12">
                                             <span t-esc="doc.currency_id.symbol"
                                             />
-                                        </P>
-                                    </TD>
-                                    <TD class="tr12 td21">
-                                        <P class="p13 ft13">
+                                        </p>
+                                    </td>
+                                    <td class="tr12 td21">
+                                        <p class="p13 ft13">
                                             <span t-esc="doc.amount_untaxed"/>
-                                        </P>
-                                    </TD>
-                                </TR>
-                            </T>
-                            <T t-foreach="doc.amount_by_group" t-as="amount_by_group">
-                                <TR>
-                                    <TD class="tr11 td33">
-                                        <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr11 td34">
-                                        <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr11 td35">
-                                        <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr11 td36">
-                                        <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr11 td37">
-                                        <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                </TR>
-                                <TR>
-                                    <TD>
-                                        <TD class="tr12 td17">
-                                            <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                        </TD>
-                                        <TD class="tr12 td18">
-                                            <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                        </TD>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                            <t t-foreach="doc.amount_by_group" t-as="amount_by_group">
+                                <tr>
+                                    <td class="tr11 td33">
+                                        <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr11 td34">
+                                        <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr11 td35">
+                                        <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr11 td36">
+                                        <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr11 td37">
+                                        <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <td class="tr12 td17">
+                                            <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                        </td>
+                                        <td class="tr12 td18">
+                                            <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                        </td>
                                         <span t-esc="amount_by_group[0]"/>
-                                        <TD class="tr12 td21">
-                                            <P class="p13 ft13">
+                                        <td class="tr12 td21">
+                                            <p class="p13 ft13">
                                                 <span>&amp;nbsp;
                                                     <span>ON</span>
                                                     <t t-esc="amount_by_group[4]"/>
                                                 </span>
-                                            </P>
-                                        </TD>
-                                    </TD>
-                                    <TD class="tr10 td0">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr10 td1">
-                                        <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                    </TD>
-                                    <TD class="tr10 td4">
-                                        <P class="p13 ft13">
+                                            </p>
+                                        </td>
+                                    </td>
+                                    <td class="tr10 td0">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr10 td1">
+                                        <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                    </td>
+                                    <td class="tr10 td4">
+                                        <p class="p13 ft13">
                                             <span t-esc="amount_by_group[3]"/>
-                                        </P>
-                                    </TD>
-                                </TR>
-                            </T>
-
-                            <!--<TR>-->
-                            <!--	<TD class="tr4 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr4 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr4 td2"><P class="p7 ft13">ADVANCED PAYMENT</P></TD>-->
-                            <!--	<TD class="tr4 td3"><P class="p14 ft12">$</P></TD>-->
-                            <!--	<TD class="tr4 td4"><P class="p13 ft13">48,084.93</P></TD>-->
-                            <!--</TR>-->
-                            <!--<TR>-->
-                            <!--	<TD class="tr8 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD colspan="2" class="tr8 td32"><P class="p7 ft12">Balance Amount contract 18</P></TD>-->
-                            <!--	<TD class="tr8 td3"><P class="p14 ft12">$</P></TD>-->
-                            <!--	<TD class="tr8 td4"><P class="p13 ft13">23,905.83</P></TD>-->
-                            <!--</TR>-->
-                            <!--<TR>-->
-                            <!--	<TD class="tr11 td33"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr11 td34"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr11 td35"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr11 td36"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr11 td37"><P class="p0 ft11"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--</TR>-->
-                            <!--<TR>-->
-                            <!--	<TD class="tr10 td0"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr10 td1"><P class="p0 ft0"><![CDATA[&nbsp;]]></P></TD>-->
-                            <!--	<TD class="tr10 td2"><P class="p7 ft12">USD TOTAL</P></TD>-->
-                            <!--	<TD class="tr10 td3"><P class="p12 ft12">$</P></TD>-->
-                            <!--	<TD class="tr10 td4"><P class="p13 ft13"><span t-esc="doc.amount_total"/></P></TD>-->
-                            <!--</TR>-->
-                            <TR>
-                                <TD class="tr11 td33">
+                                        </p>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td class="tr11 td33">
+                                    <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                </td>
+                                <td class="tr11 td34">
+                                    <p class="p0 ft11"><![CDATA[&nbsp;]]></p>
+                                </td>
+                                <td class="tr11 td35">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td34">
+                                </td>
+                                <td class="tr11 td36">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td35">
+                                </td>
+                                <td class="tr11 td37">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td36">
-                                    <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td37">
-                                    <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr10 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr10 td0">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr10 td1">
+                                </td>
+                                <td class="tr10 td1">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr10 td2">
+                                </td>
+                                <td class="tr10 td2">
                                     <P class="p7 ft12">Advance Payment</P>
-                                </TD>
-                                <TD class="tr10 td3">
+                                </td>
+                                <td class="tr10 td3">
                                     <P class="p12 ft12">
                                         <span t-esc="doc.currency_id.symbol"
                                         />
                                     </P>
-                                </TD>
+                                </td>
                                 <t t-set="total_before" t-value="doc.amount_total"/>
                                 <t t-set="total_after" t-value="doc.residual"/>
                                 <t t-set="paid_amount" t-value="total_before - total_after"/>
-                                <TD class="tr10 td4">
+                                <td class="tr10 td4">
                                     <P class="p13 ft13">
                                         <span t-esc="paid_amount"/>
                                     </P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr11 td33">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr11 td33">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td34">
+                                </td>
+                                <td class="tr11 td34">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td35">
+                                </td>
+                                <td class="tr11 td35">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td36">
+                                </td>
+                                <td class="tr11 td36">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr11 td37">
+                                </td>
+                                <td class="tr11 td37">
                                     <P class="p0 ft11"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr10 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr10 td0">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr10 td1">
+                                </td>
+                                <td class="tr10 td1">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr10 td2">
+                                </td>
+                                <td class="tr10 td2">
                                     <P class="p7 ft12">Total Amount</P>
-                                </TD>
-                                <TD class="tr10 td3">
+                                </td>
+                                <td class="tr10 td3">
                                     <P class="p12 ft12">
                                         <span t-esc="doc.currency_id.symbol"
                                         />
                                     </P>
-                                </TD>
-                                <TD class="tr10 td4">
+                                </td>
+                                <td class="tr10 td4">
                                     <P class="p13 ft13">
                                         <span t-esc="doc.residual"/>
                                     </P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr6 td5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr6 td5">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td6">
+                                </td>
+                                <td class="tr6 td6">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td7">
+                                </td>
+                                <td class="tr6 td7">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td8">
+                                </td>
+                                <td class="tr6 td8">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr6 td9">
+                                </td>
+                                <td class="tr6 td9">
                                     <P class="p0 ft8"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr10 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr10 td0">
                                     <P class="p2 ft14">BL No.</P>
-                                </TD>
-                                <TD class="tr10 td1">
+                                </td>
+                                <td class="tr10 td1">
                                     <P class="p15 ft12">
                                         <span t-esc="doc.bl_no"/>
                                     </P>
-                                </TD>
-                                <TD class="tr10 td2">
+                                </td>
+                                <td class="tr10 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr10 td3">
+                                </td>
+                                <td class="tr10 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr10 td4">
+                                </td>
+                                <td class="tr10 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr8 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr8 td0">
                                     <P class="p2 ft15">SHIP DATE</P>
-                                </TD>
-                                <TD class="tr8 td1">
+                                </td>
+                                <td class="tr8 td1">
                                     <P class="p15 ft16">
                                         <NOBR>
                                             <span t-esc="doc.ship_date"/>
                                         </NOBR>
                                     </P>
-                                </TD>
-                                <TD class="tr8 td2">
+                                </td>
+                                <td class="tr8 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr8 td3">
+                                </td>
+                                <td class="tr8 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr8 td4">
+                                </td>
+                                <td class="tr8 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr8 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr8 td0">
                                     <P class="p2 ft14">SHIP VIA</P>
-                                </TD>
-                                <TD class="tr8 td1">
+                                </td>
+                                <td class="tr8 td1">
                                     <P class="p15 ft12">
                                         <span t-esc="doc.ship_via"/>
                                     </P>
-                                </TD>
-                                <TD class="tr8 td2">
+                                </td>
+                                <td class="tr8 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr8 td3">
+                                </td>
+                                <td class="tr8 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr8 td4">
+                                </td>
+                                <td class="tr8 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr13 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr13 td0">
                                     <P class="p2 ft14">PORT OF LOADING</P>
-                                </TD>
-                                <TD class="tr13 td1">
+                                </td>
+                                <td class="tr13 td1">
                                     <P class="p15 ft12">
                                         <span t-esc="doc.pol.name"/>
                                     </P>
-                                </TD>
-                                <TD class="tr13 td2">
+                                </td>
+                                <td class="tr13 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr13 td3">
+                                </td>
+                                <td class="tr13 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr13 td4">
+                                </td>
+                                <td class="tr13 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr8 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr8 td0">
                                     <P class="p2 ft14">PORT OF DISCHARGE</P>
-                                </TD>
-                                <TD class="tr8 td1">
+                                </td>
+                                <td class="tr8 td1">
                                     <P class="p15 ft12">
                                         <span t-esc="doc.pod.name"/>
                                     </P>
-                                </TD>
-                                <TD class="tr8 td2">
+                                </td>
+                                <td class="tr8 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr8 td3">
+                                </td>
+                                <td class="tr8 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr8 td4">
+                                </td>
+                                <td class="tr8 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr13 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr13 td0">
                                     <P class="p2 ft14">Vessel Voyage No.</P>
-                                </TD>
-                                <TD class="tr13 td1">
+                                </td>
+                                <td class="tr13 td1">
                                     <br>
                                         <span t-esc="doc.vessel_voyage_no"/>
                                     </br>
-                                </TD>
-                                <TD class="tr13 td2">
+                                </td>
+                                <td class="tr13 td2">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr13 td3">
+                                </td>
+                                <td class="tr13 td3">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr13 td4">
+                                </td>
+                                <td class="tr13 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr3 td5">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr3 td5">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td6">
+                                </td>
+                                <td class="tr3 td6">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td7">
+                                </td>
+                                <td class="tr3 td7">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td8">
+                                </td>
+                                <td class="tr3 td8">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr3 td9">
+                                </td>
+                                <td class="tr3 td9">
                                     <P class="p0 ft5"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td0">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td0">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td1">
+                                </td>
+                                <td class="tr2 td1">
                                     <P class="p16 ft17">Thank You For Your Business!</P>
-                                </TD>
-                                <TD class="tr2 td2">
+                                </td>
+                                <td class="tr2 td2">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td3">
+                                </td>
+                                <td class="tr2 td3">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                                <TD class="tr2 td4">
+                                </td>
+                                <td class="tr2 td4">
                                     <P class="p0 ft4"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                        </TABLE>
-                        <TABLE style="width: 40%; max-width: 40%;" cellpadding="0" cellspacing="0" class="t1">
-                            <TR>
-                                <TD class="tr2 td4">
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width: 40%; " cellpadding="0" cellspacing="0" class="t1">
+                            <tr>
+                                <td class="tr2 td4">
                                     <P class="p0 ft18">Make all payable to</P>
-                                </TD>
-                                <TD class="tr2 td4">
+                                </td>
+                                <td class="tr2 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD rowspan="2" class="tr2 td4">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2" class="tr2 td4">
                                     <P class="p0 ft19">Bank account details</P>
-                                </TD>
-                                <TD class="tr10 td39">
+                                </td>
+                                <td class="tr10 td39">
                                     <P class="p0 ft20">EL WAHA MINING FERTILIZERS</P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td4">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td4">
                                     <P class="p0 ft21"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td4">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td4">
                                     <P class="p0 ft19">Bank Name:
                                         <span t-esc="doc.partner_bank_id.bank_id.name"/>
                                     </P>
-                                </TD>
-                                <TD class="tr2 td4">
+                                </td>
+                                <td class="tr2 td4">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td4">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td4">
                                     <P class="p0 ft19">Branch:
                                         <span t-esc="doc.partner_bank_id.branch"/>
                                     </P>
-                                </TD>
-                                <TD class="tr10 td39">
+                                </td>
+                                <td class="tr10 td39">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td4">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td4">
                                     <P class="p0 ft19">Account Name:
                                         <span t-esc="doc.partner_bank_id.acc_holder_name"/>
                                     </P>
-                                </TD>
-                                <TD class="tr10 td39">
+                                </td>
+                                <td class="tr10 td39">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td4">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td4">
                                     <P class="p0 ft19">IBAN. :
                                         <NOBR>
                                             <span t-esc="doc.partner_bank_id.acc_number"/>
                                         </NOBR>
                                     </P>
-                                </TD>
-                                <TD class="tr10 td39">
+                                </td>
+                                <td class="tr10 td39">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr2 td4">
-                                    <P class="p0 ft19">Account No. :
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr2 td4">
+                                    <p class="p0 ft19">Account No. :
                                         <NOBR>
                                             <span t-esc="doc.partner_bank_id.account_no"/>
                                         </NOBR>
-                                    </P>
-                                </TD>
-                                <TD class="tr10 td39">
-                                    <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD class="tr5 td38">
+                                    </p>
+                                </td>
+                                <td class="tr10 td39">
+                                    <p class="p0 ft0"><![CDATA[&nbsp;]]></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr5 td38">
                                     <P class="p0 ft19">Swift Code :
                                         <span t-esc="doc.partner_bank_id.bank_id.bic"/>
                                     </P>
-                                </TD>
-                                <TD class="tr5 td39">
+                                </td>
+                                <td class="tr5 td39">
                                     <P class="p0 ft0"><![CDATA[&nbsp;]]></P>
-                                </TD>
-                            </TR>
-                        </TABLE>
+                                </td>
+                            </tr>
+                        </table>
 
 
-                    </DIV>
+                    </div>
                 </t>
             </t>
         </template>

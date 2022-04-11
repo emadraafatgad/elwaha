@@ -13,10 +13,10 @@ class DeliveryPLan(models.Model):
     origin = fields.Char("Contract Ref",track_visibility="onchange")
     state = fields.Selection([('new', 'New'), ('shipment', 'Completed')], string="status", default='new',
                              track_visibility="onchange")
-    partner_id = fields.Many2one('res.partner', string='Client', readonly=True, required=True,
+    partner_id = fields.Many2one('res.partner', ondelete='restrict',string='Client', readonly=True, required=True,
                                  track_visibility="onchange", domain=[('partner_type', '=', 'client')])
     # product_id = fields.Many2many('product.product', string='Commodity', required=True)
-    shipment_company = fields.Many2one('res.partner', readonly=True, string="Forwarder",
+    shipment_company = fields.Many2one('res.partner',ondelete='restrict', readonly=True, string="Forwarder",
                                        domain=[('partner_type', '=', 'forwarder')])
     line_ids = fields.One2many('operation.order', 'shipment_plan')
     qty_done = fields.Float(readonly=True)
@@ -118,8 +118,8 @@ class DeliveryPlanLine(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')
     price_unit = fields.Monetary(string="Unit Rate", currency_field='currency_id',required=True)
     delivery_date = fields.Many2one('estimated.date', string="ETD", required=True)
-    from_port = fields.Many2one('container.port', string='POL', required=True)
-    to_port = fields.Many2one('container.port', string='POD', required=True)
+    from_port = fields.Many2one('container.port',ondelete='restrict', string='POL', required=True)
+    to_port = fields.Many2one('container.port',ondelete='restrict', string='POD', required=True)
     packing = fields.Many2one('product.packing', string='Packing', required=True)
     contract_id = fields.Many2one('sale.order')
     contract_line_id = fields.Many2one('sale.order.line')
