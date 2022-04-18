@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+        <record id="doctor_price_list_line_action" model="ir.actions.act_window">
+            <field name="name">DR Service Percentage</field>
+            <field name="res_model">doctor.price.list.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="doctor_price_list_line_tree">
+            <field name="name">doctor.price.list.tree</field>
+            <field name="model">doctor.price.list.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Config">
+                    <field name="service_id"/>
+                    <field name="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="doctor_price_list_line_form">
+            <field name="name">doctor.price.list.form</field>
+            <field name="model">doctor.price.list.line</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group>
+                                <field name="service_id"/>
+                                <field name="percentage"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+        <record id="doctor_price_list_action" model="ir.actions.act_window">
+            <field name="name">DR doctor.price.list.line</field>
+            <field name="res_model">doctor.price.list</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="doctor_price_list_tree">
+            <field name="name">doctor.amount.tree</field>
+            <field name="model">doctor.price.list</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Config">
+                    <field name="clinic"/>
+                    <field name="price_list_line"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="doctor_price_list_form">
+            <field name="name">doctor.price.list.line.form</field>
+            <field name="model">doctor.price.list</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group col="4">
+                                <field name="clinic"/>
+                                <field name="price_list_line"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+        <menuitem id="dr_price_id" parent="oeh_medical_physician_data_tree" name="DR Charge Config"/>
+        <menuitem id="doctor_price_list_line_id"  action="doctor_price_list_line_action" name = "Charge Line" parent="dr_price_id" sequence="1"/>
+        <menuitem id="doctor_price_list_id"  action="doctor_price_list_action" name = "daily charge" parent="dr_price_id" sequence="2"/>
+
+
+    </data>
+</odoo>

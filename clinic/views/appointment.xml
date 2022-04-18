@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016-2017 LasLabs Inc.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="seq_oeh_medical_appointment" model="ir.sequence">
+        <field name="name">Appointments</field>
+        <field name="code">oeh.medical.appointment</field>
+        <field name="prefix">AP</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="oeh_medical_appointment_action_tree" model="ir.actions.act_window">
+            <field name="name">Appointments</field>
+            <field name="res_model">oeh.medical.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+            <field name="domain">[]</field>
+            <field name="context"></field>
+            <field name="context">{"search_default_next_today":1}</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new appointment.
+              </p><p>
+                oeHealth appointment screen can easily find all of your appointment details;
+              </p>
+            </field>
+    </record>
+
+    <record id="oeh_clinic_appointment_action_tree" model="ir.actions.act_window">
+            <field name="name">Appointments</field>
+            <field name="res_model">oeh.medical.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+            <field name="domain">[]</field>
+            <field name="context"></field>
+            <field name="context"></field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new appointment.
+              </p><p>
+                oeHealth appointment screen can easily find all of your appointment details;
+              </p>
+            </field>
+    </record>
+
+    <record id="oeh_beauty_appointment_action_tree" model="ir.actions.act_window">
+            <field name="name">Appointments</field>
+            <field name="res_model">oeh.medical.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+            <field name="domain">[('clinic_type','=',"beauty")]</field>
+            <field name="context">{"search_default_next_today":1,"default_clinic_type":"beauty"}</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new appointment.
+                </p>
+                <p>
+                    appointment screen can easily find all of your beauty appointment details;
+              </p>
+            </field>
+    </record>
+
+    <record id="oeh_nutrition_appointment_action_tree" model="ir.actions.act_window">
+            <field name="name">Appointments</field>
+            <field name="res_model">oeh.medical.appointment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+            <field name="domain">[('clinic_type','=',"nutrition")]</field>
+            <field name="context">{"search_default_next_today":1,"default_clinic_type":'nutrition'}</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new nutrition appointment.
+              </p><p>
+                 appointment screen can easily find all of your appointment details;
+              </p>
+            </field>
+    </record>
+
+
+    <record id="view_oeh_medical_appointment_filter" model="ir.ui.view">
+        <field name="name">Appointment Search</field>
+        <field name="model">oeh.medical.appointment</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Search Appointments">
+                <separator orientation="vertical"/>
+                    <field name="name" select="1"/>
+                    <field name="patient" string="Patient" select="1"/>
+                    <field name="clinic" string="clinic" select="1"/>
+                    <field name="stage_id" domain="[]"/>
+                    <field name="clinic_type" string="beauty/nutrition"/>
+                    <field name="app_type" string="From ?"/>
+                <newline/>
+                <group expand="1" string="Group By">
+                    <filter string="Today Appointments" name="today"
+                        domain="[('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Next" name="next" domain="[('state','not in', ('Completed','Canceled'))]"/>
+                    <filter string="Today" name="today" domain="[('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Today" name="next_today" domain="[('state','not in', ('Completed','Canceled')),('appointment_date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <filter string="Patient" name="patient" context="{'group_by':'patient'}"/>
+                    <filter string="Source" name="source" context="{'group_by':'app_source'}"/>
+                    <filter string="Clinic " name="clinic_type" context="{'group_by':'clinic_type'}"/>
+                    <filter string="Type" name="type" context="{'group_by':'app_type'}"/>
+                    <filter name="stage" string="Stage" context="{'group_by':'stage_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="oeh_medical_appointment_view">
+        <field name="name">Appointments</field>
+        <field name="model">oeh.medical.appointment</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+        <form string="Appointment">
+            <header>
+                <button  name="set_arrived_state"  string="Arrived" states="Scheduled" type="object" class="oe_highlight" />
+                <button  name="set_to_completed"  string="Completed" states="Invoiced" type="object" class="oe_highlight" />
+                <button  name="action_appointment_invoice_create" states="Arrived" string="Invoice" type="object" class="oe_highlight" />
+                <button  name="set_to_cancel" string="Cancel" states="Draft,Arrived" type="object" class="btn-default" />
+<!--                <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>-->
+                <field name="state" widget="statusbar" statusbar_visible="Scheduled,Arrived,Invoiced,Completed,Canceled" statusbar_colors='{"Scheduled":"blue","Completed":"green","Invoiced":"grey"}'/>
+            </header>
+            <sheet>
+                <div class="oe_button_box" name="buttons">
+                    <button type="action" class="oe_stat_button" name="%(oeh_clinic_appointment_action_tree)d" context="{'search_default_patient': patient,'default_patient': patient}" icon="fa-calendar">
+                        <field string="Appointments" name="app_count" widget="statinfo"/>
+                    </button>
+                    <button type="action" class="oe_stat_button" id="appointment_invoice" name="%(account.action_invoice_tree1)d" context="{'search_default_patient': patient,'default_patient': patient}" icon="fa-pencil-square-o">
+                        <field string="Invoices" name="invoice_count" widget="statinfo"/>
+                    </button>
+                </div>
+                <div class="oe_left" style="width: 500px;">
+                    <div class="oe_title" >
+                        <label class="oe_edit_only" for="patient"/>
+                        <h1><field name="patient" class="oe_inline" /></h1>
+                        <h5><field name="name" class="oe_inline" readonly="1"/></h5>
+                    </div>
+                </div>
+                <group>
+                    <group>
+                        <field name="appointment_date"/>
+                        <field name="app_type"/>
+                        <field name="app_source"/>
+                        <field name="clinic_type" invisible="1"/>
+                        <field name="queue"/>
+                        <!--                        <field name="appointment_day"/>-->
+                    </group>
+                    <group>
+                        <field name="doctor" options="{'no_create': True}"/>
+                        <field name="assist_doctor" options="{'no_create': True}"/>
+                        <field name="discount"/>
+                        <field name="app_amount"/>
+                        <field name="clinic" options="{'no_create': True}" invisible="1"/>
+                        <field name="state" invisible="1"/>
+                        <field name="arrive_time" invisible="1"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Evaluation History" >
+                        <field name="evaluation_name_ids" context="{'default_patient_id': patient, 'patient_id' : patient}" >
+                            <tree editable="top">
+                                <field name="patient_id" invisible="1"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Evaluation" >
+                        <field name="evaluation_ids"  context="{'default_patient_id': patient, 'patient_id' :patient}" >
+                            <form string="Evaluation">
+                                <group colspan="12">
+                                    <group>
+                                        <field name="patient_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="doctor_id"/>
+                                        <field name="eval_date"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Evaluation">
+                                        <field name="evaluation_name_ids"  >
+                                            <tree editable="bottom">
+                                                <field name="patient_id" invisible="1"/>
+                                                <field name="name"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </form>
+                               <tree string="Evaluation " >
+<!--                                    <field name="name"/>-->
+                                    <field name="patient_id" />
+                                    <field name="service_id" invisible="1"/>
+                                    <field name="appointment_id" invisible="1" />
+                                    <field name="doctor_id" />
+                                    <field name="eval_date"/>
+                                </tree>
+                        </field>
+                    </page>
+
+                    <page string="Prescriptions">
+                        <field name="prescription_ids" context="{'default_patient_id': patient, 'patient_id' : patient}">
+                            <form string="Prescriptions">
+                                <group colspan="12">
+                                    <field name="patient_id"/>
+                                    <field name="doctor_id"/>
+                                    <field name="prescription_date"/>
+                                </group>
+                                <notebook>
+                                    <page string="Prescription Details">
+                                        <field name="prescription_line_ids" readonly="0">
+                                            <tree editable="bottom">
+                                                <field name="medicine_id" />
+                                                <field name="form"/>
+                                                <field name="qty"/>
+                                                <field name="dose"/>
+                                                <field name="frequency"/>
+                                                <field name="days"/>
+                                                <field name="note"/>
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </form>
+                            <tree >
+<!--                                <field name="name"/>-->
+                                <field name="patient_id" />
+                                <field name="service_id" invisible="1"/>
+                                <field name="appointment_id" invisible="1" />
+                                <field name="doctor_id" />
+                                <field name="prescription_date"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Session">
+                        <field name="service_ids" context="{'default_patient_id': patient, 'patient_id' : patient}"/>
+                    </page>
+                    <page string="Comments">
+                        <group colspan="12">
+                            <field name="comments" nolabel="1"/>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="oeh_medical_appointment_tree">
+        <field name="name">Appointment List</field>
+        <field name="model">oeh.medical.appointment</field>
+        <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Appointment Details" >
+                    <field name="name"/>
+                    <field name="patient"/>
+<!--                    decoration-info="state=='Arrived'" decoration-success="state=='Completed'" decoration-muted="state=='Canceled'" decoration-warning="state=='Invoiced'"-->
+                    <field name="doctor"/>
+                    <field name="appointment_date"/>
+<!--                    <field name="arrive_time"/>-->
+                    <field name='clinic' />
+                    <field name="app_type"/>
+                    <field name="app_source"/>
+                    <field name="queue"/>
+                    <field name="invoice_count"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+    </record>
+
+
+    <record id="quick_create_appointment_form" model="ir.ui.view">
+            <field name="name">oeh.medical.appointment.quick_create</field>
+            <field name="model">oeh.medical.appointment</field>
+            <field name="priority">1000</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="patient" widget="res_partner_many2one" />
+                        <field name="appointment_date" />
+                        <field name="doctor"/>
+                        <field name="app_source"/>
+                        <field name="clinic" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+    <record id="clinic_appointment_kanban_view_leads" model="ir.ui.view">
+            <field name="name">oeh.medical.appointment.lead</field>
+            <field name="model">oeh.medical.appointment</field>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <kanban default_group_by="stage_id" class="o_kanban_applicant o_opportunity_kanban" on_create="quick_create" quick_create_view="clinic.quick_create_appointment_form"
+                    archivable="false">
+                    <field name="stage_id" />
+                    <field name="patient"/>
+                    <field name="doctor"/>
+                    <field name="color"/>
+                    <field name="clinic"/>
+                    <field name="appointment_date" />
+                    <field name="app_source" />
+                     <field name="activity_ids" />
+                    <field name="activity_state"/>
+                    <progressbar field="activity_state" colors='{"planned": "success", "today": "warning", "overdue": "danger"}' sum_field="planned_revenue" help="This bar allows to filter the opportunities based on scheduled activities."/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                                <div class="o_dropdown_kanban dropdown">
+
+                                    <a class="dropdown-toggle o-no-caret btn" role="button" data-toggle="dropdown" href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                                        <span class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu" role="menu">
+                                        <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>
+                                        <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_image_fill_left d-none d-md-block">
+                                    <img t-att-src="kanban_image('oeh.medical.patient', 'image_medium', record.patient.raw_value)" t-att-title="record.patient.value" t-att-alt="record.patient.value" />
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <div class="o_kanban_record_top">
+                                        <div class="o_kanban_record_headings">
+                                            <strong class="o_kanban_record_title"><field name="patient"/></strong>
+                                        </div>
+                                    </div>
+                                        <div t-if="record.doctor.value">
+                                            <t t-esc="record.doctor.value"/>
+                                        </div>
+
+                                        <div t-if="record.appointment_date.value">
+                                            <t t-esc="record.appointment_date.value"/>
+                                        </div>
+                                        <div t-if="record.app_source.value">
+                                            <t t-esc="record.app_source.value"/>
+                                        </div>
+                                    </div>
+                            </div>
+<!--                                <div class="oe_clear"/>-->
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record id="patient_appoinetment_invoice_form" model="ir.ui.view">
+        <field name="name">account.appointment.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="priority" eval="8" />
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <field name="payment_term_id" position="before">
+                <field name="appointment_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <menuitem id="medical_root"
+          name="Sanad Clinic"
+          sequence="10"
+          web_icon="clinic,static/description/icon.png"
+          />
+
+    <menuitem id="oeh_medical_appointment_menu"  name = "Appointment" parent="medical_root" sequence="10"/>
+    <menuitem action="oeh_medical_appointment_action_tree" parent="oeh_medical_appointment_menu"  id="oeh_medical_appointment_list" sequence="2"/>
+<!--    <menuitem action="oeh_beauty_appointment_action_tree" name="Beauty Appointment" parent="oeh_medical_appointment_menu"  id="oeh_beauty_appointment_list" sequence="2"/>-->
+<!--    <menuitem action="oeh_nutrition_appointment_action_tree" name="Nutrition Appointment" parent="oeh_medical_appointment_menu"  id="oeh_nutrition_appointment_list" sequence="2"/>-->
+
+
+</odoo>

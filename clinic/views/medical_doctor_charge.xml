@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <record id="amount_for_doctor_line_action" model="ir.actions.act_window">
+            <field name="name">DR day by day amount</field>
+            <field name="res_model">amount.dr.percentage.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="amount_for_doctor_line_tree">
+            <field name="name">doctor.amount.tree</field>
+            <field name="model">amount.dr.percentage.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Config">
+                    <field name="doctor"/>
+                    <field name="work_date"/>
+                    <field name="service_id"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="amount_for_doctor_line_form">
+            <field name="name">doctor.amount.form</field>
+            <field name="model">amount.dr.percentage.line</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form>
+                        <sheet>
+                            <group col="4">
+                                <field name="doctor"/>
+                                <field name="work_date"/>
+                            </group>
+                            <group>
+                                <field name="service_id"/>
+                                <field name="amount"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+        <record id="amount_for_doctor_total_action" model="ir.actions.act_window">
+            <field name="name">DR day by day amount</field>
+            <field name="res_model">amount.dr.percentage</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="amount_for_doctor_total_tree">
+            <field name="name">doctor.amount.tree</field>
+            <field name="model">amount.dr.percentage</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Config">
+                    <field name="doctor"/>
+                    <field name="work_date"/>
+                    <field name="amount_total"/>
+                    <field name="minimum_amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="amount_for_doctor_total_form">
+            <field name="name">doctor.amount.form</field>
+            <field name="model">amount.dr.percentage</field>
+            <field name="type">form</field>
+                <field name="arch" type="xml">
+                    <form>
+                        <header>
+                            <button name="check_dr_min_charge" string="Pay" type="object" class="oe_highlight" />
+                        </header>
+                        <sheet>
+                            <group col="4">
+                                <field name="doctor"/>
+                                <field name="work_date"/>
+                            </group>
+                            <group>
+                                <field name="amount_total"/>
+                                <field name="minimum_amount"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+        <menuitem id="doctor_daily_payments_all"  action="amount_for_doctor_line_action" name = "Charge Line" parent="oeh_medical_physician_data_tree" sequence="1"/>
+        <menuitem id="doctor_daily_payments"  action="amount_for_doctor_total_action" name = "daily charge" parent="oeh_medical_physician_data_tree" sequence="2"/>
+
+
+    </data>
+</odoo>

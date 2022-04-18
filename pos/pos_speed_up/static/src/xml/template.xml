@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ChangeDetectorWidget">
+        <div class="oe_status js_synch">
+            <span class='jane_msg oe_hidden'>0</span>
+            <div class="jane_connected oe_icon oe_green">
+                <i class='fa fa-fw fa-refresh'></i>
+            </div>
+            <div class="jane_connecting oe_icon oe_hidden">
+                <i class='fa fa-fw fa-refresh fa-spin'></i>
+            </div>
+            <div class="jane_disconnected oe_icon oe_red oe_hidden">
+                <i class='fa fa-fw fa-refresh'></i>
+            </div>
+            <div class="jane_error oe_icon oe_red oe_hidden">
+                <i class='fa fa-fw fa-warning'></i>
+            </div>
+        </div>
+    </t>
+</templates>

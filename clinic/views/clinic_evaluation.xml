@@ -1,0 +1,103 @@
+<odoo>
+    <data>
+        <record id="seq_oeh_medical_evaluation" model="ir.sequence">
+            <field name="name">evaluation</field>
+            <field name="code">oeh.medical.evaluation</field>
+            <field name="prefix">EV</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="oeh_medical_evaluation_action_tree" model="ir.actions.act_window">
+            <field name="name">Evaluation</field>
+            <field name="res_model">oeh.medical.evaluation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_evaluation_tree">
+            <field name="name">evaluation.Tree</field>
+            <field name="model">oeh.medical.evaluation</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluation ">
+                    <field name="name"/>
+                    <field name="patient_id" />
+                    <field name="service_id" invisible="1"/>
+                    <field name="appointment_id" invisible="1" />
+                    <field name="doctor_id" invisible="1"/>
+                    <field name="eval_date"/>
+<!--                    <field name="evaluation"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="oeh_medical_evaluation_form">
+            <field name="name">evaluation.form</field>
+            <field name="model">oeh.medical.evaluation</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                         <div class="oe_left" style="width: 500px;">
+                            <div class="oe_title" style="width: 390px;">
+                                <label class="oe_edit_only" for="name" string="Evaluation #"/>
+                                <h5><field name="name" class="oe_inline" readonly="1"/></h5>
+                            </div>
+                        </div>
+                        <group colsapn="12">
+                            <group >
+                                <field name="patient_id"/>
+                                <field name="service_id" invisible="True"/>
+                                <field name="doctor_id"/>
+                            </group>
+                            <group>
+                                <field name="appointment_id" invisible="True"/>
+                                <field name="eval_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Evaluation">
+                                <field name="evaluation_name_ids">
+                                     <form string="Evaluation">
+                                        <field name="name"/>
+                                    </form>
+                                    <tree string="Evaluation" editable="top">
+                                        <field name="name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Note">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_oeh_medical_evaluation_filter" model="ir.ui.view">
+            <field name="name">evaluation Search</field>
+            <field name="model">oeh.medical.evaluation</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search evaluation">
+                    <separator orientation="vertical"/>
+                        <field name="patient_id" string="Patient" select="1"/>
+                    <newline/>
+                    <group expand="1" string="Group By">
+                        <filter string="Patient" name="patient" context="{'group_by':'patient_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <menuitem action="oeh_medical_evaluation_action_tree" name="Evaluations" parent="medical_patient_root"  id="oeh_medical_evaluation_view_menu" sequence="10"/>
+
+    </data>
+</odoo>

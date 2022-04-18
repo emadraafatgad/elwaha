@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016-2017 LasLabs Inc.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+
+
+    <record id="appointment_open_session_id" model="ir.ui.view">
+            <field name="name">Clinic appointment open Sessions</field>
+            <field name="model">oeh.medical.appointment</field>
+            <field name="inherit_id" ref="oeh_medical_appointment_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="before">
+<!--                    <button name="open_patient_session" string="Open Session" type="object" class="oe_highlight"/>-->
+                    <button name="open_specific_session" string="Open Session" type="object" class="btn btn-success"/>
+                </xpath>
+            </field>
+        </record>
+
+    <record id="oeh_beauty_appointment_session_action_tree" model="ir.actions.act_window">
+            <field name="name">Service</field>
+            <field name="res_model">oeh.medical.service</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="domain"></field>
+            <field name="context"></field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    open session
+                </p>
+                <p>
+              </p>
+            </field>
+    </record>
+
+</odoo>

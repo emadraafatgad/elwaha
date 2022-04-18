@@ -1,0 +1,126 @@
+
+<data>
+
+    <record id="oeh_medical_service_line_action_tree" model="ir.actions.act_window">
+        <field name="name">Sessions List</field>
+        <field name="res_model">oeh.medical.service.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.view" id="oeh_medical_service_line_tree">
+        <field name="name">Sessions List</field>
+        <field name="model">oeh.medical.service.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Sessions List">
+                <field name="name"/>
+                <field name="service_type_id"/>
+                <field name="session_cost"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="oeh_medical_service_line_form">
+        <field name="name">Sessions List</field>
+        <field name="model">oeh.medical.service.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h2><field name="name" string="Name" placeholder="Sessions Name"/></h2>
+                        <field name="service_type_id"/>
+                    </div>
+                    <group colspan="4">
+                        <group col="2">
+                            <field name="machine_ids" widget="many2many_tags"  />
+                        </group>
+                        <group col="2">
+                            <field name="session_cost"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Medicines">
+                            <field name="medicine_value_ids">
+                                <tree string="Medicine" editable="top">
+                                    <field name="medicine_id"/>
+                                    <field name="quantity"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--        <record id="view_oeh_medical_service_line_filter" model="ir.ui.view">-->
+    <!--            <field name="name">Service Search</field>-->
+    <!--            <field name="model">oeh.medical.service.line</field>-->
+    <!--            <field name="type">search</field>-->
+    <!--            <field name="arch" type="xml">-->
+    <!--                <search string="Search service">-->
+    <!--                    <separator orientation="vertical"/>-->
+    <!--                        <field name="patient_id" string="Patient" select="1"/>-->
+    <!--                        <field name="name" string="Service Name" select="1"/>-->
+    <!--                        <field name="service_id" string="Service" select="1"/>-->
+    <!--                        <field name="state" string="state"/>-->
+    <!--                    <newline/>-->
+    <!--                    <group expand="1" string="Group By">-->
+    <!--                        <filter string="Patient" name="patient" context="{'group_by':'patient_id'}"/>-->
+    <!--                    </group>-->
+    <!--                </search>-->
+    <!--            </field>-->
+    <!--        </record>-->
+
+    <menuitem id="oeh_medical_service_all_menu" name="Sessions" parent="medical_root" sequence="20"/>
+    <menuitem action="oeh_medical_service_line_action_tree" name="Sessions List"
+              parent="oeh_medical_service_all_menu" id="oeh_medical_service_list" sequence="3"/>
+
+    <record id="oeh_service_type_action_tree" model="ir.actions.act_window">
+        <field name="name">Session Category</field>
+        <field name="res_model">oeh.medical.service.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.view" id="oeh_medical_service_type_tree">
+        <field name="name">Session Category</field>
+        <field name="model">oeh.medical.service.type</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Session Category">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="oeh_medical_service_type_form">
+        <field name="name">Session Category</field>
+        <field name="model">oeh.medical.service.type</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <menuitem
+            action="oeh_service_type_action_tree"
+            name="Sessions Category"
+            parent="oeh_medical_service_all_menu"
+            id="oeh_medical_service_type" sequence="10"/>
+
+
+</data>

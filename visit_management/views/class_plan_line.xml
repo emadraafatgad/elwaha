@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Paiement tree view -->
+
+        <record model="ir.ui.view" id="class_line_tree_view">
+            <field name="name">class.line.tree</field>
+            <field name="model">class.line</field>
+            <field name="arch" type="xml">
+                <tree string="Class Line Tree">
+                    <field name="class_id"/>
+                    <field name="count"/>
+                    <field name="done_count" />
+                    <field name="remain_count"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="visit_line_graph">
+            <field name="name">class line</field>
+            <field name="model">class.line</field>
+            <field name="arch" type="xml">
+                <graph string="Class Plans">
+                    <field name="class_id" type="row"/>
+                    <field name="done_count" type="col"/>
+                    <field name="done_count" type="row"/>
+                    <field name="remain_count"/>
+                    <field name="count" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+
+         <record model="ir.ui.view" id="visit_line_pivot">
+            <field name="name">class line</field>
+            <field name="model">class.line</field>
+            <field name="arch" type="xml">
+                <pivot string="Class Plans">
+                    <field name="class_id" type="row"/>
+                    <field name="done_count" type="col"/>
+                    <field name="done_count" type="row"/>
+                    <field name="remain_count"/>
+                    <field name="count" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="class_line_list_action">
+            <field name="name">Class line</field>
+            <field name="res_model">class.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a The First Class line
+                </p>
+            </field>
+        </record>
+
+<!--        <menuitem id="class_line_list_menu" name="Class line"-->
+<!--                  parent="visits_root" sequence="30" action="class_line_list_action"/>-->
+
+    </data>
+</odoo>
+

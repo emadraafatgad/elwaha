@@ -1,0 +1,81 @@
+<odoo>
+    <data>
+        <record id="clinic_service_package_action_tree" model="ir.actions.act_window">
+            <field name="name">Clinic Package</field>
+            <field name="res_model">clinic.service.package</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+
+
+    <record model="ir.ui.view" id="clinic_service_package_tree">
+        <field name="name">Clinic Package</field>
+        <field name="model">clinic.service.package</field>
+        <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Session package">
+                    <field name="name"/>
+                    <field name="patient_id"/>
+                    <field name="package_line_id"/>
+                    <field name="start_date"/>
+                    <field name="next_date"/>
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="clinic_service_package_form">
+        <field name="name">Clinic Package</field>
+        <field name="model">clinic.service.package</field>
+        <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Session Package">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <group>
+                                <field name="patient_id"/>
+                                <field name="package_line_id"/>
+                                <field name="start_date"/>
+                                <field name="next_date"/>
+                            </group>
+                            <group>
+
+                            </group>
+                            <group>
+                                <field name="service_package_line_ids">
+                                    <tree string="Sessions List">
+                                        <field name="service_line_ids" string="Session Name"/>
+                                        <field name="count"/>
+                                        <field name="unit_price"/>
+                                        <field name="total_price"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Sessions Of Package">
+                                <field name="services_ids">
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+<!--    <menuitem id="clinic_service_package_menu"-->
+<!--              name = "Packages"-->
+<!--              parent="medical_root"-->
+<!--              sequence="80"/>-->
+
+<!--    <menuitem action="clinic_service_package_action_tree"-->
+<!--              name="Patient Package"-->
+<!--              parent="clinic_service_package_menu"-->
+<!--              id="clinic_service_package_list" sequence="2"/>-->
+
+    </data>
+</odoo>

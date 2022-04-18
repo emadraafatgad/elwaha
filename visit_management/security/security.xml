@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+
+        <record id="group_visit_manager" model="res.groups">
+          <field name="name">Visits Manager</field>
+         <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+         <record id="group_visit_user" model="res.groups">
+            <field name="name">Visits employee</field>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+         </record>
+
+    </data>
+</odoo>
