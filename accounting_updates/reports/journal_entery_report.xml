@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="journal_entry_repo"
+                model="account.move"
+                string="قيود اليومية"
+                report_type="qweb-pdf"
+                name="accounting_updates.journal_entry_repo_temp"
+                file="accounting_updates.journal_entry_repo_temp"
+        />
+        <template id="journal_entry_repo_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <style type="text/css">
+                                table.supplier {
+                                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                                border-collapse: collapse;
+                                width: 100%;
+                                text-align : center;
+                                margin :auto;
+                                }
+
+                                table.supplier td, table.supplier th {
+                                border: 1px solid #ddd;
+                                padding: 8px;
+                                }
+
+                                table.supplier tr:nth-child(even){background-color: #f2f2f2;}
+
+                                table.supplier tr:hover {background-color: #ddd;}
+
+                                table.supplier th {
+                                padding-top: 12px;
+                                padding-bottom: 12px;
+                                text-align: left;
+                                background-color: #990000 ;
+                                color: white;
+                                text-align : center;
+                                }
+                            </style>
+
+
+                            <div margin="0 auto" padding-top="0">
+                                <table width="100%" style="border: 1px solid #ddd; background-color: #EFECEB ;">
+                                    <tr>
+
+                                        <td width="30%" style="border: 1px solid #ddd;" align="center">
+                                            <h3>قيود اليومية</h3>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <div align="right">
+                                <h3><field t-field="o.name"/></h3>
+                            </div>
+                            <div align="right" style="text-align:right">
+                                <table width="100%" class="supplier" dir="rtl" >
+                                    <tr>
+                                         <td text-align="right">
+                                            <h4>المرجع:</h4>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.ref"/>
+                                            </h5>
+                                        </td>
+                                        <td text-align="right">
+                                            <h4>رقم دفتر اليومية:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.name"/>
+                                            </h5>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>دفتر اليومية:</h4>
+                                        </td>
+
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.journal_id"/>
+                                            </h5>
+                                        </td>
+
+                                        <td text-align="right">
+                                            <h4>التاريخ:</h4>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <field t-field="o.date"/>
+                                            </h5>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br/>  <br/>  <br/>
+
+                            <div>
+                                <div class="text-center" >
+                                <table width="50%" class="supplier">
+                                    <thead>
+                                        <tr>
+                                            <th>الحساب</th>
+                                            <th>العميل / المورد </th>
+                                            <th>بيان</th>
+                                            <th>الحساب التحليلي</th>
+                                            <th>المدين</th>
+                                            <th>الدائن</th>
+                                            <th>تاريخ الاستحقاق</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach='o.line_ids' t-as='line'>
+                                            <td >
+                                                <h6>
+                                                    <field t-field="line.account_id"/>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>
+                                                    <field t-field="line.partner_id"/>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>
+                                                    <field t-field="line.name"/>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>
+                                                    <field t-field="line.analytic_account_id"/>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>
+                                                    <field t-field="line.debit"/>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>
+                                                    <field t-field="line.credit"/>
+                                                </h6>
+                                            </td>
+                                             <td>
+                                                <h6>
+                                                    <field t-field="line.date_maturity"/>
+                                                </h6>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                             <div>
+                                <div class="text-center" >
+                                <table width="50%" class="supplier">
+                                    <thead>
+                                        <tr>
+                                            <th>اجمالي الدائن</th>
+                                            <th>اجمالي المدين</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td >
+                                                <h6>
+                                                    <field t-field="o.total_credit"/>
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                <h6>
+                                                    <field t-field="o.total_debit"/>
+                                                </h6>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+
+                             <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="text-center" dir="rtl">
+                                <table width="100%">
+
+                                    <tr>
+                                        <th>توقيع المحاسب</th>
+                                        <th>توقيع المدير المالي</th>
+                                    </tr>
+
+
+                                </table><br/><br/>
+                                <table width="100%">
+                                    <tr>
+                                        <td>
+                                            <h6>
+                                                --------------------------
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            <h6>
+                                                --------------------------
+                                            </h6>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+
+

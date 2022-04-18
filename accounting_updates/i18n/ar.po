@@ -1,0 +1,369 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* accounting_updates
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-11 13:22+0000\n"
+"PO-Revision-Date: 2021-11-11 13:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "<u>ايصال استلام نقدية/ شيكات</u>"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "<u>ايصال صرف نقدية/ شيكات</u>"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__bank
+msgid "Bank"
+msgstr "البنك"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__branch
+msgid "Branch"
+msgstr "الفرع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__with_date
+msgid "Check Date"
+msgstr "تاريخ الشيك"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__check_number
+msgid "Check Number"
+msgstr "رقم الشيك"
+
+#. module: accounting_updates
+#: selection:account.payment,type:0
+msgid "Customer Payment"
+msgstr "سند قبض"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__reason
+msgid "Description"
+msgstr "الوصف"
+
+#. module: accounting_updates
+#: selection:account.payment,payment_type:0
+msgid "Expense"
+msgstr "المصروفات"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_account_journal
+msgid "Journal"
+msgstr "دفتر اليومية"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_account_move
+msgid "Journal Entries"
+msgstr "قيود اليومية"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_account_move_line
+msgid "Journal Item"
+msgstr "عنصر اليومية"
+
+#. module: accounting_updates
+#: code:addons/accounting_updates/models/account_payment_inherit.py:117
+#, python-format
+msgid "Only a draft payment can be posted."
+msgstr "العناصر المرحلة فقط يمكن ان تحذف"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__journal_id
+msgid "Payment Journal"
+msgstr "دفتر يومية السداد"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__payment_type
+msgid "Payment Type"
+msgstr "نوع السداد"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_account_payment
+msgid "Payments"
+msgstr "المدفوعات"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__cus_select
+msgid "Receipt From"
+msgstr "استلام من"
+
+#. module: accounting_updates
+#: selection:account.payment,payment_type:0
+msgid "Receive Money"
+msgstr "استقبال المال"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__bank_select
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__second_code
+msgid "Second Code"
+msgstr "الكود الثاني"
+
+#. module: accounting_updates
+#: selection:account.payment,payment_type:0
+msgid "Send Money"
+msgstr "ارسال المال"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__safe_seq
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__short_code
+msgid "Short Code"
+msgstr "الكود المختصر"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_account_payment__short_code
+msgid "The journal entries of this journal will be named using this prefix."
+msgstr "سوف تُسمى القيود اليومية لدفتر اليومية المُختار باستخدام هذه البادئة."
+
+#. module: accounting_updates
+#: code:addons/accounting_updates/models/account_payment_inherit.py:120
+#, python-format
+msgid "The payment cannot be processed because the invoice is not open!"
+msgstr ""
+
+#. module: accounting_updates
+#: sql_constraint:account.journal:0
+msgid "The short code must be unique"
+msgstr "الكود يجب ان يكون مميز ولا يتكرر"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_move__total_credit
+msgid "Total Credit"
+msgstr "اجمالي الدائن"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_move__total_debit
+msgid "Total Debit"
+msgstr "اجمالي المدين"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__destination_journal_id
+msgid "Transfer To"
+msgstr "النقل إلى"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_payment__type
+msgid "Type"
+msgstr "النوع"
+
+#. module: accounting_updates
+#: selection:account.payment,type:0
+msgid "Vendor Payment"
+msgstr "سند صرف"
+
+#. module: accounting_updates
+#: code:addons/accounting_updates/models/account_payment_inherit.py:145
+#, python-format
+msgid "You have to define a sequence for %s in your company."
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_pay_customer
+msgid "pay.customer"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_paym_account
+msgid "paym.account"
+msgstr ""
+
+#. module: accounting_updates
+#: code:addons/accounting_updates/models/account_payment.py:37
+#: code:addons/accounting_updates/models/customer_payment.py:42
+#, python-format
+msgid "you can not delete record if it posted"
+msgstr "لا يمكنك حذف بنود مرحلة"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "اجمالي الدائن"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "اجمالي المدين"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "استلمنا من/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "التاريخ/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "التاريخ:"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الحساب"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الحساب التحليلي"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "الحسابات"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الدائن"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الشريك"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "المدير المالي"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "المدين"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "المرجع:"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.actions.report,name:accounting_updates.money_receipt_report
+msgid "ايصال استلام نقدية"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.actions.report,name:accounting_updates.money_send_report
+msgid "ايصال صرف نقدية"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "بتاريخ/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "بنك/"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_move_line__name
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "بيان"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "تاريخ الاستحقاق"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "توقيع المحاسب"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "توقيع المدير المالي"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "توقيع المستلم"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "دفتر اليومية:"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "فرع/"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.actions.report,name:accounting_updates.journal_entry_repo
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "قيود اليومية"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "مبلغ وقدره"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "مدفوع الي/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "مسلسل/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "نقدا /بشيك رقم/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "وذلك قيمة سداد/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "وذلك نظير/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "يعتمد....."
+msgstr ""
+

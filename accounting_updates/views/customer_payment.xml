@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+        <record id="pay_sequence_cust_id" model="ir.sequence">
+            <field name="name">Payment Sequence Code</field>
+            <field name="code">pay_cust_sequence</field>
+            <field name="prefix"></field>
+            <field eval="4" name="padding"/>
+        </record>
+
+        <record id="bulx_account_kk_payment_form_view" model="ir.ui.view">
+            <field name="name">bulx_account_kk_payment_form_view</field>
+            <field name="model">pay.customer</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                        <button name="create_journal_entry" type="object"
+                                string="Create Journal Entry" states="review" class="btn-primary"/>
+                         <button name="review" type="object"
+                                string="Review" states="draft" class="btn-primary"/>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                         <group>
+                            <h3><field name="safe_seq" readonly="1"/></h3>
+                            <field name="payment_type" readonly="1"/>
+                            <field name="short_code" invisible="1" readonly="1"/>
+                            <h3><field name="seq" readonly="1" invisible="1"/></h3>
+
+                        </group>
+                        <group>
+
+                            <group>
+
+                                <field name="date"/>
+                                <field name="customer" domain="[('customer','=',True)]"/>
+                                <field name="cus_select" />
+                                <field name="bank"/>
+                                <field name="bank_select"/>
+                                <field name="branch" />
+                            </group>
+                            <group>
+                                <field name="amount"/>
+                                <field name="check_number"/>
+                                <field name="with_date"/>
+                                <field name="reason"/>
+                                <field name="journal"  options="{'no_open': True,'no_create_edit': True,'no_create': True, 'no_quick_create': True}"/>
+                                <field name="destination_account"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="other info">
+                                <group>
+                                     <field name="move_id" />
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="bulx_account_cust_payment_tree_view" model="ir.ui.view">
+            <field name="name">bulx_account_cust_payment_tree_view</field>
+            <field name="model">pay.customer</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                    <field name="amount"/>
+                    <field name="bank"/>
+                    <field name="cus_select"/>
+                    <field name="with_date"/>
+                    <field name="bank_select"/>
+                    <field name="reason"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_pay_cust_account" model="ir.actions.act_window">
+            <field name="name">Customer Payment</field>
+            <field name="res_model">pay.customer</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_pay_cust_account"
+                  name="Customer Payment"
+                  action="action_pay_cust_account"
+                  parent="account.menu_finance_receivables"
+                  sequence="5"
+
+        />
+    </data>
+</odoo>

@@ -1,0 +1,641 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* accounting_updates
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-10-31 14:28+0000\n"
+"PO-Revision-Date: 2021-10-31 14:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "<u>ايصال استلام نقدية/ شيكات</u>"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "<u>ايصال صرف نقدية/ شيكات</u>"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_needaction
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_needaction
+msgid "Action Needed"
+msgstr "اجراء مطلوب"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__activity_ids
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__activity_ids
+msgid "Activities"
+msgstr "انشطة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__activity_state
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__amount
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__amount
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_attachment_count
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_attachment_count
+msgid "Attachment Count"
+msgstr "عداد المرفقات"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__bank
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__bank
+msgid "Bank"
+msgstr "بنك"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__branch
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__branch
+msgid "Branch"
+msgstr "فرع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__with_date
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__with_date
+msgid "Check Date"
+msgstr "تحديد التاريخ"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__check_number
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__check_number
+msgid "Check Number"
+msgstr "رقم الشيك"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.bulx_account_kk_payment_form_view
+#: model_terms:ir.ui.view,arch_db:accounting_updates.bulx_account_payment_form_view
+msgid "Create Journal Entry"
+msgstr "انشاء قيد يومية"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__create_uid
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__create_uid
+msgid "Created by"
+msgstr "تم انشائه بواسطة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__create_date
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__create_date
+msgid "Created on"
+msgstr "تم انشائه في"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__currency_id
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: accounting_updates
+#: model:ir.actions.act_window,name:accounting_updates.action_pay_cust_account
+#: model:ir.ui.menu,name:accounting_updates.menu_pay_cust_account
+msgid "Customer Payment"
+msgstr "سند قبض"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__date
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__reason
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__reason
+msgid "Description"
+msgstr "وصف"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__destination_account
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__destination_account
+msgid "Destination Account"
+msgstr "حساب الاستلام"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__display_name
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__display_name
+msgid "Display Name"
+msgstr "عرض الاسم"
+
+#. module: accounting_updates
+#: selection:pay.customer,state:0
+#: selection:paym.account,state:0
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_follower_ids
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_follower_ids
+msgid "Followers"
+msgstr "المتابعين"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_channel_ids
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "المتابعين(القنوات)"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_partner_ids
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعين(الشركاء)"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__id
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__id
+msgid "ID"
+msgstr "معرف"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__message_unread
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__message_unread
+msgid "If checked new messages require your attention."
+msgstr "إذا تم تحديدها ، فإن الرسائل الجديدة تتطلب انتباهك."
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__message_needaction
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "اذا تم تحديدها  الرسائل الجديدة تتطلب انتباهك"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__message_has_error
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "اذا تم تحديدها  بعض الرسائل بها خطأ تسليم"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_is_follower
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_is_follower
+msgid "Is Follower"
+msgstr "هل متابع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__journal_credit_account
+msgid "It acts as a default account for credit amount"
+msgstr "يعمل كحساب افتراضي لمبلغ الائتمان"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__journal_debit_account
+msgid "It acts as a default account for debit amount"
+msgstr "يعمل كحساب افتراضي لمبلغ الخصم"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__journal
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__journal
+msgid "Journal"
+msgstr "يومية"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_account_move
+msgid "Journal Entries"
+msgstr "القيود اليومية"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__move_id
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__move_id
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_account_move_line
+msgid "Journal Item"
+msgstr "عنصر اليومية"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer____last_update
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account____last_update
+msgid "Last Modified on"
+msgstr "اخر تعديل في"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__write_uid
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__write_uid
+msgid "Last Updated by"
+msgstr "اخر تحديث بواسطة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__write_date
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__write_date
+msgid "Last Updated on"
+msgstr "اخر تحديث في"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__move_id
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__move_id
+msgid "Link to the automatically generated Journal Items."
+msgstr "اربط بعناصر اليومية المنشئة اوتوماتيكيا"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_main_attachment_id
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "مرفق رئيسي"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_has_error
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ تسليم الرسالة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_ids
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__activity_date_deadline
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "موعد النشاط التالي"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__activity_summary
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__activity_type_id
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_needaction_counter
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الاجرائات"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_has_error_counter
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_has_error_counter
+msgid "Number of error"
+msgstr "عدد الاخطاء"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__message_needaction_counter
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "عدد الرسائل التي تنتظر اجراء"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__message_has_error_counter
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل التي تحتوي اخطاء تسليم"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__message_unread_counter
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__message_unread_counter
+msgid "Number of unread messages"
+msgstr "عدد الرسائل الغير مقروءة"
+
+#. module: accounting_updates
+#: selection:pay.customer,activity_state:0
+#: selection:paym.account,activity_state:0
+msgid "Overdue"
+msgstr "متأخر"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__vendor
+msgid "Partner"
+msgstr "شريك"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__payment_type
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__payment_type
+msgid "Payment Type"
+msgstr "نوع الدفع"
+
+#. module: accounting_updates
+#: selection:pay.customer,activity_state:0
+#: selection:paym.account,activity_state:0
+msgid "Planned"
+msgstr "مخطط"
+
+#. module: accounting_updates
+#: selection:pay.customer,state:0
+#: selection:paym.account,state:0
+msgid "Posted"
+msgstr "مرحلة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__cus_select
+msgid "Receipt From"
+msgstr "استلام من"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__customer
+msgid "Receipt From/Customer"
+msgstr "استلام من العميل"
+
+#. module: accounting_updates
+#: selection:pay.customer,payment_type:0
+#: selection:paym.account,payment_type:0
+msgid "Receive Money"
+msgstr "استقبال المال"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__bank_select
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__bank_select
+msgid "Reference"
+msgstr "مرجع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__activity_user_id
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسئول"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.bulx_account_kk_payment_form_view
+#: model_terms:ir.ui.view,arch_db:accounting_updates.bulx_account_payment_form_view
+msgid "Review"
+msgstr "مراجعة"
+
+#. module: accounting_updates
+#: selection:pay.customer,payment_type:0
+#: selection:paym.account,payment_type:0
+msgid "Send Money"
+msgstr "ارسال المال"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__seq
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__seq
+msgid "Seq"
+msgstr "تسلسل"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__state
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__activity_state
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: accounting_updates
+#: selection:pay.customer,activity_state:0
+#: selection:paym.account,activity_state:0
+msgid "Today"
+msgstr "اليوم"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_move__total_credit
+msgid "Total Credit"
+msgstr "اجمالي الدائن"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_move__total_debit
+msgid "Total Debit"
+msgstr "اجمالي المدين"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_unread
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_unread
+msgid "Unread Messages"
+msgstr "الرسائل غير المقروءة"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__message_unread_counter
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "عداد الرسائل غير المقروءة"
+
+#. module: accounting_updates
+#: model:ir.actions.act_window,name:accounting_updates.action_pay_tt_account
+#: model:ir.ui.menu,name:accounting_updates.menu_pay_account
+msgid "Vendor Payment"
+msgstr "سند صرف"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__website_message_ids
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,help:accounting_updates.field_pay_customer__website_message_ids
+#: model:ir.model.fields,help:accounting_updates.field_paym_account__website_message_ids
+msgid "Website communication history"
+msgstr "سجل اتصال الموقع"
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_pay_customer__journal_debit_account
+#: model:ir.model.fields,field_description:accounting_updates.field_paym_account__journal_credit_account
+msgid "journal Account"
+msgstr "حساب اليومية"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.bulx_account_kk_payment_form_view
+#: model_terms:ir.ui.view,arch_db:accounting_updates.bulx_account_payment_form_view
+msgid "other info"
+msgstr "معلومات اخري"
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_pay_customer
+msgid "pay.customer"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model,name:accounting_updates.model_paym_account
+msgid "paym.account"
+msgstr ""
+
+#. module: accounting_updates
+#: selection:pay.customer,state:0
+#: selection:paym.account,state:0
+msgid "reviewed"
+msgstr "تمت مراجعته"
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "اجمالي الدائن"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "اجمالي المدين"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "استلمنا من/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "التاريخ/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "التاريخ:"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الحساب"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الحساب التحليلي"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "الحسابات"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الدائن"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "الشريك"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "المدير المالي"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "المدين"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "المرجع:"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.actions.report,name:accounting_updates.money_receipt_report
+msgid "ايصال استلام نقدية"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.actions.report,name:accounting_updates.money_send_report
+msgid "ايصال صرف نقدية"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "بتاريخ/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "بنك/"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.model.fields,field_description:accounting_updates.field_account_move_line__name
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "بيان"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "تاريخ الاستحقاق"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "توقيع المحاسب"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "توقيع المدير المالي"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "توقيع المستلم"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "دفتر اليومية:"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "فرع/"
+msgstr ""
+
+#. module: accounting_updates
+#: model:ir.actions.report,name:accounting_updates.journal_entry_repo
+#: model_terms:ir.ui.view,arch_db:accounting_updates.journal_entry_repo_temp
+msgid "قيود اليومية"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "مبلغ وقدره"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "مدفوع الي/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "نقدا /بشيك رقم/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+msgid "وذلك قيمة سداد/بيان/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "وذلك نظير/بيان/"
+msgstr ""
+
+#. module: accounting_updates
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_receipt_cust_report_temp
+#: model_terms:ir.ui.view,arch_db:accounting_updates.money_send_report_temp
+msgid "يعتمد....."
+msgstr ""
+

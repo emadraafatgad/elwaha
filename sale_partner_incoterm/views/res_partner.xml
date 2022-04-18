@@ -11,6 +11,7 @@
             <field name="property_payment_term_id" position="after">
                 <field name="sale_incoterm_id" string="Default Sales Incoterm"
                        attrs="{'invisible': [('customer', '!=', True)]}"
+
                        groups="sale_stock.group_display_incoterm"/>
             </field>
         </field>
